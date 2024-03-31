@@ -1,0 +1,197 @@
+/* 
+pink #FCB6D8
+white #FBFAFA
+black #2A252B
+blue #4DA8D5
+brown #BF795E
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: rubikNormal;
+    src: url('./font/Rubik-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: rubikItalic;
+    src: url('./font/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-display: swap;
+}
+
+body {
+    background-color: #2A252B;
+    overflow: hidden;
+    font-family: rubikNormal;
+}
+
+#navbar svg {
+    path {
+        fill: #FBFAFA;
+    }
+}
+
+#navbar ul li:nth-child(4) {
+    margin-bottom: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #FBFAFA;
+}
+
+#navbar ul li:last-child {
+    position: absolute;
+    bottom: 24px;
+}
+
+#navbar ul li .active {
+    filter: drop-shadow(0px 1px 6px #fbfafac2);
+}
+
+.poster-show {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.slick-slide {
+    position: relative;
+    width: auto !important;
+}
+
+.slick-dots {
+    position: relative;
+    right: 30px;
+    align-self: center;
+    z-index: 999;
+}
+
+.slick-dots li button {
+    font-size: 0px;
+    height: 20px;
+    width: 20px;
+}
+
+.slick-dots li button:before {
+    color: #FBFAFA;
+    content: "•";
+    font-size: 35px;
+    border-radius: 100px;
+    line-height: 0%;
+    transition: 0.6s;
+}
+
+.slick-dots .slick-active {
+    margin-bottom: 6px;
+}
+
+.slick-dots .slick-active button:before {
+    font-size: 19px !important;
+    margin-bottom: 10px;
+    background-color: #FBFAFA !important;
+}
+
+#trending-list svg {
+    path {
+        fill: #2A252B;
+    }
+}
+
+.right-section .recent-favourite::-webkit-scrollbar,
+#trending-list .music-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.right-section .recent-favourite:hover::-webkit-scrollbar-thumb,
+.right-section .top-artist-list:hover::-webkit-scrollbar-thumb,
+#trending-list .music-list:hover::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #2a252b3a;
+}
+
+.right-section .top-artist-list svg:hover,
+#trending-list .music-list svg:hover {
+    path {
+        fill: #FCB6D8;
+    }
+}
+
+#trending-list .music-list .icon-favourite {
+    path {
+        fill: #FCB6D8;
+    }
+}
+
+.right-section .search-box svg {
+    path {
+        fill: #2A252B;
+        opacity: 0.4;
+    }
+}
+
+
+#music-player .bg-image {
+    background-size: cover;
+    filter: blur(3px);
+    max-height: 100dvh;
+}
+
+#music-player .control-music-player .play-icon svg {
+    path {
+        fill: #2A252B;
+    }
+}
+
+#music-player .close-music-player div::before,
+#music-player .close-music-player div::after {
+    content: url('icons/circle-inwards.svg');
+    width: 20px;
+    position: absolute;
+    right: -5px;
+    top: -13px;
+    transform: rotate(239deg);
+}
+
+#music-player .close-music-player div::after {
+    transform: rotate(132deg);
+    top: 22px;
+    right: -1px;
+}
+
+#music-player .rhap_play-pause-button {
+    width: 50px;
+    height: 50px;
+}
+
+#music-player .close-music-player svg,
+#music-player .play-icon svg {
+    path {
+        fill: #2A252B !important;
+    }
+}
+
+#music-player .rhap_main .rhap_progress-section {
+    margin-bottom: 5px;
+}
+
+#music-player .rhap_main .rhap_progress-container .rhap_progress-bar .rhap_download-progress {
+    opacity: 0.6;
+}
+
+#music-player .rhap_main .rhap_progress-container .rhap_progress-bar div {
+    background-color: #FBFAFA;
+}
+
+#music-player .rhap_main .rhap_time {
+    color: #FBFAFA;
+}
+
+#music-player .rhap_main svg {
+    path {
+        fill: #FBFAFA;
+    }
+}
