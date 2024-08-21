@@ -1,0 +1,339 @@
+ /* /* 
+pink #FCB6D8
+white #FBFAFA
+black #2A252B
+blue #4DA8D5
+brown #BF795E
+*/
+ /* Define color variables */
+ :root {
+     --pink: #FCB6D8;
+     --white: #FBFAFA;
+     --black: #2A252B;
+     --blue: #4DA8D5;
+     --brown: #BF795E;
+ }
+
+ /* Import font and tailwind CSS */
+ @import "~@flaticon/flaticon-uicons/css/all/all";
+ @import "tailwindcss/base";
+ /* @import "./custom-base-styles.css"; */
+
+ @import "tailwindcss/components";
+ /* @import "./custom-components.css"; */
+
+ @import "tailwindcss/utilities";
+ /* @import "./custom-utilities.css"; */
+
+ @supports (height: 100dvh) {
+     .custom-h-full {
+         height: 100dvh;
+         /* overflow: hidden; */
+     }
+ }
+
+ @supports not (height: 100dvh) {
+     .custom-h-full {
+         height: 96vh;
+         /* overflow: hidden; */
+     }
+ }
+
+ /* Define font-face for Rubik Normal */
+ @font-face {
+     font-family: 'Rubik';
+     src: url('./font/Rubik-VariableFont_wght.ttf') format('truetype');
+     font-weight: normal;
+     font-display: swap;
+ }
+
+ /* Define font-face for Rubik Italic */
+ @font-face {
+     font-family: 'Rubik Italic';
+     src: url('./font/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
+     font-style: italic;
+     font-weight: normal;
+     font-display: swap;
+ }
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     /* background: rgba(255, 255, 255, 0.45);
+     -webkit-background: rgba(255, 255, 255, 0.45);
+     border-radius: 16px;
+     -webkit-border-radius: 16px;
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     backdrop-filter: blur(13.2px);
+     -webkit-backdrop-filter: blur(13.2px); */
+ }
+
+ body {
+     background-color: var(--black);
+     overflow: hidden !important;
+     font-family: 'Rubik', sans-serif;
+ }
+
+
+ /* Scrollbar styles */
+ .scrollbar-custom::-webkit-scrollbar {
+     width: 5px;
+ }
+
+ .scrollbar-custom:hover::-webkit-scrollbar-thumb {
+     border-radius: 5px;
+     background-color: rgba(42, 37, 43, 0.23);
+ }
+
+ /* Navbar Style */
+ #navbar .nav-item {
+     padding: 8px 15px;
+ }
+
+ #navbar .nav-item:nth-child(4) {
+     margin-bottom: 15px;
+     padding-bottom: 15px;
+     border-bottom: 1px solid var(--white);
+ }
+
+ #navbar .nav-item:nth-child(7) {
+     position: absolute;
+     bottom: 40px;
+     height: 0px;
+ }
+
+ #navbar .nav-item:nth-child(8) {
+     position: absolute;
+     bottom: 80px;
+     height: 0px;
+ }
+
+ #navbar .nav-item.active {
+     filter: drop-shadow(0 1px 4px rgba(251, 250, 250, 0.63));
+ }
+
+ /* Home Page Styles */
+ #header-carousel .slick-slide {
+     /* height: 100%; */
+     position: relative;
+     z-index: 10 !important;
+     right: -10px;
+     width: auto !important;
+     display: block;
+     height: auto;
+     border: 1px solid transparent;
+ }
+
+ #header-carousel .slick-track {
+     position: relative;
+     z-index: 10 !important;
+ }
+
+ #header-carousel .slick-dots {
+     position: relative;
+     right: 35px;
+     align-self: center;
+     z-index: 101;
+ }
+
+ #header-carousel .slick-dots li button {
+     font-size: 0;
+     height: 30px;
+     width: 20px;
+ }
+
+ #header-carousel .slick-dots li button:before {
+     color: var(--white);
+     content: "•";
+     font-size: 35px;
+     border-radius: 100px;
+     line-height: 20px;
+     transition: 0.6s;
+ }
+
+ #header-carousel .slick-dots .slick-active {
+     margin-bottom: 6px;
+ }
+
+ #header-carousel .slick-dots .slick-active button:before {
+     font-size: 19px !important;
+     background-color: var(--white) !important;
+ }
+
+
+ /* Music Player */
+ #home-music-player .bg-image {
+     background-size: cover;
+     filter: blur(3px);
+     max-height: 100vh;
+ }
+
+ /* // display none ///////////////////////////////////////////////////////// */
+
+ /* #home-music-player .icon-favourite {
+     color: #FBFAFA !important;
+     font-size: 24px !important;
+     margin: 0px 0px 0px 15px;
+     display: none;
+ } */
+
+ /* // display none ///////////////////////////////////////////////////////// */
+
+ #home-page .close-music-player::before,
+ #home-page .close-music-player::after {
+     content: url('icons/circle-inwards.svg');
+     width: 20px;
+     position: absolute;
+     right: 22px;
+     top: -16px;
+     transform: rotate(227deg);
+ }
+
+ #home-page .close-music-player::after {
+     transform: rotate(132deg);
+     top: 22px;
+     right: 28px;
+ }
+
+ #home-music-player .close-music-player svg path {
+     fill: var(--black);
+ }
+
+ /* All Song Page Styles */
+ #all-music-page .slick-track {
+     display: flex;
+     gap: 20px;
+ }
+
+ .bottom-music-player .rhap_header {
+     margin-bottom: 0 !important;
+ }
+
+ .bottom-music-player .rhap_container {
+     flex-direction: row !important;
+     padding: 0 20px;
+ }
+
+ .bottom-music-player .icon-favourite {
+     color: #FBFAFA !important;
+     font-size: 24px !important;
+ }
+
+ .bottom-music-player .close-bottom-music-player div::before,
+ .bottom-music-player .close-bottom-music-player div::after {
+     content: url('icons/circle-inwards-dark.svg');
+     width: 20px;
+     position: absolute;
+     right: -8px;
+     top: 34px;
+     transform: rotate(323deg);
+ }
+
+ .bottom-music-player .close-bottom-music-player div::after {
+     transform: rotate(221deg);
+     top: 32px;
+     right: 36px;
+ }
+
+ .bottom-music-player .close-bottom-music-player svg path {
+     fill: var(--brown);
+ }
+
+ /* Music Player Styles */
+ .rhap_play-pause-button {
+     width: 50px !important;
+     height: 50px !important;
+ }
+
+ .rhap_main .rhap_progress-section {
+     margin-bottom: 5px;
+ }
+
+ .rhap_main .rhap_progress-container .rhap_progress-bar .rhap_download-progress {
+     opacity: 0.6;
+ }
+
+ .rhap_main .rhap_volume-container .rhap_volume-indicator,
+ .rhap_main .rhap_progress-container .rhap_progress-bar div {
+     background-color: var(--white);
+ }
+
+ .rhap_main .rhap_time {
+     color: var(--white);
+ }
+
+ .rhap_main svg path {
+     fill: var(--white);
+ }
+
+ /* Login Page */
+ .signup-content .input-div,
+ .login-content .input-div {
+     position: relative;
+     display: grid;
+     grid-template-columns: 7% 93%;
+     margin: 30px 0;
+     padding: 5px 0;
+ }
+
+ .signup-content .i,
+ .login-content .i {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .signup-content .i i,
+ .login-content .i i {
+     transition: 0.3s;
+ }
+
+ .signup-content .input,
+ .login-content .input {
+     border: none;
+     outline: none;
+     box-shadow: none !important;
+ }
+
+ .signup-content .input-lable,
+ .login-content .input-lable {
+     cursor: text;
+     position: absolute;
+     transform: translate(40px, 5px);
+     transition: transform .25s;
+     top: 1px;
+ }
+
+ .signup-content .input:focus+.input-lable,
+ .login-content .input:focus+.input-lable,
+ .signup-content .input:valid+.input-lable,
+ .login-content .input:valid+.input-lable {
+     transform: translate(30px, -13px) scale(.8);
+ }
+
+
+ .signup-content .btn,
+ .login-content .btn {
+     display: block;
+     width: 100%;
+     height: 55px;
+     border-radius: 30px;
+     outline: none;
+     border: none;
+     background-image: linear-gradient(65deg, var(--blue), rgba(77, 168, 213, 0.72), var(--blue));
+     background-size: 200%;
+     color: #fff;
+     letter-spacing: 3px;
+     text-transform: uppercase;
+     margin: 0;
+     margin-top: 10px;
+     cursor: pointer;
+     transition: background-position 0.7s;
+ }
+
+ .signup-content .btn:hover,
+ .login-content .btn:hover {
+     background-position: right;
+ }
