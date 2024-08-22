@@ -1,5 +1,3 @@
-import { playList } from "../App";
-
 const PlayList = () => {
     return (
         <section id='play-list-page' className='relative w-full bg-custom-white h-[100dvh] rounded-l-xl py-5 px-10'>

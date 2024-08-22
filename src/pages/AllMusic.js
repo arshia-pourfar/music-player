@@ -8,8 +8,6 @@ import { MusicPlayer } from '../components/MusicPLayer';
 // import { favouriteList } from '../App';
 import useFetchData from '../hooks/useFetchData';
 import { useAuth } from '../hooks/AuthContext';
-import FavoriteIcon from '../components/FavoriteIcon';
-import MenuIcon from '../components/MenuIcon';
 import MusicList from '../components/MusicList';
 // import useFavorites from '../components/AddToFavourite';
 const AllMusic = () => {
