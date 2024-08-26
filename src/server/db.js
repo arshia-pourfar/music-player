@@ -1,22 +1,45 @@
 const mysql = require('mysql');
 
+// const dbConfig = {
+//     host: 'music-player.wuaze.com',  // حذف پروتکل http://
+//     port: 3306,
+//     user: 'if0_37158159',  // استفاده از کاربر غیر root
+//     password: 'HJWAMIQCw7',  // رمز عبور قوی و غیر root
+//     database: 'if0_37158159_musicplayer'
+// };
 const dbConfig = {
-    host: 'localhost',
+    host: 'localhost',  // حذف پروتکل http://
     port: 3306,
-    user: 'root',
-    password: 'root',
+    user: 'root',  // استفاده از کاربر غیر root
+    password: 'root',  // رمز عبور قوی و غیر root
     database: 'musicplayer'
 };
 
 const connection = mysql.createConnection(dbConfig);
-connection.connect((err) => {
-    if (err) {
-        console.error('Error connecting to MySQL: ' + err.stack);
-        return;
-    } else {
-        console.log('Connected to MySQL as ID ' + connection.threadId);
-    }
-});
+
+function handleDisconnect() {
+    connection.connect((err) => {
+        if (err) {
+            console.error('Error connecting to MySQL: ' + err.stack);
+            // تلاش برای اتصال مجدد پس از وقفه کوتاه
+            setTimeout(handleDisconnect, 2000);
+        } else {
+            console.log('Connected to MySQL as ID ' + connection.threadId);
+        }
+    });
+
+    connection.on('error', (err) => {
+        console.error('MySQL connection error: ' + err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            // در صورت از دست رفتن اتصال، تلاش برای اتصال مجدد
+            handleDisconnect();
+        } else {
+            throw err;
+        }
+    });
+}
+
+handleDisconnect();
 
 exports.connection = connection;
 

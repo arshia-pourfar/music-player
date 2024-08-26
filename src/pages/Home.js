@@ -14,8 +14,8 @@ const Home = () => {
     const { height, width } = useWindowDimensions();
     const { user } = useAuth();
     const [limitTopArtist, setLimitTopArtist] = useState(3);
-    const { data: trendingList, loading: trendingLoading, error: trendingError } = useFetchData('http://music-player.wuaze.com/api/trendinglist', 'GET', null, true);
-    const { data: topArtistList, loading: topArtistLoading, error: topArtistError } = useFetchData('http://music-player.wuaze.com/api/topartistslist', 'GET', null, true, limitTopArtist);
+    const { data: trendingList, loading: trendingLoading, error: trendingError } = useFetchData('/api/trendinglist', 'GET', null, true);
+    const { data: topArtistList, loading: topArtistLoading, error: topArtistError } = useFetchData('/api/topartistslist', 'GET', null, true, limitTopArtist);
 
     useEffect(() => {
         // تغییر مقدار limitTopArtist بر اساس ابعاد صفحه
@@ -95,6 +95,7 @@ const Home = () => {
     };
 
     const TrendingList = () => {
+        console.log(trendingList);
         return (
             <>
                 <div id='trending-list' className='relative z-20 h-[60%] 2xl:mt-2 xl:mt-5 2xl:pb-0 xl:pb-3' style={{ width: '100%' }}>

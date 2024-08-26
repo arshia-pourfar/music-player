@@ -11,7 +11,7 @@ import { useAuth } from '../hooks/AuthContext';
 import MusicList from '../components/MusicList';
 // import useFavorites from '../components/AddToFavourite';
 const AllMusic = () => {
-    const { data: allMusicList, loading: allMusicLoading, error: allMusicError } = useFetchData('http://music-player.wuaze.com/api/allmusiclist', 'GET', null, true);
+    const { data: allMusicList, loading: allMusicLoading, error: allMusicError } = useFetchData('/api/allmusiclist', 'GET', null, true);
 
     const sliderRef = useRef(null);
     const { user } = useAuth();
