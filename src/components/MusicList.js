@@ -20,7 +20,7 @@ const MusicList = ({ myListArray, userId, isShowAlbumAndTime }) => {
                         Playing
                     </div>
                 </div>
-                {myListArray && myListArray.map((item, index) => (
+                {myListArray && Array.isArray(myListArray) ? myListArray.map((item, index) => (
                     <div id={index} key={index} className='music-item w-full flex items-center justify-between py-[10px] text-custom-black cursor-pointer'>
                         <div id={index} className='flex items-center border-l-4 border-transparent play-music'>
                             <span className='w-5 text-center xl:text-lg lg:text-base md:text-lg font-semibold opacity-50 ms-2'> {index < 9 ? `0${index + 1}` : index + 1}</span>
@@ -42,12 +42,12 @@ const MusicList = ({ myListArray, userId, isShowAlbumAndTime }) => {
                             <MenuIcon />
                         </div>
                     </div>
-                ))}
+                )) : null}
             </div>
             // </div>
         ) : (
             <div className='music-list min-h-[200px] w-full overflow-auto scrollbar-custom' style={height >= 1000 ? { height: 'calc(100% - 10px)' } : height >= 800 ? { height: 'calc(100% - 55px)' } : { height: 'calc(100% - 120px)' }}>
-                {myListArray && myListArray.map((item, index) => (
+                {myListArray && Array.isArray(myListArray) ? myListArray.map((item, index) => (
                     <div key={index} className='music-item flex justify-between items-center py-2'>
                         <div id={index} className='flex items-center border-l-4 border-transparent cursor-pointer play-music'>
                             <span className='w-5 text-center xl:text-lg lg:text-base md:text-lg font-semibold opacity-50 ms-2'> {index < 9 ? `0${index + 1}` : index + 1}</span>
@@ -63,7 +63,7 @@ const MusicList = ({ myListArray, userId, isShowAlbumAndTime }) => {
                             <MenuIcon />
                         </div>
                     </div>
-                ))}
+                )) : null}
             </div >)
     )
 }

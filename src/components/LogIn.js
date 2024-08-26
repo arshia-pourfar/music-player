@@ -18,7 +18,7 @@ function LoginOrSingup() {
 
     const handleSubmitLogin = (e) => {
         e.preventDefault();
-        setUrl('/api/login');
+        setUrl('http://music-player.wuaze.com/api/login');
         setMethod('POST');
         setBody({ username, password });
         setTriggerFetch(true);
@@ -26,7 +26,7 @@ function LoginOrSingup() {
 
     const handleSubmitRegister = (e) => {
         e.preventDefault();
-        setUrl('/api/register');
+        setUrl('http://music-player.wuaze.com/api/register');
         setMethod('POST');
         setBody({ username, email, password });
         setLoginPage(true);

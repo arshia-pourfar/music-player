@@ -14,8 +14,8 @@ const Home = () => {
     const { height, width } = useWindowDimensions();
     const { user } = useAuth();
     const [limitTopArtist, setLimitTopArtist] = useState(3);
-    const { data: trendingList, loading: trendingLoading, error: trendingError } = useFetchData('/api/trendinglist', 'GET', null, true);
-    const { data: topArtistList, loading: topArtistLoading, error: topArtistError } = useFetchData('/api/topartistslist', 'GET', null, true, limitTopArtist);
+    const { data: trendingList, loading: trendingLoading, error: trendingError } = useFetchData('http://music-player.wuaze.com/api/trendinglist', 'GET', null, true);
+    const { data: topArtistList, loading: topArtistLoading, error: topArtistError } = useFetchData('http://music-player.wuaze.com/api/topartistslist', 'GET', null, true, limitTopArtist);
 
     useEffect(() => {
         // تغییر مقدار limitTopArtist بر اساس ابعاد صفحه
@@ -143,7 +143,7 @@ const Home = () => {
                     <a href="#" className='underline text-custom-blue xl:text-base lg:text-sm'>See all</a>
                 </div>
                 <div className='w-full h-full top-artist-list lg:px-1 xl:mt-3 md:mt-1 flex flex-col'>
-                    {topArtistList && topArtistList.map((item, index) => (
+                    {topArtistList && Array.isArray(topArtistList) ? topArtistList.map((item, index) => (
                         // <div key={index} className='flex justify-between items-center xl:my-2 md:my-1 cursor-pointer relative'>
                         //     <div className='w-full flex items-center xl:gap-3 lg:gap-3 md:gap-2 border-l-4 border-transparent'>
                         //         <img className='2xl:w-[65px] xl:w-[60px] lg:w-[55px] md:w-[50px] shadow-lg rounded-lg' src={require(`../images/${item.imageSrc}`)} alt="" />
@@ -175,7 +175,7 @@ const Home = () => {
                                 <MenuIcon />
                             </div>
                         </div>
-                    ))}
+                    )) : null}
                 </div>
             </div>
         );

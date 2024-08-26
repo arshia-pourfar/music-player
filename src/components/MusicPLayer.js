@@ -8,13 +8,13 @@ import useFetchData from '../hooks/useFetchData';
 import { useAuth } from "../hooks/AuthContext";
 export const MusicPlayer = ({ getStyle }) => {
     const { user } = useAuth();
-    const { data: allMusicList } = useFetchData('/api/allmusiclist', 'GET', null, true);
-    const { data: trendingListItem } = useFetchData('/api/trendinglist', 'GET', null, true);
+    const { data: allMusicList } = useFetchData('http://music-player.wuaze.com/api/allmusiclist', 'GET', null, true);
+    const { data: trendingListItem } = useFetchData('http://music-player.wuaze.com/api/trendinglist', 'GET', null, true);
     const { data: favouriteList, setUrl, fetchData } = useFetchData('', 'GET', null, true);
 
     useEffect(() => {
         if (user) {
-            setUrl(`/api/${user ? user.id : 0}/favorites`);
+            setUrl(`http://192.168.1.228:5000/api/${user ? user.id : 0}/favorites`);
             fetchData();
         }
     }, [user, setUrl, fetchData]);
@@ -152,11 +152,11 @@ export const MusicPlayer = ({ getStyle }) => {
                         <h1 className='font-semibold text-custom-white inline-block text-3xl mx-5 mt-8'>Next Composition</h1>
                         <div className='absolute overflow-visible flex items-center flex-nowrap flex-row z-0 ps-3 mt-3'>
                             {/* insted trending list after set best allbums */}
-                            {trendingListItem && trendingListItem.map((item, index) => (
+                            {/* {trendingListItem && Array.isArray(trendingListItem) ? trendingListItem.map((item, index) => (
                                 <div key={item.id} className='bg-custom-black relative mx-3 rounded-2xl w-[200px] basis-[180px]'>
                                     <img className='rounded-2xl opacity-90 h-full w-full object-cover' src={require(`../images/${item.imageSrc}`)} alt="" />
                                 </div>
-                            ))}
+                            )) : null} */}
                         </div>
                     </div>
                     <AudioPlayer
