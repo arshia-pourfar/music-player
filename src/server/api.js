@@ -1,4 +1,5 @@
 // POSTGRESSQL IN VERCEL
+
 const express = require('express');
 const app = express();
 const db = require('./db.js'); // اتصال به پایگاه داده
@@ -9,9 +10,11 @@ app.use(express.static(__dirname + 'build'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+console.log('sd');
 
 // API برای دریافت لیست همه آهنگها
 app.get('/api/allmusiclist', (req, res) => {
+    console.log('sd');
     db.query('SELECT * FROM allmusiclist', (err, results) => {
         if (err) {
             console.error(err);
@@ -21,6 +24,7 @@ app.get('/api/allmusiclist', (req, res) => {
             ...item,
             newId: index
         }));
+        console.log(updatedResult);
 
         res.json(updatedResult);
     });

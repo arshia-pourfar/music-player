@@ -1,14 +1,10 @@
 // PROGRESSQL IN VERCEL
+require('dotenv').config();
 const { Pool } = require('pg');
-
-// تنظیمات اتصال به پایگاه داده PostgreSQL
 const pool = new Pool({
-    connectionString: 'postgres://default:O1pMfdv2FVuI@ep-weathered-sun-a4c88yk1-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require',
-    // ssl: {
-    //     rejectUnauthorized: false
-    // }
+    connectionString: process.env.POSTGRES_URL
 });
-// console.log(exports.pool = pool);
+// console.log(pool);
 
 exports.pool = pool;
 
