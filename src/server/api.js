@@ -1,8 +1,7 @@
 // POSTGRESSQL IN VERCEL
-
 const express = require('express');
 const app = express();
-const db = require('./db.js'); // اتصال به پایگاه داده
+const { pool } = require('./db.js'); // استفاده از pool به جای connection
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -10,12 +9,10 @@ app.use(express.static(__dirname + 'build'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-console.log('sd');
-
 // API برای دریافت لیست همه آهنگها
 app.get('/api/allmusiclist', (req, res) => {
     console.log('sd');
-    db.query('SELECT * FROM allmusiclist', (err, results) => {
+    pool.query('SELECT * FROM allmusiclist', (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
@@ -32,7 +29,7 @@ app.get('/api/allmusiclist', (req, res) => {
 
 // API برای دریافت لیست آهنگهای ترند
 app.get('/api/trendinglist', (req, res) => {
-    db.query('SELECT * FROM allmusiclist WHERE isTrending=1 ORDER BY id', (err, results) => {
+    pool.query('SELECT * FROM allmusiclist WHERE isTrending=1 ORDER BY id', (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
@@ -50,7 +47,7 @@ app.get('/api/trendinglist', (req, res) => {
 app.get('/api/topartistslist/:limit/', (req, res) => {
     const limit = parseInt(req.params.limit);
 
-    db.query('SELECT * FROM allmusiclist ORDER BY viewNumber DESC LIMIT $1', [limit], (err, results) => {
+    pool.query('SELECT * FROM allmusiclist ORDER BY viewNumber DESC LIMIT $1', [limit], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
@@ -70,7 +67,7 @@ app.post('/api/:userId/favorites/update', (req, res) => {
 
     const query = 'INSERT INTO favorites (user_id, song_id) VALUES ($1, $2) ON CONFLICT (user_id, song_id) DO NOTHING';
 
-    db.query(query, [userId, songId], (err, result) => {
+    pool.query(query, [userId, songId], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -85,7 +82,7 @@ app.delete('/api/:userId/favorites/update', (req, res) => {
     const { songId } = req.body;
 
     const query = 'DELETE FROM favorites WHERE user_id = $1 AND song_id = $2';
-    db.query(query, [userId, songId], (err, result) => {
+    pool.query(query, [userId, songId], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -103,7 +100,7 @@ app.get('/api/:userId/favorites/update', (req, res) => {
     }
 
     const query = 'SELECT song_id FROM favorites WHERE user_id = $1';
-    db.query(query, [userId], (err, result) => {
+    pool.query(query, [userId], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -124,7 +121,7 @@ app.get('/api/:userId/favorites', (req, res) => {
                     JOIN allmusiclist ON favorites.song_id = allmusiclist.id
                     WHERE favorites.user_id = $1`;
 
-    db.query(query, [userId], (err, results) => {
+    pool.query(query, [userId], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
@@ -149,7 +146,7 @@ app.post('/api/login', (req, res) => {
 
     const query = "SELECT * FROM users WHERE (username = $1 OR email = $1) AND password = $2";
 
-    db.query(query, [username, password], (err, results) => {
+    pool.query(query, [username, password], (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             return res.status(500).json({ success: false, message: 'Server error' });
@@ -168,7 +165,7 @@ app.post('/api/register', (req, res) => {
     const { username, email, password } = req.body;
     const query = "INSERT INTO users (username, email, password) VALUES ($1, $2, $3)";
 
-    db.query(query, [username, email, password], (err, result) => {
+    pool.query(query, [username, email, password], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal Server Error' });

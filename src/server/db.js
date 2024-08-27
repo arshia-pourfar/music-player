@@ -1,12 +1,26 @@
 // PROGRESSQL IN VERCEL
-require('dotenv').config();
-const { Pool } = require('pg');
-const pool = new Pool({
-    connectionString: process.env.POSTGRES_URL
-});
-// console.log(pool);
+// db.js
 
-exports.pool = pool;
+const { Pool } = require('pg');
+require('dotenv').config(); // بارگذاری متغیرهای محیطی از فایل .env
+
+// تنظیمات اتصال به PostgreSQL
+const pool = new Pool({
+    connectionString: process.env.POSTGRES_URL,
+});
+
+pool.connect((err, client, release) => {
+    if (err) {
+        console.error('Error connecting to PostgreSQL:', err.stack);
+        return;
+    } else {
+        console.log('Connected to PostgreSQL');
+        release(); // اتصال را آزاد می‌کند
+    }
+});
+
+// اکسپورت کردن pool برای استفاده در api.js
+module.exports = { pool };
 
 
 // module.exports = {
@@ -15,7 +29,9 @@ exports.pool = pool;
 //         return pool.query(text, params, callback);
 //     }
 // };
-// *******************************************************
+
+
+// ***************************************************************************
 // MYSQL IN LOCALHOST
 // const mysql = require('mysql');
 
