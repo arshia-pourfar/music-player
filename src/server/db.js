@@ -4,16 +4,22 @@ const { Pool } = require('pg');
 // تنظیمات اتصال به پایگاه داده PostgreSQL
 const pool = new Pool({
     connectionString: 'postgres://default:O1pMfdv2FVuI@ep-weathered-sun-a4c88yk1-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require',
-    ssl: {
-        rejectUnauthorized: false
-    }
+    // ssl: {
+    //     rejectUnauthorized: false
+    // }
 });
+// console.log(exports.pool = pool);
 
-module.exports = {
-    query: (text, params, callback) => {
-        return pool.query(text, params, callback);
-    }
-};
+exports.pool = pool;
+
+
+// module.exports = {
+//     query: (text, params, callback) => {
+//         console.log(params);
+//         return pool.query(text, params, callback);
+//     }
+// };
+// *******************************************************
 // MYSQL IN LOCALHOST
 // const mysql = require('mysql');
 
