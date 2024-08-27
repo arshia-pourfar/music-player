@@ -29,14 +29,23 @@ app.get('/api/allmusiclist', (req, res) => {
 
 // API برای دریافت لیست آهنگهای ترند
 app.get('/api/trendinglist', (req, res) => {
-    pool.query('SELECT * FROM allmusiclist WHERE isTrending=1 ORDER BY id', (err, results) => {
+    pool.query('SELECT * FROM allmusiclist WHERE isTrending=TRUE ORDER BY id', (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
         }
+
+        // // بررسی می‌کنیم که نتایج یک آرایه هستند
+        // const rows = results.rows; // یا `results` در صورتی که در نسخه pg متفاوت باشد
+        // if (!Array.isArray(rows)) {
+        //     console.error('Unexpected results format:', rows);
+        //     return res.status(500).json({ message: "Unexpected result from database" });
+        // }
+
+        // ایجاد آی‌دی جدید از صفر
         const updatedResult = results.rows.map((item, index) => ({
             ...item,
-            newId: index
+            newId: index // یا هر نامی که برای آی‌دی جدید استفاده می‌کنید
         }));
 
         res.json(updatedResult);
