@@ -1,6 +1,7 @@
+// POSTGRESSQL IN VERCEL
 const express = require('express');
 const app = express();
-const db = require('./db.js').connection;
+const db = require('./db.js'); // اتصال به پایگاه داده
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -16,10 +17,9 @@ app.get('/api/allmusiclist', (req, res) => {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
         }
-        // ایجاد آی‌دی جدید از صفر
-        const updatedResult = results.map((item, index) => ({
+        const updatedResult = results.rows.map((item, index) => ({
             ...item,
-            newId: index // یا هر نامی که برای آی‌دی جدید استفاده می‌کنید
+            newId: index
         }));
 
         res.json(updatedResult);
@@ -33,10 +33,9 @@ app.get('/api/trendinglist', (req, res) => {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
         }
-        // ایجاد آی‌دی جدید از صفر
-        const updatedResult = results.map((item, index) => ({
+        const updatedResult = results.rows.map((item, index) => ({
             ...item,
-            newId: index // یا هر نامی که برای آی‌دی جدید استفاده می‌کنید
+            newId: index
         }));
 
         res.json(updatedResult);
@@ -47,12 +46,12 @@ app.get('/api/trendinglist', (req, res) => {
 app.get('/api/topartistslist/:limit/', (req, res) => {
     const limit = parseInt(req.params.limit);
 
-    db.query('SELECT * FROM allmusiclist ORDER BY viewNumber DESC LIMIT ?', [limit], (err, results) => {
+    db.query('SELECT * FROM allmusiclist ORDER BY viewNumber DESC LIMIT $1', [limit], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
         }
-        res.json(results);
+        res.json(results.rows);
     });
 });
 
@@ -65,17 +64,9 @@ app.post('/api/:userId/favorites/update', (req, res) => {
         return res.status(400).json({ message: 'User ID and Song ID are required' });
     }
 
-    // محاسبه newId به صورت پویا
-    // const query = `
-    //     INSERT INTO favorites (user_id, song_id, newId)
-    //     SELECT ?, ?, COALESCE(MAX(newId) + 1, 0)
-    //     FROM favorites
-    //     WHERE user_id = ?
-    //     ON DUPLICATE KEY UPDATE song_id = song_id
-    // `;
-    const query = 'INSERT INTO favorites (user_id, song_id) VALUES (?, ?)';
+    const query = 'INSERT INTO favorites (user_id, song_id) VALUES ($1, $2) ON CONFLICT (user_id, song_id) DO NOTHING';
 
-    db.query(query, [userId, songId, userId], (err, result) => {
+    db.query(query, [userId, songId], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -89,7 +80,7 @@ app.delete('/api/:userId/favorites/update', (req, res) => {
     const { userId } = req.params;
     const { songId } = req.body;
 
-    const query = 'DELETE FROM favorites WHERE user_id = ? AND song_id = ?';
+    const query = 'DELETE FROM favorites WHERE user_id = $1 AND song_id = $2';
     db.query(query, [userId, songId], (err, result) => {
         if (err) {
             console.error(err);
@@ -107,18 +98,17 @@ app.get('/api/:userId/favorites/update', (req, res) => {
         return res.status(400).json({ message: 'User ID is required' });
     }
 
-    const query = 'SELECT song_id FROM favorites WHERE user_id = ?';
+    const query = 'SELECT song_id FROM favorites WHERE user_id = $1';
     db.query(query, [userId], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal Server Error' });
         }
-        res.json(result.map(row => row.song_id));
+        res.json(result.rows.map(row => row.song_id));
     });
 });
 
-
-// // گرفتن لیست مورد علاقه از دیتا بیس نسبت به ایدی کاربر
+// گرفتن لیست مورد علاقه از دیتابیس نسبت به آی‌دی کاربر
 app.get('/api/:userId/favorites', (req, res) => {
     const userId = req.params.userId;
 
@@ -128,24 +118,22 @@ app.get('/api/:userId/favorites', (req, res) => {
     const query = `SELECT allmusiclist.id, allmusiclist.imageSrc, allmusiclist.musicTime, allmusiclist.musicLink, allmusiclist.musicName, allmusiclist.artistName, allmusiclist.viewNumber
                     FROM favorites
                     JOIN allmusiclist ON favorites.song_id = allmusiclist.id
-                    WHERE favorites.user_id = ?`;
+                    WHERE favorites.user_id = $1`;
 
     db.query(query, [userId], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: "Internal Server Error" });
         }
-        // ایجاد آی‌دی جدید از صفر
-        const updatedResult = results.map((item, index) => ({
+        const updatedResult = results.rows.map((item, index) => ({
             ...item,
-            newId: index // یا هر نامی که برای آی‌دی جدید استفاده می‌کنید
+            newId: index
         }));
 
         res.json(updatedResult);
 
     });
 });
-
 
 // API برای لاگین کاربر
 app.post('/api/login', (req, res) => {
@@ -155,30 +143,28 @@ app.post('/api/login', (req, res) => {
         return res.status(400).json({ success: false, message: 'Username and password are required' });
     }
 
-    const query = "SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ?";
+    const query = "SELECT * FROM users WHERE (username = $1 OR email = $1) AND password = $2";
 
-    db.query(query, [username, username, password], (err, results) => {
+    db.query(query, [username, password], (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             return res.status(500).json({ success: false, message: 'Server error' });
         }
 
-        if (results.length > 0 && results[0].id !== 0) {
-            return res.json({ success: true, results });
+        if (results.rows.length > 0 && results.rows[0].id !== 0) {
+            return res.json({ success: true, results: results.rows });
         } else {
             return res.json({ success: false, message: 'Invalid username or password' });
         }
     });
 });
 
-
 // API برای ثبت‌نام کاربر
 app.post('/api/register', (req, res) => {
     const { username, email, password } = req.body;
-    const values = [[username, email, password]];
-    const query = "INSERT INTO users (username, email, password) VALUES ?";
+    const query = "INSERT INTO users (username, email, password) VALUES ($1, $2, $3)";
 
-    db.query(query, [values], (err, result) => {
+    db.query(query, [username, email, password], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -190,3 +176,197 @@ app.post('/api/register', (req, res) => {
 app.listen(80, () => {
     console.log('Server is running on port 80');
 });
+
+// MYSQL IN LOCALHOST
+// const express = require('express');
+// const app = express();
+// const db = require('./db.js').connection;
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
+
+// app.use(express.static(__dirname + 'build'));
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(cors());
+
+// // API برای دریافت لیست همه آهنگها
+// app.get('/api/allmusiclist', (req, res) => {
+//     db.query('SELECT * FROM allmusiclist', (err, results) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: "Internal Server Error" });
+//         }
+//         // ایجاد آی‌دی جدید از صفر
+//         const updatedResult = results.map((item, index) => ({
+//             ...item,
+//             newId: index // یا هر نامی که برای آی‌دی جدید استفاده می‌کنید
+//         }));
+
+//         res.json(updatedResult);
+//     });
+// });
+
+// // API برای دریافت لیست آهنگهای ترند
+// app.get('/api/trendinglist', (req, res) => {
+//     db.query('SELECT * FROM allmusiclist WHERE isTrending=1 ORDER BY id', (err, results) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: "Internal Server Error" });
+//         }
+//         // ایجاد آی‌دی جدید از صفر
+//         const updatedResult = results.map((item, index) => ({
+//             ...item,
+//             newId: index // یا هر نامی که برای آی‌دی جدید استفاده می‌کنید
+//         }));
+
+//         res.json(updatedResult);
+//     });
+// });
+
+// // API برای دریافت لیست برترین هنرمندان
+// app.get('/api/topartistslist/:limit/', (req, res) => {
+//     const limit = parseInt(req.params.limit);
+
+//     db.query('SELECT * FROM allmusiclist ORDER BY viewNumber DESC LIMIT ?', [limit], (err, results) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: "Internal Server Error" });
+//         }
+//         res.json(results);
+//     });
+// });
+
+// // افزودن به موارد مورد علاقه
+// app.post('/api/:userId/favorites/update', (req, res) => {
+//     const { userId } = req.params;
+//     const { songId } = req.body;
+
+//     if (!userId || !songId) {
+//         return res.status(400).json({ message: 'User ID and Song ID are required' });
+//     }
+
+//     // محاسبه newId به صورت پویا
+//     // const query = `
+//     //     INSERT INTO favorites (user_id, song_id, newId)
+//     //     SELECT ?, ?, COALESCE(MAX(newId) + 1, 0)
+//     //     FROM favorites
+//     //     WHERE user_id = ?
+//     //     ON DUPLICATE KEY UPDATE song_id = song_id
+//     // `;
+//     const query = 'INSERT INTO favorites (user_id, song_id) VALUES (?, ?)';
+
+//     db.query(query, [userId, songId, userId], (err, result) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: 'Internal Server Error' });
+//         }
+//         res.status(201).json({ message: 'Added to favorites' });
+//     });
+// });
+
+// // حذف از موارد مورد علاقه
+// app.delete('/api/:userId/favorites/update', (req, res) => {
+//     const { userId } = req.params;
+//     const { songId } = req.body;
+
+//     const query = 'DELETE FROM favorites WHERE user_id = ? AND song_id = ?';
+//     db.query(query, [userId, songId], (err, result) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: 'Internal Server Error' });
+//         }
+//         res.status(200).json({ message: 'Removed from favorites' });
+//     });
+// });
+
+// // دریافت موارد مورد علاقه کاربر
+// app.get('/api/:userId/favorites/update', (req, res) => {
+//     const { userId } = req.params;
+
+//     if (!userId) {
+//         return res.status(400).json({ message: 'User ID is required' });
+//     }
+
+//     const query = 'SELECT song_id FROM favorites WHERE user_id = ?';
+//     db.query(query, [userId], (err, result) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: 'Internal Server Error' });
+//         }
+//         res.json(result.map(row => row.song_id));
+//     });
+// });
+
+
+// // // گرفتن لیست مورد علاقه از دیتا بیس نسبت به ایدی کاربر
+// app.get('/api/:userId/favorites', (req, res) => {
+//     const userId = req.params.userId;
+
+//     if (!userId) {
+//         return res.status(400).json({ error: 'userId is required' });
+//     }
+//     const query = `SELECT allmusiclist.id, allmusiclist.imageSrc, allmusiclist.musicTime, allmusiclist.musicLink, allmusiclist.musicName, allmusiclist.artistName, allmusiclist.viewNumber
+//                     FROM favorites
+//                     JOIN allmusiclist ON favorites.song_id = allmusiclist.id
+//                     WHERE favorites.user_id = ?`;
+
+//     db.query(query, [userId], (err, results) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: "Internal Server Error" });
+//         }
+//         // ایجاد آی‌دی جدید از صفر
+//         const updatedResult = results.map((item, index) => ({
+//             ...item,
+//             newId: index // یا هر نامی که برای آی‌دی جدید استفاده می‌کنید
+//         }));
+
+//         res.json(updatedResult);
+
+//     });
+// });
+
+
+// // API برای لاگین کاربر
+// app.post('/api/login', (req, res) => {
+//     const { username, password } = req.body;
+
+//     if (!username || !password) {
+//         return res.status(400).json({ success: false, message: 'Username and password are required' });
+//     }
+
+//     const query = "SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ?";
+
+//     db.query(query, [username, username, password], (err, results) => {
+//         if (err) {
+//             console.error('Error executing query:', err);
+//             return res.status(500).json({ success: false, message: 'Server error' });
+//         }
+
+//         if (results.length > 0 && results[0].id !== 0) {
+//             return res.json({ success: true, results });
+//         } else {
+//             return res.json({ success: false, message: 'Invalid username or password' });
+//         }
+//     });
+// });
+
+
+// // API برای ثبت‌نام کاربر
+// app.post('/api/register', (req, res) => {
+//     const { username, email, password } = req.body;
+//     const values = [[username, email, password]];
+//     const query = "INSERT INTO users (username, email, password) VALUES ?";
+
+//     db.query(query, [values], (err, result) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: 'Internal Server Error' });
+//         }
+//         res.status(201).json({ message: 'User registered successfully', redirect: '/User' });
+//     });
+// });
+
+// app.listen(80, () => {
+//     console.log('Server is running on port 80');
+// });
