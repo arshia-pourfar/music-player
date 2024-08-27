@@ -22,6 +22,7 @@
     "flat-carousel": "^0.0.1",
     "flowbite-react": "^0.7.2",
     "headlessui": "^0.0.0",
+    "http-proxy-middleware": "^3.0.0",
     "jquery": "^3.7.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.10.3",
@@ -49,7 +50,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
