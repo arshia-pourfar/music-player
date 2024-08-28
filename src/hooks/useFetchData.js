@@ -47,12 +47,6 @@ const useFetchData = (
         }
     }, [fetchData, immediate]);
 
-    // useEffect(() => {
-    //     if (data === null || (Array.isArray(data) && data.length === 0)) {
-    //         fetchData();
-    //     }
-    // }, [data, fetchData]);
-
     return { data, loading, error, setUrl, setMethod, setBody, fetchData };
 };
 
