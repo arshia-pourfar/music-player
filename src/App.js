@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Home from './pages/Home';
 import AllMusic from "./pages/AllMusic";
@@ -97,10 +97,6 @@ export default function App() {
     return (
         <AuthProvider>
             <Router>
-                <Switch>
-                    <Route path="/favorites/:userId" component={<Favourite />} />
-                    {/* سایر مسیرها */}
-                </Switch>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Home />} />
