@@ -66,7 +66,7 @@ app.get('/api/topartistslist/:limit/', (req, res) => {
 });
 
 // افزودن به موارد مورد علاقه
-app.post('/api/:userId/favorites/update', (req, res) => {
+app.post('/api/:userId/favorites', (req, res) => {
     const { userId } = req.params;
     const { songId } = req.body;
 
@@ -86,7 +86,7 @@ app.post('/api/:userId/favorites/update', (req, res) => {
 });
 
 // حذف از موارد مورد علاقه
-app.delete('/api/:userId/favorites/update', (req, res) => {
+app.delete('/api/:userId/favorites', (req, res) => {
     const { userId } = req.params;
     const { songId } = req.body;
 
@@ -101,22 +101,22 @@ app.delete('/api/:userId/favorites/update', (req, res) => {
 });
 
 // دریافت موارد مورد علاقه کاربر
-app.get('/api/:userId/favorites/update', (req, res) => {
-    const { userId } = req.params;
+// app.get('/api/:userId/favorites', (req, res) => {
+//     const { userId } = req.params;
 
-    if (!userId) {
-        return res.status(400).json({ message: 'User ID is required' });
-    }
+//     if (!userId) {
+//         return res.status(400).json({ message: 'User ID is required' });
+//     }
 
-    const query = 'SELECT song_id FROM favorites WHERE user_id = $1';
-    pool.query(query, [userId], (err, result) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ message: 'Internal Server Error' });
-        }
-        res.json(result.rows.map(row => row.song_id));
-    });
-});
+//     const query = 'SELECT song_id FROM favorites WHERE user_id = $1';
+//     pool.query(query, [userId], (err, result) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).json({ message: 'Internal Server Error' });
+//         }
+//         res.json(result.rows.map(row => row.song_id));
+//     });
+// });
 
 // گرفتن لیست مورد علاقه از دیتابیس نسبت به آی‌دی کاربر
 app.get('/api/:userId/favorites', (req, res) => {
