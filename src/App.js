@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Home from './pages/Home';
 import AllMusic from "./pages/AllMusic";
@@ -12,7 +12,7 @@ import Download from "./pages/Download";
 import Setting from "./pages/Setting";
 // import User from "./components/LogIn";
 import { AuthProvider } from './hooks/AuthContext';
-import { Switch } from "@headlessui/react";
+// import { } from "@headlessui/react";
 // import { useAuth } from './components/AuthContext';
 
 // ///////////////////////////////////////////////////////////////////
@@ -99,6 +99,7 @@ export default function App() {
             <Router>
                 <Switch>
                     <Route path="/favorites/:userId" component={<Favourite />} />
+                    {/* سایر مسیرها */}
                 </Switch>
                 <Navbar />
                 <Routes>
