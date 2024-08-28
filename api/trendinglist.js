@@ -1,9 +1,7 @@
 const { pool } = require('./db.js');
 
 export default async function handler(req, res) {
-    console.log('sdcscsdcsdcdscds');
     if (req.method === 'GET') {
-    console.log('sdcscsdcsdcdscds');
         try {
             const result = await pool.query('SELECT * FROM allmusiclist WHERE isTrending=TRUE ORDER BY id');
             const updatedResult = result.rows.map((item, index) => ({
