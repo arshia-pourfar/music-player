@@ -5,6 +5,8 @@ import useWindowDimensions from '../hooks/useWidthSize';
 
 const MusicList = ({ myListArray, userId, isShowAlbumAndTime }) => {
     const { height } = useWindowDimensions();
+    console.log(myListArray);
+
     return (
         isShowAlbumAndTime ? (
             // <div className='2xl:h-[54dvh] xl:h-[63dvh] flex'>
