@@ -8,7 +8,7 @@ import MusicList from "../components/MusicList";
 
 const Favourite = () => {
     const { user } = useAuth();
-    const { data, loading, setUrl, fetchData } = useFetchData('', 'GET', null, false);
+    const { data, loading, setUrl, fetchData } = useFetchData(`/api/${user.id}/favoriteslist`, 'GET', null, true);
 
     useEffect(() => {
         if (user) {
