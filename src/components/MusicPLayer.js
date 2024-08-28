@@ -133,11 +133,11 @@ export const MusicPlayer = ({ getStyle }) => {
                     if (musicPlayerShow === true && ifFirstPlay.current === true) {
                         ifFirstPlay.current = false;
                         return (
-                            require(`../images/${musicDetails.imageSrc}`)
+                            musicDetails.imageSrc
                         )
                     } else if (ifFirstPlay.current === false) {
                         return (
-                            require(`../images/${musicDetails.imageSrc}`)
+                            musicDetails.imageSrc
                         )
                     }
                 })()} alt="" />
@@ -154,7 +154,7 @@ export const MusicPlayer = ({ getStyle }) => {
                             {/* insted trending list after set best allbums */}
                             {trendingListItem && Array.isArray(trendingListItem) ? trendingListItem.map((item, index) => (
                                 <div key={item.id} className='bg-custom-black relative mx-3 rounded-2xl w-[200px] basis-[180px]'>
-                                    <img className='rounded-2xl opacity-90 h-full w-full object-cover' src={require(`../images/${item.imageSrc}`)} alt="" />
+                                    <img className='rounded-2xl opacity-90 h-full w-full object-cover' src={item.imageSrc} alt="" />
                                 </div>
                             )) : null}
                         </div>
@@ -182,11 +182,11 @@ export const MusicPlayer = ({ getStyle }) => {
                                     if (musicPlayerShow === true && ifFirstPlay.current === true) {
                                         ifFirstPlay.current = false;
                                         return (
-                                            require(`../images/${musicDetails.imageSrc}`)
+                                            musicDetails.imageSrc
                                         )
                                     } else if (ifFirstPlay.current === false) {
                                         return (
-                                            require(`../images/${musicDetails.imageSrc}`)
+                                            musicDetails.imageSrc
                                         )
                                     }
                                 })()} alt="" />
@@ -265,11 +265,11 @@ export const MusicPlayer = ({ getStyle }) => {
                                 if (musicPlayerShow === true && ifFirstPlay.current === true) {
                                     ifFirstPlay.current = false;
                                     return (
-                                        require(`../images/${musicDetails.imageSrc}`)
+                                        musicDetails.imageSrc
                                     )
                                 } else if (ifFirstPlay.current === false) {
                                     return (
-                                        require(`../images/${musicDetails.imageSrc}`)
+                                        musicDetails.imageSrc
                                     )
                                 }
                             })()} alt="" />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useFetchData from '../hooks/useFetchData';
 
 const FavoriteIcon = ({ userId, songId }) => {
-    const { data, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData('', 'POST', null, false);
+    const { data, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData(`/api/${userId}/favorites`, 'POST', null, false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [triggerFetch, setTriggerFetch] = useState(false);
     const [showLoginPage, setShowLoginPage] = useState(false);
@@ -10,7 +10,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     useEffect(() => {
         if (!userId || !songId) return; // اطمینان از مقداردهی صحیح userId و songId
         const fetchFavoriteStatus = async () => {
-            setUrl(`/api/${userId}/favorites`); // این URL باید به درستی با مسیر سرور شما همخوانی داشته باشد
+            setUrl(`/api/${userId}/favorites/update`); // این URL باید به درستی با مسیر سرور شما همخوانی داشته باشد
             setMethod('GET');
             setTriggerFetch(true);
         };
@@ -25,7 +25,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     }, [data, songId]);
 
     const handleAddToFavorites = async () => {
-        setUrl(`/api/${userId}/favorites`);
+        setUrl(`/api/${userId}/favorites/update`);
         setMethod(isFavorite ? 'DELETE' : 'POST');
         setBody({ songId });
         setTriggerFetch(true);

@@ -12,6 +12,17 @@ import Download from "./pages/Download";
 import Setting from "./pages/Setting";
 // import User from "./components/LogIn";
 import { AuthProvider } from './hooks/AuthContext';
+import myHomePostImage1 from './images/33138010_8010266.png';
+import myHomePostImage2 from './images/33138010_8010266.png';
+import myHomePostImage3 from './images/33138010_8010266.png';
+import myHomePostImage4 from './images/33138010_8010266.png';
+
+import myImage1 from './images/10604875_4512064.jpg';
+import myImage2 from './images/4464775_2372686.jpg';
+import myImage3 from './images/4464775_2372686.jpg';
+import myImage4 from './images/9802046_4219738.jpg';
+
+
 // import { } from "@headlessui/react";
 // import { useAuth } from './components/AuthContext';
 
@@ -20,10 +31,10 @@ import { AuthProvider } from './hooks/AuthContext';
 // carousel post image
 
 export const headerPostItem = [
-    { id: 0, imageSrc: require('./images/33138010_8010266.png') },
-    { id: 1, imageSrc: require('./images/33418152_8044927.png') },
-    { id: 2, imageSrc: require('./images/33921407_8095756.png') },
-    { id: 3, imageSrc: require('./images/34684748_8156480.png') },
+    { id: 0, imageSrc: myHomePostImage1 },
+    { id: 1, imageSrc: myHomePostImage2 },
+    { id: 2, imageSrc: myHomePostImage3 },
+    { id: 3, imageSrc: myHomePostImage4 },
 ]
 
 
@@ -32,19 +43,19 @@ export const headerPostItem = [
 // remove
 // best albums of all time infomation array
 export const bestAlbum = [
-    { id: 0, imageSrc: require('./images/10604875_4512064.jpg') },
-    { id: 1, imageSrc: require('./images/4464775_2372686.jpg') },
-    { id: 2, imageSrc: require('./images/5237910_2688833.jpg') },
-    { id: 3, imageSrc: require('./images/9802046_4219738.jpg') },
-    { id: 4, imageSrc: require('./images/10604875_4512064.jpg') },
-    { id: 5, imageSrc: require('./images/4464775_2372686.jpg') },
-    { id: 6, imageSrc: require('./images/5237910_2688833.jpg') },
-    { id: 7, imageSrc: require('./images/9802046_4219738.jpg') },
-    { id: 8, imageSrc: require('./images/10604875_4512064.jpg') },
-    { id: 9, imageSrc: require('./images/4464775_2372686.jpg') },
-    { id: 10, imageSrc: require('./images/5237910_2688833.jpg') },
-    { id: 11, imageSrc: require('./images/9802046_4219738.jpg') },
-    { id: 12, imageSrc: require('./images/10604875_4512064.jpg') },
+    { id: 0, imageSrc: myImage1 },
+    { id: 1, imageSrc: myImage2 },
+    { id: 2, imageSrc: myImage3 },
+    { id: 3, imageSrc: myImage4 },
+    { id: 4, imageSrc: myImage1 },
+    { id: 5, imageSrc: myImage2 },
+    { id: 6, imageSrc: myImage3 },
+    { id: 7, imageSrc: myImage4 },
+    { id: 8, imageSrc: myImage1 },
+    { id: 9, imageSrc: myImage2 },
+    { id: 10, imageSrc: myImage3 },
+    { id: 11, imageSrc: myImage4 },
+    { id: 12, imageSrc: myImage3 },
 ]
 // remove
 // ****************************************************
@@ -53,13 +64,13 @@ export const bestAlbum = [
 
 // recent favourite infomation array
 export const recentFavList = [
-    { id: 0, imageSrc: require('./images/5237910_2688833.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet ing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 1, imageSrc: require('./images/9802046_4219738.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consec elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 2, imageSrc: require('./images/4464775_2372686.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 3, imageSrc: require('./images/10604875_4512064.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 4, imageSrc: require('./images/9802046_4219738.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 5, imageSrc: require('./images/9802046_4219738.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 6, imageSrc: require('./images/4464775_2372686.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 0, imageSrc: myImage1, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet ing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 1, imageSrc: myImage2, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consec elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 2, imageSrc: myImage3, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 3, imageSrc: myImage4, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 4, imageSrc: myImage1, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 5, imageSrc: myImage2, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 6, imageSrc: myImage3, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
 ];
 // ****************************************************
 
@@ -67,24 +78,24 @@ export const recentFavList = [
 // after add users in db
 // notification array
 export const notificationList = [
-    { id: 0, imageSrc: require('./images/10604875_4512064.jpg'), title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
-    { id: 1, imageSrc: require('./images/10604875_4512064.jpg'), title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
-    { id: 2, imageSrc: require('./images/10604875_4512064.jpg'), title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
-    { id: 3, imageSrc: require('./images/10604875_4512064.jpg'), title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
-    { id: 4, imageSrc: require('./images/10604875_4512064.jpg'), title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
-    { id: 5, imageSrc: require('./images/10604875_4512064.jpg'), title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
-    { id: 6, imageSrc: require('./images/10604875_4512064.jpg'), title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
+    { id: 0, imageSrc: myImage1, title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
+    { id: 1, imageSrc: myImage2, title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
+    { id: 2, imageSrc: myImage3, title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
+    { id: 3, imageSrc: myImage4, title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
+    { id: 4, imageSrc: myImage1, title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
+    { id: 5, imageSrc: myImage2, title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
+    { id: 6, imageSrc: myImage3, title: 'test', subTitle: 'test teadfmk dfm dfbdbstrhj' },
 ]
 
 export const favouriteList = [];
 export const playList = [
-    { id: 0, imageSrc: require('./images/5237910_2688833.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 1, imageSrc: require('./images/9802046_4219738.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 2, imageSrc: require('./images/4464775_2372686.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 3, imageSrc: require('./images/10604875_4512064.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 4, imageSrc: require('./images/9802046_4219738.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 5, imageSrc: require('./images/9802046_4219738.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
-    { id: 6, imageSrc: require('./images/4464775_2372686.jpg'), title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 0, imageSrc: myImage4, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 1, imageSrc: myImage1, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 2, imageSrc: myImage2, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 3, imageSrc: myImage3, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 4, imageSrc: myImage4, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 5, imageSrc: myImage1, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
+    { id: 6, imageSrc: myImage3, title: 'Lorem ipsum', subTitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque ipsam laudantium dolor voluptatum dicta quis' },
 ];
 // ****************************************************
 
