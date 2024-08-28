@@ -12,6 +12,7 @@ import Download from "./pages/Download";
 import Setting from "./pages/Setting";
 // import User from "./components/LogIn";
 import { AuthProvider } from './hooks/AuthContext';
+import { Switch } from "@headlessui/react";
 // import { useAuth } from './components/AuthContext';
 
 // ///////////////////////////////////////////////////////////////////
@@ -96,6 +97,9 @@ export default function App() {
     return (
         <AuthProvider>
             <Router>
+                <Switch>
+                    <Route path="/favorites/:userId" component={<Favourite />} />
+                </Switch>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Home />} />
