@@ -12,7 +12,7 @@ const Favourite = () => {
 
     useEffect(() => {
         if (user) {
-            setUrl(`/api/${user.id}/favorites`);
+            setUrl(`/api/${user.id}/favoriteslist`);
             fetchData();
         }
     }, [user, setUrl, fetchData]);
