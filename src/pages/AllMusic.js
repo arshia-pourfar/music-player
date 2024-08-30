@@ -41,7 +41,6 @@ const AllMusic = () => {
         arrows: false,
         vertical: false,
     };
-    console.log(allMusicList);
 
     if (allMusicLoading) {
         return (
