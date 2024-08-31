@@ -15,7 +15,7 @@ export default function handler(req, res) {
             return res.status(400).json({ message: 'Song ID is required' });
         }
 
-        const query = 'INSERT INTO favorites (user_id, song_id) VALUES ($1, $2) ON CONFLICT (user_id, song_id) DO NOTHING';
+        const query = 'INSERT INTO favorites (user_id, song_id) VALUES ($1, $2)';
         pool.query(query, [userId, songId], (err, result) => {
             if (err) {
                 console.error(err);

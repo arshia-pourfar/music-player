@@ -1,7 +1,6 @@
 {
   "name": "music-player",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@flaticon/flaticon-uicons": "^3.3.1",
@@ -53,6 +52,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -74,7 +74,8 @@ app.post('/api/:userId/favorites/update', (req, res) => {
         return res.status(400).json({ message: 'User ID and Song ID are required' });
     }
 
-    const query = 'INSERT INTO favorites (user_id, song_id) VALUES ($1, $2) ON CONFLICT (user_id, song_id) DO NOTHING';
+    // const query = 'INSERT INTO favorites (user_id, song_id) VALUES ($1, $2) ON CONFLICT (user_id, song_id) DO NOTHING';
+    const query = 'INSERT INTO favorites (user_id, song_id) VALUES ($1, $2)';
 
     pool.query(query, [userId, songId], (err, result) => {
         if (err) {
@@ -101,25 +102,25 @@ app.delete('/api/:userId/favorites/update', (req, res) => {
 });
 
 // دریافت موارد مورد علاقه کاربر
-// app.get('/api/:userId/favorites/update', (req, res) => {
-//     const { userId } = req.params;
+app.get('/api/:userId/favorites/update', (req, res) => {
+    const { userId } = req.params;
 
-//     if (!userId) {
-//         return res.status(400).json({ message: 'User ID is required' });
-//     }
+    if (!userId) {
+        return res.status(400).json({ message: 'User ID is required' });
+    }
 
-//     const query = 'SELECT song_id FROM favorites WHERE user_id = $1';
-//     pool.query(query, [userId], (err, result) => {
-//         if (err) {
-//             console.error(err);
-//             return res.status(500).json({ message: 'Internal Server Error' });
-//         }
-//         res.json(result.rows.map(row => row.song_id));
-//     });
-// });
+    const query = 'SELECT song_id FROM favorites WHERE user_id = $1';
+    pool.query(query, [userId], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
+        res.json(result.rows.map(row => row.song_id));
+    });
+});
 
 // گرفتن لیست مورد علاقه از دیتابیس نسبت به آی‌دی کاربر
-app.get('/api/:userId/favorites', (req, res) => {
+app.get('/api/:userId/favoriteslist', (req, res) => {
     const userId = req.params.userId;
 
     if (!userId) {
@@ -265,7 +266,7 @@ app.listen(5000, () => {
 //     // `;
 //     const query = 'INSERT INTO favorites (user_id, song_id) VALUES (?, ?)';
 
-//     db.query(query, [userId, songId, userId], (err, result) => {
+//     db.query(query, [userId, songId], (err, result) => {
 //         if (err) {
 //             console.error(err);
 //             return res.status(500).json({ message: 'Internal Server Error' });
