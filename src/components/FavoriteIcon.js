@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import useFetchData from '../hooks/useFetchData';
 
 const FavoriteIcon = ({ userId, songId }) => {
-    const { data, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData(`/api/${userId}/favorites/update`, 'GET', null, false);
+    const { data, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData('', 'POST', null, false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [triggerFetch, setTriggerFetch] = useState(false);
     const [showLoginPage, setShowLoginPage] = useState(false);
 
     useEffect(() => {
-        // if (!userId || !songId) return; // اطمینان از مقداردهی صحیح userId و songId
+        if (!userId || !songId) return; // اطمینان از مقداردهی صحیح userId و songId
         const fetchFavoriteStatus = async () => {
             setUrl(`/api/${userId}/favorites/update`); // این URL باید به درستی با مسیر سرور شما همخوانی داشته باشد
             setMethod('GET');
@@ -19,6 +19,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     }, [userId, songId, setUrl, setMethod, fetchData]);
 
     useEffect(() => {
+        console.log(data + Array.isArray(data));
         if (data && Array.isArray(data)) {
             setIsFavorite(data.includes(songId));
         }
@@ -42,7 +43,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     useEffect(() => {
         setShowLoginPage(userId === 0);
     }, [userId]);
-
+    console.log(isFavorite);
     return (
         showLoginPage ? (
             <div className='flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5'>
