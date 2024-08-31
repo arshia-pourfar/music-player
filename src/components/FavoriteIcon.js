@@ -10,7 +10,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     useEffect(() => {
         if (!userId || !songId) return; // اطمینان از مقداردهی صحیح userId و songId
         const fetchFavoriteStatus = async () => {
-            setUrl(`/api/${userId}/favorites/update`); // این URL باید به درستی با مسیر سرور شما همخوانی داشته باشد
+            setUrl(`/api/${userId}/favoriteslist`); // این URL باید به درستی با مسیر سرور شما همخوانی داشته باشد
             setMethod('GET');
             setTriggerFetch(true);
         };
