@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     } = req;
 
     // بررسی متد درخواست
-    if (method === 'GET') {
+    if (req.method === 'GET') {
         // دریافت لیست علاقه‌مندی‌ها بر اساس userId
         if (!userId) {
             return res.status(400).json({ error: 'userId is required' });

@@ -19,7 +19,6 @@ const FavoriteIcon = ({ userId, songId }) => {
     }, [userId, songId, setUrl, setMethod, fetchData, isFavorite]);
 
     useEffect(() => {
-        console.log(data + Array.isArray(data));
         if (data && Array.isArray(data)) {
             setIsFavorite(data.includes(songId));
         }
@@ -43,7 +42,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     useEffect(() => {
         setShowLoginPage(userId === 0);
     }, [userId]);
-    console.log(isFavorite);
+
     return (
         showLoginPage ? (
             <div className='flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5'>
