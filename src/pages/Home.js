@@ -157,9 +157,9 @@ const Home = () => {
                         <div key={index} className='w-full min-h-fit flex items-center justify-between py-2 text-custom-black cursor-pointer'>
                             <div className='w-full items-center flex border-l-4 border-transparent'>
                                 {/* <span className='w-5 text-center xl:text-lg lg:text-base md:text-lg font-semibold opacity-50 ms-2 '> {index < 9 ? `0${index + 1}` : index + 1}</span> */}
-                                <img className='lg:w-[65px] md:w-[70px] shadow-lg rounded-md' src={item.imageSrc} alt="" />
+                                <img className='lg:w-[65px] md:w-[70px] shadow-lg rounded-md' src={item.imagesrc} alt="" />
                                 <div className='capitalize w-[200px] xl:mx-4 lg:mx-2 md:mx-3'>
-                                    <h2 className='font-bold xl:text-xl lg:text-xl md:text-xl line-clamp-1'>{item.artistName}</h2>
+                                    <h2 className='font-bold xl:text-xl lg:text-xl md:text-xl line-clamp-1'>{item.artistname}</h2>
                                     {/* <span className='text-custom-gray xl:text-[15px] lg:text-base md:text-lg line-clamp-1'>{item.followers}</span> */}
                                     <span className='text-custom-gray xl:text-sm lg:text-base md:text-lg line-clamp-1 flex items-center'>
                                         <i className='fi fi-ss-waveform-path'></i>
