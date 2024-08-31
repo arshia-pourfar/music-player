@@ -8,14 +8,15 @@ import MusicList from "../components/MusicList";
 
 const Favourite = () => {
     const { user } = useAuth();
-    const { data, loading, setUrl, fetchData } = useFetchData(`/api/${user.id}/favoriteslist`, 'GET', null, true);
+    const userId = user.id;
+    const { data, loading, setUrl, fetchData } = useFetchData(`/api/${userId}/favoriteslist`, 'GET', null, true);
 
     useEffect(() => {
         if (user) {
-            setUrl(`/api/${user.id}/favoriteslist`);
+            setUrl(`/api/${userId}/favoriteslist`);
             fetchData();
         }
-    }, [user, setUrl, fetchData]);
+    }, [user, setUrl, fetchData, userId]);
 
     ////////////////////////////////////////////////////////////////////
     // code for local server

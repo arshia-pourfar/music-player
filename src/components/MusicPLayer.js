@@ -14,7 +14,7 @@ export const MusicPlayer = ({ getStyle }) => {
 
     useEffect(() => {
         if (user) {
-            setUrl(`/api/${user ? user.id : 0}/favorites`);
+            setUrl(`/api/${user ? user.id : 0}/favoriteslist`);
             fetchData();
         }
     }, [user, setUrl, fetchData]);
