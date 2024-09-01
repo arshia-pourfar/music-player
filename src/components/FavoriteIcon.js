@@ -8,7 +8,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     const [showLoginPage, setShowLoginPage] = useState(false);
 
     useEffect(() => {
-        if (!userId || !songId) return; // اطمینان از مقداردهی صحیح userId و songId
+        // if (!userId || !songId) return; // اطمینان از مقداردهی صحیح userId و songId
         const fetchFavoriteStatus = async () => {
             setUrl(`/api/${userId}/favorites/update`); // این URL باید به درستی با مسیر سرور شما همخوانی داشته باشد
             setMethod('GET');
@@ -20,6 +20,7 @@ const FavoriteIcon = ({ userId, songId }) => {
 
     useEffect(() => {
         if (typeof window !== 'undefined' && Array.isArray(data) && songId) {
+            console.log(songId + data);
             setIsFavorite(data.includes(songId));
         }
     }, [data, songId]);

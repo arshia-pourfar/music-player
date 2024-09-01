@@ -37,26 +37,24 @@ export default function handler(req, res) {
         });
 
     } else if (req.method === 'GET') {
-        console.log('asddsda');
-
         const query = `SELECT allmusiclist.id, allmusiclist.imageSrc, allmusiclist.musicTime, allmusiclist.musicLink, allmusiclist.musicName, allmusiclist.artistName, allmusiclist.viewNumber
-                        FROM favorites
-                        JOIN allmusiclist ON favorites.song_id = allmusiclist.id
-                        WHERE favorites.user_id = $1`;
+        FROM favorites
+        JOIN allmusiclist ON favorites.song_id = allmusiclist.id
+        WHERE favorites.user_id = $1`;
 
-        pool.query(query, [userId], (err, results) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).json({ message: "Internal Server Error" });
-            }
-            const updatedResult = results.rows.map((item, index) => ({
+        try {
+            const rows = pool.query(query, [userId]);
+
+            const updatedResult = rows.map((item, index) => ({
                 ...item,
                 newId: index
             }));
 
-            res.json(updatedResult);
-        });
-
+            return res.status(200).json(updatedResult);
+        } catch (err) {
+            console.error('Error querying the database:', err);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
     } else {
         res.setHeader('Allow', ['POST', 'DELETE', 'GET']);
         res.status(405).end(`Method ${req.method} Not Allowed`);
