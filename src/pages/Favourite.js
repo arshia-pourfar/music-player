@@ -8,16 +8,15 @@ import MusicList from "../components/MusicList";
 
 const Favourite = () => {
     const { user } = useAuth();
-    const { data, loading, setUrl, setMethod, fetchData } = useFetchData('', 'GET', null, false);
+    const userId = user.id;
+    const { data, loading, setUrl, fetchData } = useFetchData(`/api/${userId}/favoriteslist`, 'GET', null, true);
 
     useEffect(() => {
-        console.log(data);
-
         if (user) {
-            setUrl(`/api/${user.id}/favoriteslist`); // این URL باید به درستی با مسیر سرور شما همخوانی داشته باشد
+            setUrl(`/api/${userId}/favoriteslist`);
             fetchData();
         }
-    }, [user, setUrl, fetchData, setMethod, data]);
+    }, [user, setUrl, fetchData, userId]);
 
     ////////////////////////////////////////////////////////////////////
     // code for local server
