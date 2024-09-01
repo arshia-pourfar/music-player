@@ -3,7 +3,7 @@ const { pool } = require('../../db.js'); // اتصال به دیتابیس
 
 export default function handler(req, res) {
     const { userId } = req.query; // دریافت userId از URL
-    
+
     if (!userId) {
         return res.status(400).json({ message: 'User ID is required' });
     }
@@ -37,6 +37,8 @@ export default function handler(req, res) {
         });
 
     } else if (req.method === 'GET') {
+        console.log('asddsda');
+
         const query = `SELECT allmusiclist.id, allmusiclist.imageSrc, allmusiclist.musicTime, allmusiclist.musicLink, allmusiclist.musicName, allmusiclist.artistName, allmusiclist.viewNumber
                         FROM favorites
                         JOIN allmusiclist ON favorites.song_id = allmusiclist.id

@@ -143,7 +143,7 @@ const Home = () => {
                     <a href="#" className='underline text-custom-blue xl:text-base lg:text-sm'>See all</a>
                 </div>
                 <div className='w-full h-full top-artist-list lg:px-1 xl:mt-3 md:mt-1 flex flex-col'>
-                    {/* {topArtistList && topArtistList.map((item, index) => (
+                    {topArtistList && topArtistList.map((item, index) => (
                         <div key={index} className='w-full min-h-fit flex items-center justify-between py-2 text-custom-black cursor-pointer'>
                             <div className='w-full items-center flex border-l-4 border-transparent'>
                                 <img className='lg:w-[65px] md:w-[70px] shadow-lg rounded-md' src={`/images/${item.imagesrc}`} alt="" />
@@ -160,7 +160,7 @@ const Home = () => {
                                 <MenuIcon />
                             </div>
                         </div>
-                    ))} */}
+                    ))}
                 </div>
             </div>
         );
