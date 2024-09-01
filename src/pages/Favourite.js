@@ -15,7 +15,6 @@ const Favourite = () => {
 
         if (user) {
             setUrl(`/api/${user.id}/favoriteslist`); // این URL باید به درستی با مسیر سرور شما همخوانی داشته باشد
-            setMethod('GET');
             fetchData();
         }
     }, [user, setUrl, fetchData, setMethod, data]);
