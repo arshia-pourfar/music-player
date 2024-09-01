@@ -19,7 +19,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     }, [userId, songId, setUrl, setMethod, fetchData, isFavorite]);
 
     useEffect(() => {
-        console.log(Array.isArray(data) + data[0]);
+        console.log(Array.isArray(data) + data);
         console.log(JSON.stringify(data, null, 2));
         console.table(data);
         if (data && Array.isArray(data)) {
