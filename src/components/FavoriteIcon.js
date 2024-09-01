@@ -19,9 +19,9 @@ const FavoriteIcon = ({ userId, songId }) => {
     }, [userId, songId, setUrl, setMethod, fetchData, isFavorite]);
 
     useEffect(() => {
-        // if (data && Array.isArray(data)) {
-        setIsFavorite(data.includes(songId));
-        // }
+        if (data) {
+            setIsFavorite(data.includes(songId));
+        }
     }, [data, songId]);
 
     const handleAddToFavorites = async () => {
