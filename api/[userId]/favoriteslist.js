@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         `;
 
         try {
-            const { rows } = await pool.query(query, [userId]);
+            const rows = await pool.query(query, [userId]);
             const updatedResult = rows.map((item, index) => ({
                 ...item,
                 newId: index

@@ -22,7 +22,7 @@ const FavoriteIcon = ({ userId, songId }) => {
         if (data && Array.isArray(data)) {
             setIsFavorite(data.includes(songId));
         }
-    }, [data, songId]);
+    }, [data, songId, userId, setUrl, setMethod, fetchData, isFavorite]);
 
     const handleAddToFavorites = async () => {
         setUrl(`/api/${userId}/favorites/update`);

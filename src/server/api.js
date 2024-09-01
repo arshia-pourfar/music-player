@@ -53,7 +53,7 @@ app.get('/api/trendinglist', (req, res) => {
 });
 
 // API برای دریافت لیست برترین هنرمندان
-app.get('/api/topartistslist/:limit/', (req, res) => {
+app.get('/api/topartistslist/:limit', (req, res) => {
     const limit = parseInt(req.params.limit);
 
     pool.query('SELECT * FROM allmusiclist ORDER BY viewNumber DESC LIMIT $1', [limit], (err, results) => {
