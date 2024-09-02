@@ -198,7 +198,7 @@ const Home = () => {
                     <i className='flex justify-between items-center fi fi-rr-circle-xmark text-custom-black text-3xl bg-custom-white w-[60px] p-[6px] rounded-l-full cursor-pointer'></i>
                 </div>
                 <SearchBox widthSize={false} titleText={'Home'} />
-                <div className='flex pt-14 lg:pe-10 absolute custom-h-full'>
+                <div className='flex pt-14 lg:px-10 absolute custom-h-full'>
                     <div className='left-section lg:w-[60%] z-[100]'>
                         <HeaderPostCarousel />
                         <TrendingList />

@@ -87,7 +87,7 @@ const Navbar = () => {
                     <RenderNavIcon />
                 </div>
             </nav>
-            <nav id='navbar-mobile' className='block flex-col justify-around items-start h-[100dvh] min-h-[650px] w-[40%] absolute text-center z-[999]'>
+            <nav id='navbar-mobile' className='lg:hidden block h-[100dvh] min-h-[650px] w-[40%] absolute text-center z-[999]'>
                 {/* <i className={`fi fi-rs-bars-staggered lg:hidden absolute left-10 top-6 text-4xl z-[999] transition-all ${isClickMenuIcon ? 'text-custom-white' : 'text-custom-black'}`} onClick={() => setIsClickMenuIcon(!isClickMenuIcon)}></i> */}
                 <div className={`lg:hidden absolute left-7 top-5 text-4xl z-[999] transition-all ${isClickMenuIcon ? 'text-custom-white' : 'text-custom-black'}`} onClick={() => setIsClickMenuIcon(!isClickMenuIcon)}>
                     <Hamburger size={45} duration={0.7} rounded />
