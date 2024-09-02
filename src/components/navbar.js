@@ -2,15 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ReactComponent as Logo } from '../images/logo.svg';
 import { NavLink as Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
-
-import useWindowDimensions from '../hooks/useWidthSize';
+import { Divide as Hamburger } from 'hamburger-react'
 const navItems = [
-    { id: 0, sectionName: '', icon: 'fi-rs-home', iconSolid: 'fi-ss-home' },
-    { id: 1, sectionName: 'AllMusic', icon: 'fi-rs-music-alt', iconSolid: 'fi-ss-music-alt' },
-    { id: 2, sectionName: 'Favourite', icon: 'fi-rs-heart', iconSolid: 'fi-ss-heart' },
-    { id: 3, sectionName: 'PlayList', icon: 'fi-rs-list-music', iconSolid: 'fi-ss-list-music' },
-    { id: 4, sectionName: 'Download', icon: 'fi-rs-download', iconSolid: 'fi-ss-download' },
-    { id: 5, sectionName: 'Setting', icon: 'fi-rs-settings', iconSolid: 'fi-ss-settings' },
+    { id: 0, itemName: 'Home', sectionName: '', icon: 'fi-rs-home', iconSolid: 'fi-ss-home' },
+    { id: 1, itemName: 'AllMusic', sectionName: 'AllMusic', icon: 'fi-rs-music-alt', iconSolid: 'fi-ss-music-alt' },
+    { id: 2, itemName: 'Favourite', sectionName: 'Favourite', icon: 'fi-rs-heart', iconSolid: 'fi-ss-heart' },
+    { id: 3, itemName: 'PlayList', sectionName: 'PlayList', icon: 'fi-rs-list-music', iconSolid: 'fi-ss-list-music' },
+    { id: 4, itemName: 'Download', sectionName: 'Download', icon: 'fi-rs-download', iconSolid: 'fi-ss-download' },
+    { id: 5, itemName: 'Setting', sectionName: 'Setting', icon: 'fi-rs-settings', iconSolid: 'fi-ss-settings' },
     // { id: 6, sectionName: 'User', icon: 'fi-rs-circle-user', iconSolid: 'fi-ss-circle-user' },
 ];
 
@@ -34,10 +33,9 @@ const NavLink = styled(Link)`
 // `;
 
 const Navbar = () => {
-    const { width } = useWindowDimensions();
     const location = useLocation();
     const [activeIndex, setActiveIndex] = useState(-1);
-
+    const [isClickMenuIcon, setIsClickMenuIcon] = useState(false);
     const updateActiveIndex = useCallback(() => {
         const index = navItems.findIndex(item => '/' + item.sectionName === location.pathname);
         setActiveIndex(index);
@@ -54,24 +52,54 @@ const Navbar = () => {
     const RenderNavIcon = () => (
         navItems.map((item, index) => (
             <NavLink
-                key={item.id}
-                className={`nav-item lg:my-3 flex lg:text-[22px] text-3xl justify-center cursor-pointer nth-child-4 nth-child-7 nth-child-8`}
+                key={index}
+                className={`nav-item lg:flex hidden my-3 text-[22px] justify-center cursor-pointer nth-child-4 nth-child-7 nth-child-8`}
                 to={'/' + item.sectionName}
                 onClick={() => handleClick(index)}
             >
-                <i className={`fi ${activeIndex === index ? item.iconSolid : item.icon} flex lg:text-custom-white text-custom-white`} />
+                <i className={`fi ${activeIndex === index ? item.iconSolid : item.icon} flex text-custom-white`} />
+
+            </NavLink>
+        ))
+    );
+    const RenderNavIconMobile = () => (
+        navItems.map((item, index) => (
+            <NavLink
+                key={index}
+                className={`nav-item flex text-3xl justify-start cursor-pointer nth-child-7 rounded-lg`}
+                to={'/' + item.sectionName}
+                onClick={() => handleClick(index)}
+            >
+                <span className='flex justify-start items-center p-4 ps-6 w-full text-custom-white'>
+                    <i className={`fi ${activeIndex === index ? item.iconSolid : item.icon} flex `} />
+                    <span className='flex px-4'>{item.itemName}</span>
+                </span>
             </NavLink>
         ))
     );
 
     return (
-        <nav id='navbar' className='lg:w-[70px] h-[100dvh] min-h-[650px] lg:relative absolute left-0 flex flex-col justify-center items-center text-center px-3 z-[1000]'>
-            {/* <div className='absolute backdrop-blur-[10px] rounded-xl bg-custom-gray w-[90%] h-[90px] lg:hidden block'></div> */}
-            <div className='flex-col lg:justify-normal lg:w-auto w-[70%] flex justify-between items-center me-[1px] z-10'>
-                <Logo className='lg:inline-block hidden absolute top-6' />
-                <RenderNavIcon />
-            </div>
-        </nav>
+        <>
+            <nav id='navbar' className='lg:flex hidden flex-col justify-center items-center w-[70px] h-[100dvh] min-h-[650px] relative text-center px-3 z-[1000]'>
+                {/* <div className='absolute backdrop-blur-[10px] rounded-xl bg-custom-gray w-[90%] h-[90px] lg:hidden block'></div> */}
+                <div className='flex flex-col items-center w-auto me-[1px] z-10'>
+                    <Logo className='inline-block absolute top-6' />
+                    <RenderNavIcon />
+                </div>
+            </nav>
+            <nav id='navbar-mobile' className='block flex-col justify-around items-start h-[100dvh] min-h-[650px] w-[40%] absolute text-center z-[999]'>
+                {/* <i className={`fi fi-rs-bars-staggered lg:hidden absolute left-10 top-6 text-4xl z-[999] transition-all ${isClickMenuIcon ? 'text-custom-white' : 'text-custom-black'}`} onClick={() => setIsClickMenuIcon(!isClickMenuIcon)}></i> */}
+                <div className={`lg:hidden absolute left-7 top-5 text-4xl z-[999] transition-all ${isClickMenuIcon ? 'text-custom-white' : 'text-custom-black'}`} onClick={() => setIsClickMenuIcon(!isClickMenuIcon)}>
+                    <Hamburger size={45} duration={0.7} rounded />
+                </div>
+                <div className={`w-full h-full absolute backdrop-blur-[11px] bg-custom-gray text-center z-10 pt-14 ${isClickMenuIcon ? 'animate-open-navmenu' : 'animate-close-navmenu'}`}>
+                    <div className='flex flex-col py-5 px-3 w-full'>
+                        {/* <Logo className='inline-block text-4xl absolute top-6' /> */}
+                        <RenderNavIconMobile />
+                    </div>
+                </div>
+            </nav>
+        </>
     );
 };
 

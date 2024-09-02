@@ -115,7 +115,6 @@ export default function App() {
                     <Route path="/Favourite" element={<Favourite />} />
                     <Route path="/PlayList" element={<PlayList />} />
                     <Route path="/Download" element={<Download />} />
-                    {/* <Route path="/User" element={<User />} /> */}
                     <Route path="/Setting" element={<Setting />} />
                 </Routes>
             </Router>

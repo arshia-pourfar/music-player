@@ -36,6 +36,8 @@ module.exports = {
         'slide-left': 'slideLeft 0.7s linear both',
         'slide-down': 'slideDown 0.5s linear both',
         'slide-up': 'slideUp 0.5s linear both',
+        'open-navmenu': 'openNavMenu 0.55s linear both',
+        'close-navmenu': 'closeNavMenu 0.7s linear both',
       },
       keyframes: {
         slideRight: {
@@ -53,6 +55,14 @@ module.exports = {
         slideUp: {
           '0%': { bottom: '-90px' },
           '100%': { bottom: '0px' },
+        },
+        openNavMenu: {
+          '0%': { left: '-100%' },
+          '100%': { left: '0' },
+        },
+        closeNavMenu: {
+          '0%': { left: '0' },
+          '100%': { left: '-100%' },
         },
       },
     },

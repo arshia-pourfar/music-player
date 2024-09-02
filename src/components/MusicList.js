@@ -26,7 +26,6 @@ const MusicList = ({ myListArray, userId, isShowAlbumAndTime }) => {
                         <div id={index} className='flex items-center border-l-4 border-transparent play-music'>
                             <span className='w-5 text-center xl:text-lg lg:text-base md:text-lg font-semibold opacity-50 ms-2'> {index < 9 ? `0${index + 1}` : index + 1}</span>
                             <img className='lg:w-[65px] md:w-[70px] xl:mx-5 lg:mx-3 md:mx-4 shadow-lg rounded-md' src={`/images/${item.imagesrc}`} alt="" />
-                            {console.log(item.imagesrc)}
                             <div className='capitalize w-[200px]'>
                                 <h2 className='font-bold xl:text-xl lg:text-xl md:text-xl line-clamp-1'>{item.musicname}</h2>
                                 <span className='text-custom-gray xl:text-[15px] lg:text-base md:text-lg line-clamp-1'>{item.artistname}</span>

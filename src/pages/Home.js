@@ -17,27 +17,27 @@ const Home = () => {
     const { data: trendingList, loading: trendingLoading, error: trendingError } = useFetchData('/api/trendinglist', 'GET', null, true);
     const { data: topArtistList, loading: topArtistLoading, error: topArtistError } = useFetchData('/api/topartistslist', 'GET', null, true, limitTopArtist);
 
-    useEffect(() => {
-        // تغییر مقدار limitTopArtist بر اساس ابعاد صفحه
-        // if (height >= 1300) {
-        //     setLimitTopArtist(6);
-        // } else
-        if (width >= 1024) {
-            if (height >= 1470) {
-                setLimitTopArtist(5);
-            } else if (width < 1280 && height >= 1170) {
-                setLimitTopArtist(5);
-            } else if (width < 1280 && height >= 990) {
-                setLimitTopArtist(4);
-            } else if (width < 1536 && height >= 1140) {
-                setLimitTopArtist(4);
-            } else if (width >= 1536 && height >= 1230) {
-                setLimitTopArtist(4);
-            } else {
-                setLimitTopArtist(3);
-            }
-        }
-    }, [height, width, user]); // وابستگی به تغییر ابعاد صفحه
+    // useEffect(() => {
+    //     // تغییر مقدار limitTopArtist بر اساس ابعاد صفحه
+    //     // if (height >= 1300) {
+    //     //     setLimitTopArtist(6);
+    //     // } else
+    //     if (width >= 1024) {
+    //         if (height >= 1470) {
+    //             setLimitTopArtist(5);
+    //         } else if (width < 1280 && height >= 1170) {
+    //             setLimitTopArtist(5);
+    //         } else if (width < 1280 && height >= 990) {
+    //             setLimitTopArtist(4);
+    //         } else if (width < 1536 && height >= 1140) {
+    //             setLimitTopArtist(4);
+    //         } else if (width >= 1536 && height >= 1230) {
+    //             setLimitTopArtist(4);
+    //         } else {
+    //             setLimitTopArtist(3);
+    //         }
+    //     }
+    // }, [height, width, user]); // وابستگی به تغییر ابعاد صفحه
 
     if (trendingLoading || topArtistLoading) {
         return (
@@ -137,7 +137,7 @@ const Home = () => {
 
     const TopArtist = () => {
         return (
-            <div className='relative lg:block justify-center items-center h-[30%] min-h-[300px] lg:mt-0 mt-2 hidden'>
+            <div className='relative lg:block hidden justify-center items-center h-[30%] min-h-[300px] lg:mt-0 mt-2'>
                 <div className='flex justify-between items-center'>
                     <h1 className='font-semibold inline-block xl:text-3xl md:text-2xl'>Top Artist</h1>
                     <a href="#" className='underline text-custom-blue xl:text-base lg:text-sm'>See all</a>
@@ -168,7 +168,7 @@ const Home = () => {
 
     const RecentFavourite = () => {
         return (
-            <div className='relative z-20 h-[60%] 2xl:mt-2 xl:mt-5 2xl:pb-0 xl:pb-3' style={{ width: '100%' }}>
+            <div className='relative lg:block hidden z-20 h-[60%] 2xl:mt-2 xl:mt-5 2xl:pb-0 xl:pb-3' style={{ width: '100%' }}>
                 <div className='flex justify-between items-center mb-2'>
                     <h1 className='font-semibold inline-block xl:text-3xl md:text-2xl'>Recent Favourite</h1>
                     <a href="#" className='underline text-custom-blue xl:text-base lg:text-sm'>See all</a>
@@ -193,12 +193,12 @@ const Home = () => {
             <MusicPlayer getStyle='home' />
             {/* <section id='home-page' className='relative w-full bg-custom-white h-[100dvh] flex flex-col rounded-l-xl pt-5 px-10'> */}
 
-            <section id='home-page' className='relative w-full bg-custom-white custom-h-full min-h-[650px] flex flex-col rounded-l-xl pt-5 px-10'>
+            <section id='home-page' className='relative w-full bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center rounded-l-xl pt-5 lg:px-10 px-5'>
                 <div className='close-music-player hidden absolute -left-16 px-5 mt-2'>
                     <i className='flex justify-between items-center fi fi-rr-circle-xmark text-custom-black text-3xl bg-custom-white w-[60px] p-[6px] rounded-l-full cursor-pointer'></i>
                 </div>
                 <SearchBox widthSize={false} titleText={'Home'} />
-                <div className='flex pt-14 pe-10 absolute custom-h-full'>
+                <div className='flex pt-14 lg:pe-10 absolute custom-h-full'>
                     <div className='left-section lg:w-[60%] z-[100]'>
                         <HeaderPostCarousel />
                         <TrendingList />

@@ -22,6 +22,7 @@
     "express": "^4.19.2",
     "flat-carousel": "^0.0.1",
     "flowbite-react": "^0.7.2",
+    "hamburger-react": "^2.5.1",
     "headlessui": "^0.0.0",
     "http-proxy-middleware": "^3.0.0",
     "jquery": "^3.7.1",

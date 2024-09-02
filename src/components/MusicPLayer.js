@@ -10,7 +10,7 @@ export const MusicPlayer = ({ getStyle }) => {
     const { user } = useAuth();
     const { data: allMusicList } = useFetchData('/api/allmusiclist', 'GET', null, true);
     const { data: trendingListItem } = useFetchData('/api/trendinglist', 'GET', null, true);
-    const { data: favouriteList, setUrl, fetchData } = useFetchData('', 'GET', null, true);
+    const { data: favouriteList, setUrl, fetchData } = useFetchData(`/api/${user ? user.id : 0}/favoriteslist`, 'GET', null, true);
 
     useEffect(() => {
         if (user) {
@@ -133,11 +133,12 @@ export const MusicPlayer = ({ getStyle }) => {
                     if (musicPlayerShow === true && ifFirstPlay.current === true) {
                         ifFirstPlay.current = false;
                         return (
-                            musicDetails.imageSrc
+                            `/images/${musicDetails.imagesrc}`
                         )
                     } else if (ifFirstPlay.current === false) {
                         return (
-                            musicDetails.imageSrc
+                            `/images/${musicDetails.imagesrc}`
+
                         )
                     }
                 })()} alt="" />
@@ -154,7 +155,7 @@ export const MusicPlayer = ({ getStyle }) => {
                             {/* insted trending list after set best allbums */}
                             {trendingListItem && Array.isArray(trendingListItem) ? trendingListItem.map((item, index) => (
                                 <div key={item.id} className='bg-custom-black relative mx-3 rounded-2xl w-[200px] basis-[180px]'>
-                                    <img className='rounded-2xl opacity-90 h-full w-full object-cover' src={item.imageSrc} alt="" />
+                                    <img className='rounded-2xl opacity-90 h-full w-full object-cover' src={`/images/${item.imagesrc}`} alt="" />
                                 </div>
                             )) : null}
                         </div>
@@ -167,11 +168,11 @@ export const MusicPlayer = ({ getStyle }) => {
                             if (musicPlayerShow === true && ifFirstPlay.current === true) {
                                 ifFirstPlay.current = false;
                                 return (
-                                    require(`../musics/${musicDetails.musicLink}`)
+                                    require(`../musics/${musicDetails.musiclink}`)
                                 )
                             } else if (ifFirstPlay.current === false) {
                                 return (
-                                    require(`../musics/${musicDetails.musicLink}`)
+                                    require(`../musics/${musicDetails.musiclink}`)
                                 )
                             }
                         })()}
@@ -182,16 +183,16 @@ export const MusicPlayer = ({ getStyle }) => {
                                     if (musicPlayerShow === true && ifFirstPlay.current === true) {
                                         ifFirstPlay.current = false;
                                         return (
-                                            musicDetails.imageSrc
+                                            `/images/${musicDetails.imagesrc}`
                                         )
                                     } else if (ifFirstPlay.current === false) {
                                         return (
-                                            musicDetails.imageSrc
+                                            `/images/${musicDetails.imagesrc}`
                                         )
                                     }
                                 })()} alt="" />
-                                <div className='font-semibold text-custom-white text-2xl mt-2 capitalize'>{musicDetails.musicName}</div>
-                                <div className='font-medium text-custom-white text-md capitalize'>{musicDetails.artistName}</div>
+                                <div className='font-semibold text-custom-white text-2xl mt-2 capitalize'>{musicDetails.musicname}</div>
+                                <div className='font-medium text-custom-white text-md capitalize'>{musicDetails.artistname}</div>
                             </div>
                         }
                         style={{
@@ -250,11 +251,11 @@ export const MusicPlayer = ({ getStyle }) => {
                         if (musicPlayerShow === true && ifFirstPlay.current === true) {
                             ifFirstPlay.current = false;
                             return (
-                                require(`../musics/${musicDetails.musicLink}`)
+                                require(`../musics/${musicDetails.musiclink}`)
                             )
                         } else if (ifFirstPlay.current === false) {
                             return (
-                                require(`../musics/${musicDetails.musicLink}`)
+                                require(`../musics/${musicDetails.musiclink}`)
                             )
                         }
                     })()}
@@ -265,17 +266,17 @@ export const MusicPlayer = ({ getStyle }) => {
                                 if (musicPlayerShow === true && ifFirstPlay.current === true) {
                                     ifFirstPlay.current = false;
                                     return (
-                                        musicDetails.imageSrc
+                                        `/images/${musicDetails.imagesrc}`
                                     )
                                 } else if (ifFirstPlay.current === false) {
                                     return (
-                                        musicDetails.imageSrc
+                                        `/images/${musicDetails.imagesrc}`
                                     )
                                 }
                             })()} alt="" />
                             <div className='flex flex-col'>
-                                <h2 className='font-semibold text-custom-white text-xl line-clamp-1 capitalize'>{musicDetails.musicName}</h2>
-                                <span className='font-medium text-custom-white text-sm line-clamp-1 capitalize'>{musicDetails.artistName}</span>
+                                <h2 className='font-semibold text-custom-white text-xl line-clamp-1 capitalize'>{musicDetails.musicname}</h2>
+                                <span className='font-medium text-custom-white text-sm line-clamp-1 capitalize'>{musicDetails.artistname}</span>
                             </div>
                         </div>
                     }
