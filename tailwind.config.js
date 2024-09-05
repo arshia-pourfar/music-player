@@ -57,12 +57,25 @@ module.exports = {
           '100%': { bottom: '0px' },
         },
         openNavMenu: {
-          '0%': { left: '-100%' },
-          '100%': { left: '0' },
+          '0%': {
+            zIndex: '991',
+            left: '-100%',
+          },
+          '100%': {
+            zIndex: '991',
+            left: '0',
+          },
         },
         closeNavMenu: {
-          '0%': { left: '0' },
-          '100%': { left: '-100%' },
+          '0%': {
+            left: '0',
+            zIndex: '991',
+          },
+          '100%': {
+            left: '-100%',
+            zIndex: '1',
+            display: 'none',
+          },
         },
       },
     },

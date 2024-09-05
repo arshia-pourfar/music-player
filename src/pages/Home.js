@@ -9,13 +9,13 @@ import { useAuth } from '../hooks/AuthContext';
 import MenuIcon from '../components/MenuIcon';
 import useWindowDimensions from '../hooks/useWidthSize';
 import MusicList from '../components/MusicList';
-
+import AllMusic from './AllMusic';
 const Home = () => {
     const { height, width } = useWindowDimensions();
     const { user } = useAuth();
-    const [limitTopArtist, setLimitTopArtist] = useState(3);
+    // const [limitTopArtist, setLimitTopArtist] = useState(3);
     const { data: trendingList, loading: trendingLoading, error: trendingError } = useFetchData('/api/trendinglist', 'GET', null, true);
-    const { data: topArtistList, loading: topArtistLoading, error: topArtistError } = useFetchData('/api/topartistslist', 'GET', null, true, limitTopArtist);
+    const { data: topArtistList, loading: topArtistLoading, error: topArtistError } = useFetchData('/api/topartistslist', 'GET', null, true, 3);
 
     // useEffect(() => {
     //     // تغییر مقدار limitTopArtist بر اساس ابعاد صفحه
@@ -72,15 +72,15 @@ const Home = () => {
             // autoplay: true,
             autoplaySpeed: 2000,
         };
-        if (width >= 1024) {
-            if (height <= 1300) {
-                settings.fade = true;
-                settings.slidesToShow = 1;
-            } else {
-                settings.fade = false;
-                settings.slidesToShow = 1.65;
-            }
-        }
+        // if (width >= 1024) {
+        //     if (height <= 1300) {
+        //         settings.fade = true;
+        //         settings.slidesToShow = 1;
+        //     } else {
+        //         settings.fade = false;
+        //         settings.slidesToShow = 1.65;
+        //     }
+        // }
         return (
             // <div id='header-carousel' className='relative flex justify-center items-center xl:max-h-[30dvh] xl:min-h-[300px] lg:min-h-[250px] lg:h-[30dvh] lg:mt-0 mt-2'>
             <div id='header-carousel' className='relative flex justify-center items-center h-[30%] min-h-[300px] lg:mt-0 mt-2'>
@@ -173,7 +173,7 @@ const Home = () => {
                     <h1 className='font-semibold inline-block xl:text-3xl md:text-2xl'>Recent Favourite</h1>
                     <a href="#" className='underline text-custom-blue xl:text-base lg:text-sm'>See all</a>
                 </div>
-                <div className='min-h-[200px] flex flex-wrap overflow-auto scrollbar-custom' style={height >= 1000 ? { height: 'calc(100% - 10px)' } : height >= 800 ? { height: 'calc(100% - 55px)' } : { height: 'calc(100% - 120px)' }}>
+                <div className='min-h-[200px] flex flex-wrap overflow-auto scrollbar-custom' style={height >= 1000 ? { height: 'calc(100% - 10px)' } : height >= 800 ? { height: 'calc(100% - 55px)' } : { height: 'calc(100% - 140px)' }}>
                     {recentFavList.map(item => (
                         <div key={item.id} className='flex flex-col xl:basis-1/3 lg:basis-1/2 py-3 cursor-pointer'>
                             <img className='w-[90%] m-auto rounded-xl drop-shadow-md' src={item.imageSrc} alt="" />
@@ -192,22 +192,26 @@ const Home = () => {
         <>
             <MusicPlayer getStyle='home' />
             {/* <section id='home-page' className='relative w-full bg-custom-white h-[100dvh] flex flex-col rounded-l-xl pt-5 px-10'> */}
-
-            <section id='home-page' className='relative w-full bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center rounded-l-xl pt-5 lg:px-10 px-5'>
-                <div className='close-music-player hidden absolute -left-16 px-5 mt-2'>
-                    <i className='flex justify-between items-center fi fi-rr-circle-xmark text-custom-black text-3xl bg-custom-white w-[60px] p-[6px] rounded-l-full cursor-pointer'></i>
+            <section id='home-page' className='relative w-full bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center lg:rounded-l-xl pt-5 lg:px-10 md:px-5 px-2'>
+                <div className='container md:block hidden'>
+                    <div className='close-music-player hidden absolute -left-16 px-5 mt-2'>
+                        <i className='flex justify-between items-center fi fi-rr-circle-xmark text-custom-black text-3xl bg-custom-white w-[60px] p-[6px] rounded-l-full cursor-pointer'></i>
+                    </div>
+                    <SearchBox widthSize={false} titleText={'Home'} />
+                    <div className='flex pt-4 custom-h-full'>
+                        <div className='left-section lg:w-[60%] z-[100]'>
+                            <HeaderPostCarousel />
+                            <TrendingList />
+                        </div>
+                        <div className='xl:mx-8 lg:mx-6 lg:inline-block hidden'></div>
+                        <div className='right-section lg:w-[40%] z-[100]'>
+                            <TopArtist />
+                            <RecentFavourite />
+                        </div>
+                    </div>
                 </div>
-                <SearchBox widthSize={false} titleText={'Home'} />
-                <div className='flex pt-14 lg:px-10 absolute custom-h-full'>
-                    <div className='left-section lg:w-[60%] z-[100]'>
-                        <HeaderPostCarousel />
-                        <TrendingList />
-                    </div>
-                    <div className='xl:mx-7 lg:mx-4 lg:inline-block hidden'></div>
-                    <div className='right-section lg:w-[40%] z-[100]'>
-                        <TopArtist />
-                        <RecentFavourite />
-                    </div>
+                <div className='container md:hidden block'>
+                    <AllMusic />
                 </div>
             </section>
         </>

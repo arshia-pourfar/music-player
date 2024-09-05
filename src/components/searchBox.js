@@ -46,7 +46,7 @@ const SearchBox = ({ widthSize, titleText }) => {
             <div className={isClickIcon ? 'inline w-[100dvw] h-[100dvh] absolute left-0 top-0 z-[990] bg-transparent' : 'hidden'} onClick={() => setIsClickIcon(false)} ></div>
             <div
                 id='search-box'
-                className={`flex items-center lg:justify-end justify-end z-[991] ${widthSize ? 'xl:w-[700px] lg:w-[600px] md:w-full' : 'xl:w-[600px] lg:w-[500px] md:w-full'}`}
+                className={`flex items-center lg:justify-end justify-end z-[980] md:w-full ${widthSize ? 'xl:w-[700px] lg:w-[600px]' : 'xl:w-[600px] lg:w-[500px]'}`}
             >
                 <div className='relative me-5'>
                     {renderBellIcon()}

@@ -4,7 +4,7 @@ const MenuIcon = () => {
     return (
         <Menu>
             <MenuButton className="font-semibold me-3">
-                <i className='fi fi-rs-menu-dots hover:text-custom-pink lg:text-xl md:text-2xl flex'></i>
+                <i className='fi fi-rs-menu-dots hover:text-custom-pink lg:text-xl md:text-2xl text-xl flex'></i>
             </MenuButton>
             <MenuItems
                 transition

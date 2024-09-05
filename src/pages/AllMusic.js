@@ -2,17 +2,15 @@ import React, { useRef } from 'react';
 import Slider from "react-slick";
 import SearchBox from '../components/searchBox';
 import { bestAlbum } from '../App';
-// import { ReactComponent as NextIcon } from '../icons/next.svg';
-// import { ReactComponent as PrevIcon } from '../icons/prev.svg';
 import { MusicPlayer } from '../components/MusicPLayer';
-// import { favouriteList } from '../App';
 import useFetchData from '../hooks/useFetchData';
 import { useAuth } from '../hooks/AuthContext';
 import MusicList from '../components/MusicList';
-// import useFavorites from '../components/AddToFavourite';
+import useWindowDimensions from '../hooks/useWidthSize';
+
 const AllMusic = () => {
     const { data: allMusicList, loading: allMusicLoading, error: allMusicError } = useFetchData('/api/allmusiclist', 'GET', null, true);
-
+    const { width } = useWindowDimensions();
     const sliderRef = useRef(null);
     const { user } = useAuth();
 
@@ -36,11 +34,21 @@ const AllMusic = () => {
         rtl: false,
         infinite: false,
         speed: 1000,
-        slidesToShow: 8,
+        slidesToShow: 5,
         slidesToScroll: 2,
         arrows: false,
         vertical: false,
     };
+
+    if (width >= 1536) {
+        settings.slidesToShow = 8
+    } else if (width >= 1024) {
+        settings.slidesToShow = 6
+    } else if (width >= 640) {
+        settings.slidesToShow = 4
+    } else {
+        settings.slidesToShow = 3
+    }
 
     if (allMusicLoading) {
         return (
@@ -69,18 +77,14 @@ const AllMusic = () => {
     // }
 
     return (
-        <section id='all-music-page' className='relative w-full bg-custom-white custom-h-full flex-col rounded-l-xl py-5 px-10'>
-            {/* <div className='flex items-center justify-between'>
-                <h1 className='font-black text-5xl'>All Song</h1>
-                <SearchBox widthSize={true} />
-            </div> */}
-            <div className='flex flex-col custom-h-full pe-10'>
+        <section id='all-music-page' className='relative w-full lg:max-w-[95vw] bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center lg:rounded-l-xl md:pt-5 lg:px-10'>
+            <div className='md:container w-full'>
                 <SearchBox widthSize={true} titleText={'All Song'} />
                 <div className='mt-4 relative'>
-                    <div className='flex justify-between items-center me-5'>
+                    <div className='flex justify-between items-center'>
                         <h3 className='text-lg font-semibold block'>Best Albums Of All Times</h3>
-                        <div className='control flex gap-3'>
-                            <div className='rounded-full p-[10px] bg-custom-black text-custom-white cursor-pointer' onClick={() => sliderRef.current.slickPrev()}>
+                        <div className='control flex'>
+                            <div className='rounded-full p-[10px] bg-custom-black text-custom-white cursor-pointer mx-2' onClick={() => sliderRef.current.slickPrev()}>
                                 <i className='fi fi-br-angle-left text-2xl flex justify-center items-center p-[2px]'></i>
                             </div>
                             <div className='rounded-full p-[10px] bg-custom-black text-custom-white cursor-pointer' onClick={() => sliderRef.current.slickNext()}>
@@ -88,15 +92,15 @@ const AllMusic = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='mt-2 w-full max-w-[95vw] overflow-hidden pb-5'>
+                    <div className='mt-2 w-full max-w-[95vw] overflow-hidden pb-5 m-auto'>
                         <Slider {...settings} className='cursor-grab' ref={sliderRef}>
                             {bestAlbum.map(item => (
-                                <img key={item.id} className='w-48 cursor-pointer rounded-lg shadow-lg' src={item.imageSrc} alt={item.title} />
+                                <img key={item.id} className='cursor-pointer rounded-lg shadow-lg' src={item.imageSrc} alt={item.title} />
                             ))}
                         </Slider>
                     </div>
                 </div>
-                <MusicList myListArray={allMusicList} userId={user ? user.id : 0} isShowAlbumAndTime={true} />
+                <MusicList myListArray={allMusicList} userId={user ? user.id : 0} isShowAlbumAndTime={width >= 768 ? true : false} />
                 {/* <div className='music-list overflow-auto w-full h-full scrollbar-custom'>
                     <div className='w-full flex items-center justify-between text-lg pb-2 shadow-sm text-opacity-50 capitalize font-semibold text-custom-black bg-custom-white cursor-pointer sticky -top-1 z-30'>
                         <div className='w-2/6 flex items-center gap-5 border-l-4 border-transparent'>
@@ -134,7 +138,7 @@ const AllMusic = () => {
                         </div>
                     ))}
                 </div> */}
-                <MusicPlayer getStyle='bottom' />
+                <MusicPlayer getStyle={width >= 768 ? 'bottom' : 'full'} />
             </div>
         </section>
     );

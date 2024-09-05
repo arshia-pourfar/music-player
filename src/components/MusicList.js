@@ -4,7 +4,7 @@ import MenuIcon from '../components/MenuIcon';
 import useWindowDimensions from '../hooks/useWidthSize';
 
 const MusicList = ({ myListArray, userId, isShowAlbumAndTime }) => {
-    const { height } = useWindowDimensions();
+    const { height, width } = useWindowDimensions();
 
     return (
         isShowAlbumAndTime ? (
@@ -47,15 +47,15 @@ const MusicList = ({ myListArray, userId, isShowAlbumAndTime }) => {
             </div>
             // </div>
         ) : (
-            <div className='music-list min-h-[200px] w-full overflow-auto scrollbar-custom' style={height >= 1000 ? { height: 'calc(100% - 10px)' } : height >= 800 ? { height: 'calc(100% - 55px)' } : { height: 'calc(100% - 120px)' }}>
+            <div className='music-list md:min-h-[200px] w-full overflow-auto scrollbar-custom md:h-auto h-[calc(100% - 500px)]' style={height >= 1000 && width >= 768 ? { height: 'calc(100% - 10px)' } : height >= 800 && width >= 768 ? { height: 'calc(100% - 55px)' } : height < 800 && width >= 768 ? { height: 'calc(100% - 140px)' } : {}}>
                 {myListArray && Array.isArray(myListArray) ? myListArray.map((item, index) => (
                     <div key={index} className='music-item flex justify-between items-center py-2'>
                         <div id={index} className='flex items-center border-l-4 border-transparent cursor-pointer play-music'>
                             <span className='w-5 text-center xl:text-lg lg:text-base md:text-lg font-semibold opacity-50 ms-2'> {index < 9 ? `0${index + 1}` : index + 1}</span>
-                            <img className='lg:w-[65px] md:w-[70px] xl:mx-5 lg:mx-3 md:mx-4 shadow-lg rounded-md' src={`/images/${item.imagesrc}`} alt="" />
-                            <div className='capitalize w-[200px]'>
-                                <h2 className='font-bold xl:text-xl lg:text-xl md:text-xl line-clamp-1'>{item.musicname}</h2>
-                                <span className='text-custom-gray xl:text-[15px] lg:text-base md:text-lg line-clamp-1'>{item.artistname}</span>
+                            <img className='lg:w-[65px] md:w-[75px] w-[55px] xl:mx-5 lg:mx-3 md:mx-4 mx-2 shadow-lg rounded-md' src={`/images/${item.imagesrc}`} alt="" />
+                            <div className='capitalize md:w-[200px] w-[150px]'>
+                                <h2 className='font-bold xl:text-xl lg:text-xl md:text-xl text-base line-clamp-1'>{item.musicname}</h2>
+                                <span className='text-custom-gray xl:text-[15px] lg:text-base md:text-lg text-sm line-clamp-1'>{item.artistname}</span>
                             </div>
                         </div>
                         <div className='xl:w-2/5 lg:w-1/5 relative flex items-center justify-end'>

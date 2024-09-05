@@ -73,6 +73,10 @@
      filter: drop-shadow(0 1px 4px rgba(251, 250, 250, 0.63));
  }
 
+ #all-music-page .slick-track {
+     gap: 5px !important;
+ }
+
  /* Home Page Styles */
  #header-carousel .slick-slide {
      /* height: 100%; */

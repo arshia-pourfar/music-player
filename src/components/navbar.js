@@ -3,13 +3,14 @@ import { ReactComponent as Logo } from '../images/logo.svg';
 import { NavLink as Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Divide as Hamburger } from 'hamburger-react'
+import useWindowDimensions from '../hooks/useWidthSize';
 const navItems = [
-    { id: 0, itemName: 'Home', sectionName: '', icon: 'fi-rs-home', iconSolid: 'fi-ss-home' },
-    { id: 1, itemName: 'AllMusic', sectionName: 'AllMusic', icon: 'fi-rs-music-alt', iconSolid: 'fi-ss-music-alt' },
-    { id: 2, itemName: 'Favourite', sectionName: 'Favourite', icon: 'fi-rs-heart', iconSolid: 'fi-ss-heart' },
-    { id: 3, itemName: 'PlayList', sectionName: 'PlayList', icon: 'fi-rs-list-music', iconSolid: 'fi-ss-list-music' },
-    { id: 4, itemName: 'Download', sectionName: 'Download', icon: 'fi-rs-download', iconSolid: 'fi-ss-download' },
-    { id: 5, itemName: 'Setting', sectionName: 'Setting', icon: 'fi-rs-settings', iconSolid: 'fi-ss-settings' },
+    { id: 0, itemName: 'Home', sectionName: '', icon: 'fi-rs-home', iconSolid: 'fi-ss-home', className: '' },
+    { id: 1, itemName: 'AllMusic', sectionName: 'AllMusic', icon: 'fi-rs-music-alt', iconSolid: 'fi-ss-music-alt', className: 'md:block hidden' },
+    { id: 2, itemName: 'Favourite', sectionName: 'Favourite', icon: 'fi-rs-heart', iconSolid: 'fi-ss-heart', className: '' },
+    { id: 3, itemName: 'PlayList', sectionName: 'PlayList', icon: 'fi-rs-list-music', iconSolid: 'fi-ss-list-music', className: '' },
+    { id: 4, itemName: 'Download', sectionName: 'Download', icon: 'fi-rs-download', iconSolid: 'fi-ss-download', className: '' },
+    { id: 5, itemName: 'Setting', sectionName: 'Setting', icon: 'fi-rs-settings', iconSolid: 'fi-ss-settings', className: '' },
     // { id: 6, sectionName: 'User', icon: 'fi-rs-circle-user', iconSolid: 'fi-ss-circle-user' },
 ];
 
@@ -33,6 +34,7 @@ const NavLink = styled(Link)`
 // `;
 
 const Navbar = () => {
+    const { width } = useWindowDimensions();
     const location = useLocation();
     const [activeIndex, setActiveIndex] = useState(-1);
     const [isClickMenuIcon, setIsClickMenuIcon] = useState(false);
@@ -66,7 +68,7 @@ const Navbar = () => {
         navItems.map((item, index) => (
             <NavLink
                 key={index}
-                className={`nav-item flex text-3xl justify-start cursor-pointer nth-child-7 rounded-lg`}
+                className={`nav-item flex text-3xl justify-start cursor-pointer nth-child-7 rounded-lg ${item.className}`}
                 to={'/' + item.sectionName}
                 onClick={() => handleClick(index)}
             >
@@ -87,12 +89,12 @@ const Navbar = () => {
                     <RenderNavIcon />
                 </div>
             </nav>
-            <nav id='navbar-mobile' className='lg:hidden block h-[100dvh] min-h-[650px] w-[40%] absolute text-center z-[999]'>
+            <nav id='navbar-mobile' className={`lg:hidden block h-[100dvh] min-h-[650px] md:w-[40%] w-full absolute text-center`}>
                 {/* <i className={`fi fi-rs-bars-staggered lg:hidden absolute left-10 top-6 text-4xl z-[999] transition-all ${isClickMenuIcon ? 'text-custom-white' : 'text-custom-black'}`} onClick={() => setIsClickMenuIcon(!isClickMenuIcon)}></i> */}
-                <div className={`lg:hidden absolute left-7 top-5 text-4xl z-[999] transition-all ${isClickMenuIcon ? 'text-custom-white' : 'text-custom-black'}`} onClick={() => setIsClickMenuIcon(!isClickMenuIcon)}>
-                    <Hamburger size={45} duration={0.7} rounded />
+                <div className={`lg:hidden absolute md:left-7 top-5 text-2xl z-[999] transition-all ${isClickMenuIcon ? 'text-custom-white' : 'text-custom-black'}`} onClick={() => setIsClickMenuIcon(!isClickMenuIcon)}>
+                    <Hamburger size={width >= 768 ? 45 : 30} duration={0.7} rounded />
                 </div>
-                <div className={`w-full h-full absolute backdrop-blur-[11px] bg-custom-gray text-center z-10 pt-14 ${isClickMenuIcon ? 'animate-open-navmenu' : 'animate-close-navmenu'}`}>
+                <div className={`w-full h-full absolute backdrop-blur-[11px] bg-custom-gray text-center pt-14 ${isClickMenuIcon ? 'animate-open-navmenu block' : 'animate-close-navmenu'}`}>
                     <div className='flex flex-col py-5 px-3 w-full'>
                         {/* <Logo className='inline-block text-4xl absolute top-6' /> */}
                         <RenderNavIconMobile />
