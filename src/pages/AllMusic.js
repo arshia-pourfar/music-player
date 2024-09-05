@@ -100,6 +100,7 @@ const AllMusic = () => {
                         </Slider>
                     </div>
                 </div>
+                <h3 className="text-lg font-semibold block md:hidden">All Music</h3>
                 <MusicList myListArray={allMusicList} userId={user ? user.id : 0} isShowAlbumAndTime={width >= 768 ? true : false} />
                 {/* <div className='music-list overflow-auto w-full h-full scrollbar-custom'>
                     <div className='w-full flex items-center justify-between text-lg pb-2 shadow-sm text-opacity-50 capitalize font-semibold text-custom-black bg-custom-white cursor-pointer sticky -top-1 z-30'>

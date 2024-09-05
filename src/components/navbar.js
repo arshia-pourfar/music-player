@@ -68,13 +68,13 @@ const Navbar = () => {
         navItems.map((item, index) => (
             <NavLink
                 key={index}
-                className={`nav-item flex text-3xl justify-start cursor-pointer nth-child-7 rounded-lg ${item.className}`}
+                className={`nav-item flex lg:text-3xl text-2xl justify-start cursor-pointer nth-child-7 rounded-lg ${item.className}`}
                 to={'/' + item.sectionName}
                 onClick={() => handleClick(index)}
             >
                 <span className='flex justify-start items-center p-4 ps-6 w-full text-custom-white'>
                     <i className={`fi ${activeIndex === index ? item.iconSolid : item.icon} flex `} />
-                    <span className='flex px-4'>{item.itemName}</span>
+                    <span className='flex px-4 lg:text-3xl text-2xl'>{item.itemName}</span>
                 </span>
             </NavLink>
         ))

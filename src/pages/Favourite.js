@@ -5,9 +5,10 @@ import SearchBox from '../components/searchBox';
 import useFetchData from "../hooks/useFetchData";
 import { useAuth } from "../hooks/AuthContext";
 import MusicList from "../components/MusicList";
-
+import useWindowDimensions from '../hooks/useWidthSize';
 const Favourite = () => {
     const { user } = useAuth();
+    const { width } = useWindowDimensions();
     // const userId = user.id;
     const { data, loading, setUrl, fetchData } = useFetchData(`/api/${user ? user.id : 0}/favoriteslist`, 'GET', null, true);
 
@@ -63,35 +64,34 @@ const Favourite = () => {
     // }
 
     return (
-        <section id='favourite-page' className='relative w-full bg-custom-white custom-h-full flex-col rounded-l-xl py-5 px-10'>
-            <div className='flex items-center justify-between'>
-                <h1 className='font-black text-5xl'>Favourite</h1>
-                <SearchBox widthSize={true} />
+        <section id='favourite-page' className='relative w-full lg:max-w-[95vw] bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center lg:rounded-l-xl md:pt-5 lg:px-10'>
+            <div className='lg:container w-full lg:px-0 px-2'>
+                <SearchBox widthSize={true} titleText={'Favorite'} />
+                <div className='overflow-auto w-full h-full py-6 scrollbar-custom'>
+                    {(() => {
+                        // const checkFavListLength = data.find(item => item.isFavourite === true);
+                        if (!Array.isArray(data) || data.length === 0 || data === null) {
+                            return (
+                                <div className="text-center mt-20">
+                                    <img className="w-[170px] m-auto animate-bounce" src={require('../images/playlist.png')} alt="" />
+                                    <h2 className="font-black text-4xl ms-3 text-custom-black">No Songs Available</h2>
+                                    <h5 className="text-lg text-gray-500 mt-2">Your Favorites List Is Empty</h5>
+                                    <a href="./AllMusic" className="text-2xl flex items-center justify-center font-extrabold text-custom-black mt-12 animate-pulse">
+                                        <i className="fi fi-ss-heart flex text-custom-pink"></i>
+                                        <span className="mx-2">Add Favourite</span>
+                                        <i className="fi fi-br-arrow-right flex mt-1"></i>
+                                    </a>
+                                </div>
+                            )
+                        } else {
+                            return (
+                                <MusicList myListArray={data ? data : []} userId={user ? user.id : 0} isShowAlbumAndTime={width >= 768 ? true : false} />
+                            );
+                        }
+                    })()}
+                </div>
+                <MusicPlayer getStyle='bottom' />
             </div>
-            <div className='overflow-auto w-full h-full py-6 scrollbar-custom'>
-                {(() => {
-                    // const checkFavListLength = data.find(item => item.isFavourite === true);
-                    if (!Array.isArray(data) || data.length === 0 || data === null) {
-                        return (
-                            <div className="text-center mt-20">
-                                <img className="w-[170px] m-auto animate-bounce" src={require('../images/playlist.png')} alt="" />
-                                <h2 className="font-black text-4xl ms-3 text-custom-black">No Songs Available</h2>
-                                <h5 className="text-lg text-gray-500 mt-2">Your Favorites List Is Empty</h5>
-                                <a href="./AllMusic" className="text-2xl flex items-center justify-center font-extrabold text-custom-black mt-12 animate-pulse">
-                                    <i className="fi fi-ss-heart flex text-custom-pink"></i>
-                                    <span className="mx-2">Add Favourite</span>
-                                    <i className="fi fi-br-arrow-right flex mt-1"></i>
-                                </a>
-                            </div>
-                        )
-                    } else {
-                        return (
-                            <MusicList myListArray={data ? data : []} userId={user ? user.id : 0} isShowAlbumAndTime={true} />
-                        );
-                    }
-                })()}
-            </div>
-            <MusicPlayer getStyle='bottom' />
         </section >
     );
 }
