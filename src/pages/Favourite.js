@@ -64,7 +64,7 @@ const Favourite = () => {
     // }
 
     return (
-        <section id='favourite-page' className='relative w-full lg:max-w-[95vw] bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center lg:rounded-l-xl md:pt-5 lg:px-10'>
+        <section id='favourite-page' className='relative w-full 2xl:max-w-[100vw] lg:max-w-[95vw] bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center lg:rounded-l-xl md:pt-5 lg:px-10'>
             <div className='lg:container w-full lg:px-0 px-2'>
                 <SearchBox widthSize={true} titleText={'Favorite'} />
                 <div className='overflow-auto w-full h-full py-6 scrollbar-custom'>
