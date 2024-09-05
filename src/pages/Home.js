@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 import { headerPostItem, recentFavList } from '../App';
 import SearchBox from '../components/searchBox';
@@ -11,7 +11,7 @@ import useWindowDimensions from '../hooks/useWidthSize';
 import MusicList from '../components/MusicList';
 import AllMusic from './AllMusic';
 const Home = () => {
-    const { height, width } = useWindowDimensions();
+    const { height } = useWindowDimensions();
     const { user } = useAuth();
     // const [limitTopArtist, setLimitTopArtist] = useState(3);
     const { data: trendingList, loading: trendingLoading, error: trendingError } = useFetchData('/api/trendinglist', 'GET', null, true);
@@ -210,7 +210,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className='container md:hidden block'>
+                <div className='container md:hidden block custom-h-full'>
                     <AllMusic />
                 </div>
             </section>

@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { notificationList } from '../App';
-import Navbar from './navbar';
-import $ from 'jquery';
 const SearchBox = ({ widthSize, titleText }) => {
     const [isClickIcon, setIsClickIcon] = useState(false);
 

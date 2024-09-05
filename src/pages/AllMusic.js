@@ -43,7 +43,7 @@ const AllMusic = () => {
     if (width >= 1536) {
         settings.slidesToShow = 8
     } else if (width >= 1024) {
-        settings.slidesToShow = 6
+        settings.slidesToShow = 7
     } else if (width >= 640) {
         settings.slidesToShow = 4
     } else {
@@ -78,11 +78,11 @@ const AllMusic = () => {
 
     return (
         <section id='all-music-page' className='relative w-full lg:max-w-[95vw] bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center lg:rounded-l-xl md:pt-5 lg:px-10'>
-            <div className='md:container w-full'>
+            <div className='lg:container w-full lg:px-0 px-2'>
                 <SearchBox widthSize={true} titleText={'All Song'} />
                 <div className='mt-4 relative'>
                     <div className='flex justify-between items-center'>
-                        <h3 className='text-lg font-semibold block'>Best Albums Of All Times</h3>
+                        <h3 className='text-lg font-semibold block'>{width >= 768 ? 'Best Albums Of All Times' : 'Best Albums'}</h3>
                         <div className='control flex'>
                             <div className='rounded-full p-[10px] bg-custom-black text-custom-white cursor-pointer mx-2' onClick={() => sliderRef.current.slickPrev()}>
                                 <i className='fi fi-br-angle-left text-2xl flex justify-center items-center p-[2px]'></i>
