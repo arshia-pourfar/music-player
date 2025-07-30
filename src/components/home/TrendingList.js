@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import MusicList from '../MusicList';
 import useFetchData from '../../hooks/useFetchData';
 import { useAuth } from '../../hooks/AuthContext';
-import MusicPlayer from '../MusicPLayer'; // حالا استفاده می‌کنیم
 
 const TrendingList = ({ onPlay, currentPlaying }) => {
     const [height, setHeight] = useState(0);
@@ -46,12 +45,12 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
                     <h1 className="font-semibold xl:text-3xl md:text-2xl text-lg text-custom-black">
                         Trending
                     </h1>
-                    <a
+                    <button
                         href="#"
                         className="underline text-custom-blue xl:text-base lg:text-sm text-xs hover:text-blue-600 transition-colors"
                     >
                         See all
-                    </a>
+                    </button>
                 </div>
             </div>
 

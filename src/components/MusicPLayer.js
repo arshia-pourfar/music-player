@@ -6,7 +6,7 @@ import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 // require('dotenv').config();
 
 const MusicPlayer = ({ getStyle, musicDetails, musicPlayerShow, onClose, onChangeMusic }) => {
-    const { data: trendingListItem, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData(`/api/trendinglist`, 'GET', null, true);
+    const { data: trendingListItem } = useFetchData(`/api/trendinglist`, 'GET', null, true);
     console.log(trendingListItem);
 
     const handleClick = (action, sectionId, loadArray) => {

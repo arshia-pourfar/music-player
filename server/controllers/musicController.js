@@ -1,7 +1,5 @@
 const pool = require('../models/db');
 
-
-
 exports.getAllMusic = (req, res) => {
     pool.query('SELECT * FROM allmusiclist', (err, results) => {
         if (err) return res.status(500).json({ message: "Internal Server Error" });
@@ -12,7 +10,10 @@ exports.getAllMusic = (req, res) => {
 
 exports.getTrendingMusic = (req, res) => {
     pool.query('SELECT * FROM allmusiclist WHERE isTrending=TRUE ORDER BY id', (err, results) => {
-        if (err) return res.status(500).json({ message: "Internal Server Error" });
+        if (err) {
+            console.error("🔥 SQL Error:", err);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
         const updated = results.rows.map((item, index) => ({ ...item, newId: index }));
         res.json(updated);
     });

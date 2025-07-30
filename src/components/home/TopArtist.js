@@ -8,7 +8,7 @@ const TopArtist = () => {
     <div className="relative lg:block hidden justify-center items-center h-[30%] min-h-[300px] lg:mt-0 mt-2">
       <div className="flex justify-between items-center">
         <h1 className="font-semibold inline-block xl:text-3xl md:text-2xl">Top Artist</h1>
-        <a href="#" className="underline text-custom-blue xl:text-base lg:text-sm">See all</a>
+        <button className="underline text-custom-blue xl:text-base lg:text-sm">See all</button>
       </div>
       <div className="w-full h-full top-artist-list lg:px-1 xl:mt-3 md:mt-1 flex flex-col">
         {recentFavListLimited.map((item, index) => (

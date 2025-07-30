@@ -20,9 +20,9 @@ const RecentFavourite = () => {
         <div className="relative lg:block hidden w-full box-border">
             <div className="flex justify-between items-center px-2 mb-2">
                 <h1 className="font-semibold xl:text-3xl md:text-2xl text-lg text-custom-black">Recent Favourite</h1>
-                <a href="#" className="underline text-custom-blue xl:text-base lg:text-sm text-xs hover:text-blue-600 transition-colors">
+                <button className="underline text-custom-blue xl:text-base lg:text-sm text-xs hover:text-blue-600 transition-colors">
                     See all
-                </a>
+                </button>
             </div>
 
             <div className={`overflow-y-auto scrollbar-custom box-border`}>
