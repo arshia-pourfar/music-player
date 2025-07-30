@@ -50,7 +50,7 @@
     "web-vitals": "^2.1.4"
   },
   "homepage": "./",
-  "proxy": "https://music-player-eight-red.vercel.app",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
