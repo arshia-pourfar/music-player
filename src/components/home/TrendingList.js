@@ -4,7 +4,7 @@ import useFetchData from '../../hooks/useFetchData';
 import { useAuth } from '../../hooks/AuthContext';
 
 const TrendingList = ({ onPlay, currentPlaying }) => {
-    const [height, setHeight] = useState(0);
+    const [height, setHeight] = useState(window.innerHeight || 0);
     const { user } = useAuth();
 
     const {
@@ -12,9 +12,13 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
         loading: trendingLoading,
         error: trendingError,
     } = useFetchData('/api/trendinglist', 'GET', null, true);
-
+    console.log('Trending List:', trendingList);
     useEffect(() => {
-        setHeight(window.innerHeight);
+        function updateHeight() {
+            setHeight(window.innerHeight);
+        }
+        window.addEventListener('resize', updateHeight);
+        return () => window.removeEventListener('resize', updateHeight);
     }, []);
 
     const dynamicHeight =
@@ -23,6 +27,10 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
             : height >= 800
                 ? 'max-h-[45vh]'
                 : 'max-h-[41vh]';
+
+    if (trendingError) {
+        return <div style={{ color: 'red', padding: 20 }}>Error: {JSON.stringify(trendingError)}</div>;
+    }
 
     if (trendingLoading) {
         return (
@@ -34,8 +42,11 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
     }
 
     if (trendingError) {
-        return <div>Error: {trendingError?.message}</div>;
+        return <div>Error: {trendingError.message || 'Failed to load trending music'}</div>;
     }
+
+    // ایمنی: اگر trendingList آرایه نیست، خالی ارسال شود
+    const safeTrendingList = Array.isArray(trendingList) ? trendingList : [];
 
     return (
         <section className="h-screen w-full bg-custom-white flex flex-col overflow-hidden">
@@ -46,8 +57,12 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
                         Trending
                     </h1>
                     <button
-                        href="#"
+                        onClick={() => {
+                            // اگر لینک برای نمایش همه هست اینجا عملکرد بده
+                            // مثلاً ناوبری به صفحه دیگر یا ...
+                        }}
                         className="underline text-custom-blue xl:text-base lg:text-sm text-xs hover:text-blue-600 transition-colors"
+                        type="button"
                     >
                         See all
                     </button>
@@ -57,7 +72,7 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
             {/* لیست با اسکرول داخلی واقعی */}
             <div className={`flex-1 overflow-y-auto px-2 scrollbar-custom ${dynamicHeight}`}>
                 <MusicList
-                    myListArray={Array.isArray(trendingList) ? trendingList : []}
+                    myListArray={safeTrendingList}
                     isShowAlbumAndTime={false}
                     userId={user?.id}
                     onPlay={onPlay}

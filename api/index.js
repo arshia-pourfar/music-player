@@ -1,21 +1,20 @@
-// api.js
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }, // اگر لازم بود
+    ssl: { rejectUnauthorized: false },
 });
 
 const app = express();
 
-// Middleware
 app.use(cors({
-    origin: 'https://music-player-eight-red.vercel.app', // آدرس فرانت Reactت
+    origin: process.env.NODE_ENV === 'production'
+        ? 'https://music-player-eight-red.vercel.app'
+        : '*',
 }));
 app.use(express.json());
-
 // --- کنترلرها ---
 // Favorites Controller
 const addFavorite = (req, res) => {
@@ -135,5 +134,12 @@ app.get('/topartistslist/:limit', getTopArtists);
 app.post('/login', login);
 app.post('/register', register);
 
-// Export به شکل سرورلس ورکل
+// اجرا روی لوکال
+if (require.main === module) {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
 module.exports = app;
