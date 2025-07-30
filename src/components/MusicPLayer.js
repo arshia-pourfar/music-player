@@ -3,9 +3,11 @@ import 'react-h5-audio-player/lib/styles.css';
 import useFetchData from '../hooks/useFetchData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
+// require('dotenv').config();
 
 const MusicPlayer = ({ getStyle, musicDetails, musicPlayerShow, onClose, onChangeMusic }) => {
-    const { data: trendingListItem } = useFetchData(`${process.env.NEXT_PUBLIC_API_BASE}/api/trendinglist`, 'GET', null, true);
+    const { data: trendingListItem, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData(`/api/trendinglist`, 'GET', null, true);
+    console.log(trendingListItem);
 
     const handleClick = (action, sectionId, loadArray) => {
         if (!loadArray || loadArray.length === 0 || !onChangeMusic) return;

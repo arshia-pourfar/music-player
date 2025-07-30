@@ -1,9 +1,39 @@
+// PROGRESSQL IN VERCEL
+// db.js
+require('dotenv').config(); // بارگذاری متغیرهای محیطی از فایل .env
 const { Pool } = require('pg');
-require('dotenv').config();
 
+// تنظیمات اتصال به PostgreSQL
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false },
+    connectionString: process.env.POSTGRES_URL_NO_SSL,
+    user: process.env.POSTGRES_USER,
+    host: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DATABASE,
+    password: process.env.POSTGRES_PASSWORD,
+    port: process.env.POSTGRES_PORT,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
-module.exports = pool;
+pool.connect((err, client, release) => {
+    if (err) {
+        console.error('Error connecting to PostgreSQL:', err.stack);
+        return;
+    } else {
+        console.log('Connected to PostgreSQL');
+        release(); // اتصال را آزاد می‌کند
+    }
+});
+
+module.exports = { pool };
+
+// const { Pool } = require('pg');
+// require('dotenv').config();
+
+// const pool = new Pool({
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: { rejectUnauthorized: false },
+// });
+
+// module.exports = pool;
