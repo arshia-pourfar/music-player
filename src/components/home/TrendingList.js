@@ -57,7 +57,7 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
             {/* لیست با اسکرول داخلی واقعی */}
             <div className={`flex-1 overflow-y-auto px-2 scrollbar-custom ${dynamicHeight}`}>
                 <MusicList
-                    myListArray={trendingList}
+                    myListArray={Array.isArray(trendingList) ? trendingList : []}
                     isShowAlbumAndTime={false}
                     userId={user?.id}
                     onPlay={onPlay}
