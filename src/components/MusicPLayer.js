@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
 const MusicPlayer = ({ getStyle, musicDetails, musicPlayerShow, onClose, onChangeMusic }) => {
-    const { data: trendingListItem } = useFetchData('/api/trendinglist', 'GET', null, true);
+    const { data: trendingListItem } = useFetchData(`${process.env.NEXT_PUBLIC_API_BASE}/api/trendinglist`, 'GET', null, true);
 
     const handleClick = (action, sectionId, loadArray) => {
         if (!loadArray || loadArray.length === 0 || !onChangeMusic) return;
