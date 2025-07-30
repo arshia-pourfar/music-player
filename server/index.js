@@ -11,7 +11,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-
+app.use(cors({
+    origin: 'https://music-player-eight-red.vercel.app'
+}));
 // روت‌های اصلی
 app.use('/api', musicRoutes);
 app.use('/api', favoritesRoutes);
