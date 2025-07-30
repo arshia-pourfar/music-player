@@ -1,11 +1,11 @@
-
 import React, { useEffect } from "react";
-import { MusicPlayer } from '../components/MusicPLayer';
-import SearchBox from '../components/searchBox';
+import MusicPlayer from '../components/MusicPLayer';
+import Header from '../components/Header';
 import useFetchData from "../hooks/useFetchData";
 import { useAuth } from "../hooks/AuthContext";
 import MusicList from "../components/MusicList";
 import useWindowDimensions from '../hooks/useWidthSize';
+
 const Favourite = () => {
     const { user } = useAuth();
     const { width } = useWindowDimensions();
@@ -66,14 +66,14 @@ const Favourite = () => {
     return (
         <section id='favourite-page' className='relative w-full 2xl:max-w-[100vw] lg:max-w-[95vw] bg-custom-white custom-h-full min-h-[650px] flex flex-col lg:items-normal items-center lg:rounded-l-xl md:pt-5 lg:px-10'>
             <div className='lg:container w-full lg:px-0 px-2'>
-                <SearchBox widthSize={true} titleText={'Favorite'} />
+                <Header />
                 <div className='overflow-auto w-full h-full py-6 scrollbar-custom'>
                     {(() => {
                         // const checkFavListLength = data.find(item => item.isFavourite === true);
                         if (!Array.isArray(data) || data.length === 0 || data === null) {
                             return (
                                 <div className="text-center mt-20">
-                                    <img className="w-[170px] m-auto animate-bounce" src={require('../images/playlist.png')} alt="" />
+                                    <img className="w-[170px] m-auto animate-bounce" src='/images/playlist.png' alt="" />
                                     <h2 className="font-black text-4xl ms-3 text-custom-black">No Songs Available</h2>
                                     <h5 className="text-lg text-gray-500 mt-2">Your Favorites List Is Empty</h5>
                                     <a href="./AllMusic" className="text-2xl flex items-center justify-center font-extrabold text-custom-black mt-12 animate-pulse">

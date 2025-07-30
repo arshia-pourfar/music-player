@@ -8,7 +8,7 @@ const MenuIcon = () => {
             </MenuButton>
             <MenuItems
                 transition
-                className="absolute z-20 w-56 right-[50px] -top-5 flex flex-col justify-around shadow-md text-custom-white/95 bg-custom-black rounded-xl border p-1 text-sm/6 transition duration-100 ease-out [--anchor-gap:var(--spacing-1)]  data-[closed]:scale-95 data-[closed]:opacity-0"
+                className="absolute z-20 w-56 right-[50px] -top-5 flex flex-col justify-around shadow-md text-custom-white/95 bg-custom-black rounded-xl p-1 text-sm/6 transition duration-100 ease-out [--anchor-gap:var(--spacing-1)]  data-[closed]:scale-95 data-[closed]:opacity-0"
             >
                 <div className='absolute -z-10 w-[20px] h-[20px] rounded-sm bg-custom-black -right-2 top-5 rotate-45 shadow-md'></div>
                 <MenuItem>

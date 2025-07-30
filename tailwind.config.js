@@ -41,12 +41,12 @@ module.exports = {
       },
       keyframes: {
         slideRight: {
-          '0%': { left: '0' },
+          '0%': { left: '0px' },
           '100%': { left: '38%' },
         },
         slideLeft: {
           '0%': { left: '38%' },
-          '100%': { left: '0' },
+          '100%': { left: '0px' },
         },
         slideDown: {
           '0%': { bottom: '0px' },
@@ -97,27 +97,6 @@ module.exports = {
           },
           '@supports not (height: 100dvh)': {
             height: '98vh',
-          },
-        },
-        '.nth-child-4': {
-          '&:nth-child(4)': {
-            marginBottom: '15px',
-            padding: '0px 15px 15px 15px',
-            borderBottom: '1px solid #FBFAFA',
-          },
-        },
-        '.nth-child-7': {
-          '&:nth-child(7)': {
-            position: 'absolute',
-            bottom: '40px',
-            height: '0px',
-          },
-        },
-        '.nth-child-8': {
-          '&:nth-child(8)': {
-            position: 'absolute',
-            bottom: '80px',
-            height: '0px',
           },
         },
       }, ['responsive']);

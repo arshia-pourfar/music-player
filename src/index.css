@@ -1,138 +1,100 @@
- /* Define color variables */
- :root {
-     --pink: #FCB6D8;
-     --white: #FBFAFA;
-     --black: #2A252B;
-     --blue: #4DA8D5;
-     --brown: #BF795E;
- }
+@import "~@flaticon/flaticon-uicons/css/all/all";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
- /* styles/globals.css */
- @font-face {
-     font-family: 'Rubik';
-     src: url('./font/Rubik-VariableFont_wght.ttf') format('truetype');
-     font-weight: normal;
-     font-display: swap;
- }
+/* Color Variables */
+:root {
+    --pink: #FCB6D8;
+    --white: #FBFAFA;
+    --black: #2A252B;
+    --blue: #4DA8D5;
+    --brown: #BF795E;
+}
 
- @font-face {
-     font-family: 'Rubik Italic';
-     src: url('./font/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
-     font-style: italic;
-     font-weight: normal;
-     font-display: swap;
- }
+/* Font */
+@font-face {
+    font-family: 'Rubik';
+    src: url('./font/Rubik-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-display: swap;
+}
 
- @import "~@flaticon/flaticon-uicons/css/all/all";
- @import "tailwindcss/base";
- /* @import "./custom-base-styles.css"; */
+@font-face {
+    font-family: 'Rubik Italic';
+    src: url('./font/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: italic;
+    font-weight: normal;
+    font-display: swap;
+}
 
- @import "tailwindcss/components";
- /* @import "./custom-components.css"; */
+/* Scrollbar Custom */
+.scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+}
 
- @import "tailwindcss/utilities";
- /* @import "./custom-utilities.css"; */
+.scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+}
 
- @supports (height: 100dvh) {
-     .custom-h-full {
-         height: 100dvh;
-         min-height: 650px;
-         /* overflow: hidden; */
-     }
- }
+.scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
 
- @supports not (height: 100dvh) {
-     .custom-h-full {
-         height: 96vh;
-         min-height: 650px;
-         /* overflow: hidden; */
-     }
- }
+/* Base Body */
+body {
+    background-color: var(--black);
+    font-family: 'Rubik', sans-serif;
+}
 
- body {
-     background-color: #2A252B;
-     overflow: hidden;
-     height: 100% !important;
-     font-family: 'Rubik', sans-serif;
- }
 
- @media only screen and (max-height:650px) {
+#header-carousel .slick-slide {
+    position: relative;
+    z-index: 10 !important;
+    right: -10px;
+    width: auto !important;
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+}
 
-     #root,
-     body {
-         overflow: visible !important;
-     }
- }
+#header-carousel .slick-track {
+    position: relative;
+    z-index: 10 !important;
+}
 
- #navbar-mobile .nav-item.active {
-     filter: drop-shadow(0 1px 4px rgba(251, 250, 250, 0.63));
-     background-color: #ffffff1a;
- }
+#header-carousel .slick-dots {
+    position: relative;
+    right: 35px;
+    align-self: center;
+    z-index: 101;
+}
 
- #navbar .nav-item.active {
-     filter: drop-shadow(0 1px 4px rgba(251, 250, 250, 0.63));
- }
+#header-carousel .slick-dots li button {
+    font-size: 0;
+    height: 30px;
+    width: 20px;
+}
 
- #all-music-page .slick-track {
-     gap: 5px !important;
- }
+#header-carousel .slick-dots li button:before {
+    color: var(--white);
+    content: "•";
+    font-size: 35px;
+    border-radius: 100px;
+    line-height: 20px;
+    transition: 0.6s;
+}
 
- /* Home Page Styles */
- #header-carousel .slick-slide {
-     /* height: 100%; */
-     position: relative;
-     z-index: 10 !important;
-     right: -10px;
-     width: auto !important;
-     display: block;
-     height: auto;
-     border: 1px solid transparent;
- }
-
- #header-carousel .slick-track {
-     position: relative;
-     z-index: 10 !important;
- }
-
- #header-carousel .slick-dots {
-     position: relative;
-     right: 35px;
-     align-self: center;
-     z-index: 101;
- }
-
- #header-carousel .slick-dots li button {
-     font-size: 0;
-     height: 30px;
-     width: 20px;
- }
-
- #header-carousel .slick-dots li button:before {
-     color: var(--white);
-     content: "•";
-     font-size: 35px;
-     border-radius: 100px;
-     line-height: 20px;
-     transition: 0.6s;
- }
-
- #header-carousel .slick-dots .slick-active {
-     margin-bottom: 6px;
- }
-
- #header-carousel .slick-dots .slick-active button:before {
-     font-size: 19px !important;
-     background-color: var(--white) !important;
- }
-
- /* #header-carousel .slick-dots li button:before {
-    color: #FBFAFA;
+#header-carousel .slick-dots .slick-active {
+    margin-bottom: 6px;
 }
 
 #header-carousel .slick-dots .slick-active button:before {
     font-size: 19px !important;
-    background-color: #FBFAFA !important;
-} */
+    background-color: var(--white) !important;
+}
+
 
  #home-page .close-music-player::before,
  #home-page .close-music-player::after {
@@ -289,8 +251,9 @@
      background-position: right;
  }
 
- /* LOADER */
- /* HTML: <div class="loader"></div> */
+
+
+
  .loader {
      width: 80px;
      aspect-ratio: 1;
@@ -327,24 +290,3 @@
      }
  }
 
- /* HTML: <div class="loader"></div> */
- /* HTML: <div class="loader"></div> */
- /* .dot-loader {
-     color: #000;
-     width: 2px;
-     aspect-ratio: 1;
-     border-radius: 50%;
-     box-shadow: 19px 0 0 7px, 38px 0 0 3px, 57px 0 0 0;
-     transform: translateX(-38px);
-     animation: l21 .5s infinite alternate linear;
- }
-
- @keyframes l21 {
-     50% {
-         box-shadow: 19px 0 0 3px, 38px 0 0 7px, 57px 0 0 3px
-     }
-
-     100% {
-         box-shadow: 19px 0 0 0, 38px 0 0 3px, 57px 0 0 7px
-     }
- } */
