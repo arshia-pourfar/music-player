@@ -17,7 +17,6 @@ export default function handler(req, res) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ success: false, message: 'Server error' });
             }
-            console.log(results.rows[0].id);
 
             if (results.rows.length > 0 && results.rows[0].id !== 0) {
                 return res.json({ success: true, results: results.rows });

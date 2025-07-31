@@ -4,7 +4,6 @@ const pool = require('../db'); // اتصال به دیتابیس
 export default async function handler(req, res) {
     const { userId } = req.query;
 
-    console.log(req.method);
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method not allowed' });
     }

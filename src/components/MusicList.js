@@ -25,10 +25,10 @@ const MusicList = ({ myListArray, isShowAlbumAndTime, userId, onPlay, currentPla
                     key={item.id}
                     data-testid={`music-item-${item.id}`}
                     className="music-item w-full flex items-center justify-between py-2 text-custom-black cursor-pointer"
-                    onClick={() => onPlay?.(item)} // 🎯 اتصال به پلیر
+                     // 🎯 اتصال به پلیر
                 >
                     {/* Left Section: Index + Image + Title */}
-                    <div className={`w-2/6 flex items-center ${currentPlaying?.id === item.id ? 'border-l-4 border-custom-pink' : 'border-l-4 border-transparent'}`}>
+                    <div onClick={() => onPlay?.(item)} className={`w-full flex items-center ${currentPlaying?.id === item.id ? 'border-l-4 border-custom-pink' : 'border-l-4 border-transparent'}`}>
                         <span className="w-5 text-center xl:text-lg lg:text-base md:text-lg font-semibold opacity-50 md:ms-2">
                             {String(index + 1).padStart(2, "0")}
                         </span>

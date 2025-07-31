@@ -4,7 +4,6 @@ const pool = require('../db'); // فرض می‌کنیم db.js در همان پ�
 export default async function handler(req, res) {
     if (req.method === 'GET') {
         const { limit } = req.query;
-        console.log(limit);
 
         if (!limit) {
             return res.status(400).json({ message: 'Limit is required' });

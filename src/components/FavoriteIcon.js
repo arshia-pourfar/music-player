@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useFetchData from '../hooks/useFetchData';
 
 const FavoriteIcon = ({ userId, songId }) => {
-    const { data, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData('', 'POST', null, false);
+    const { data, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData('', 'GET', null, false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [showLoginPage, setShowLoginPage] = useState(false);
 
