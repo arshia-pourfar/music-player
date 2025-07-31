@@ -1,5 +1,5 @@
 // /api/[userId]/favorites/update.js
-const { pool } = require('../../db.js'); // اتصال به دیتابیس
+const pool = require('./db'); // اتصال به دیتابیس
 
 export default async function handler(req, res) {
     const { userId } = req.query;

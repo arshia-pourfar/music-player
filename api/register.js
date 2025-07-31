@@ -1,5 +1,5 @@
 // /api/register.js
-const { pool } = require('./db.js'); // اتصال به دیتابیس
+const pool = require('./db'); // اتصال به دیتابیس
 
 export default function handler(req, res) {
     if (req.method === 'POST') {
