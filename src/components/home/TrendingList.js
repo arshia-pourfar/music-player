@@ -13,6 +13,7 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
         error: trendingError,
     } = useFetchData('/api/trendinglist', 'GET', null, true);
     console.log('Trending List:', trendingList);
+
     useEffect(() => {
         function updateHeight() {
             setHeight(window.innerHeight);

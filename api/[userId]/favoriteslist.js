@@ -1,4 +1,4 @@
-// src/lib/api/[userId]/favorites/favoriteslist.js
+// /api/[userId]/favorites/favoriteslist.js
 const { pool } = require('../db.js'); // اتصال به دیتابیس
 
 export default async function handler(req, res) {

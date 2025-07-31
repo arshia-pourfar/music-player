@@ -1,4 +1,4 @@
-// src/lib/api/login.js
+// /api/login.js
 const { pool } = require('./db.js'); // اتصال به دیتابیس
 
 export default function handler(req, res) {
