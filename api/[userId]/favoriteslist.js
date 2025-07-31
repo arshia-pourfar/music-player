@@ -20,10 +20,13 @@ export default async function handler(req, res) {
     try {
         const { rows } = await pool.query(query, [userId]);
 
+        console.log(rows);
+
         const updatedResult = rows.map((item, index) => ({
             ...item,
             newId: index
         }));
+        console.log(updatedResult);
 
         return res.status(200).json(updatedResult);
     } catch (err) {

@@ -26,15 +26,15 @@ const AllMusic = () => {
 
     if (allMusicLoading) {
         return (
-            <div className='h-screen w-full flex flex-col justify-center items-center bg-custom-white'>
-                <div className='loader'></div>
-                <div className='text-2xl font-bold mt-2'>Loading ...</div>
+            <div className="h-screen w-full flex flex-col justify-center items-center bg-custom-white">
+                <div className="loader"></div>
+                <div className="text-2xl font-bold mt-2">Loading ...</div>
             </div>
         );
     }
 
     if (allMusicError) {
-        return <div>Error: {allMusicError?.message}</div>;
+        return <div>Error: {allMusicError.message || 'Failed to load trending music'}</div>;
     }
 
     return (

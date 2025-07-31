@@ -1,9 +1,50 @@
 import React from 'react';
-import { recentFavList } from '../../data/tracks';
 import MenuIcon from '../MenuIcon';
+import useFetchData from '../../hooks/useFetchData';
+import { useState } from 'react';
+import useWindowDimensions from '../../hooks/useWidthSize';
+import { useEffect } from 'react';
+import { useAuth } from '../../hooks/AuthContext';
 
 const TopArtist = () => {
-  const recentFavListLimited = [recentFavList[1], recentFavList[2], recentFavList[3]];
+  const { height, width } = useWindowDimensions();
+  const [limitTopArtist, setLimitTopArtist] = useState(3);
+  const { user } = useAuth();
+  const { data: topArtistList, loading: topArtistLoading, error: topArtistError } = useFetchData('/api/topartistslist', 'GET', null, true, limitTopArtist);
+
+  useEffect(() => {
+    if (width >= 1024) {
+      if (height >= 1470) {
+        setLimitTopArtist(5);
+      } else if (width < 1280 && height >= 1170) {
+        setLimitTopArtist(5);
+      } else if (width < 1280 && height >= 990) {
+        setLimitTopArtist(4);
+      } else if (width < 1536 && height >= 1140) {
+        setLimitTopArtist(4);
+      } else if (width >= 1536 && height >= 1230) {
+        setLimitTopArtist(4);
+      } else {
+        setLimitTopArtist(3);
+      }
+    }
+  }, [height, width, user]);
+
+  if (topArtistLoading) {
+    return (
+      <div className='custom-h-full w-[100vw] flex flex-col justify-center items-center rounded-l-xl bg-custom-white'>
+        <div className='loader'></div>
+        <div className='text-2xl font-bold mt-2'>
+          Loading ...
+        </div>
+      </div>
+    );
+  }
+
+  if (topArtistError) {
+    return <div>Error: {topArtistError?.message}</div>;
+  }
+
   return (
     <div className="relative lg:block hidden justify-center items-center h-[30%] min-h-[300px] lg:mt-0 mt-2">
       <div className="flex justify-between items-center">
@@ -11,7 +52,7 @@ const TopArtist = () => {
         <button className="underline text-custom-blue xl:text-base lg:text-sm">See all</button>
       </div>
       <div className="w-full h-full top-artist-list lg:px-1 xl:mt-3 md:mt-1 flex flex-col">
-        {recentFavListLimited.map((item, index) => (
+        {topArtistList && topArtistList.map((item, index) => (
           <div key={index} className="w-full min-h-fit flex items-center justify-between py-2 text-custom-black cursor-pointer">
             <div className="w-full items-center flex border-l-4 border-transparent">
               <img className="lg:w-[65px] md:w-[70px] shadow-lg rounded-md" src={item.imageSrc} alt="" />

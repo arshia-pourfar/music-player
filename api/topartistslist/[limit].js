@@ -1,5 +1,5 @@
 // /api/topartistslist/[limit].js
-const { pool } = require('../db.js'); // فرض می‌کنیم db.js در همان پوشه است
+const pool = require('./db'); // فرض می‌کنیم db.js در همان پوشه است
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {

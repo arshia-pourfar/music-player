@@ -10,6 +10,8 @@ const Favourite = () => {
     const { user } = useAuth();
     const { width } = useWindowDimensions();
     // const userId = user.id;
+    console.log(user);
+    
     const { data, loading, setUrl, fetchData } = useFetchData(`/api/${user ? user.id : 0}/favoriteslist`, 'GET', null, true);
 
     useEffect(() => {

@@ -7,7 +7,6 @@ import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
 const MusicPlayer = ({ getStyle, musicDetails, musicPlayerShow, onClose, onChangeMusic }) => {
     const { data: trendingListItem } = useFetchData(`/api/trendinglist`, 'GET', null, true);
-    console.log(trendingListItem);
 
     const handleClick = (action, sectionId, loadArray) => {
         if (!loadArray || loadArray.length === 0 || !onChangeMusic) return;
