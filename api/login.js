@@ -1,5 +1,5 @@
 // /api/login.js
-const { pool } = require('./db.js'); // اتصال به دیتابیس
+const pool = require('./db'); // یا مسیر درست db.js خودت
 
 export default function handler(req, res) {
     if (req.method === 'POST') {
