@@ -1,7 +1,9 @@
 import React from 'react';
 import MenuIcon from '../MenuIcon';
 
-const TopArtist = ({topArtistList}) => {
+const TopArtist = ({ topArtistList }) => {
+  console.log(topArtistList);
+
   return (
     <div className="relative lg:block hidden justify-center items-center h-[30%] min-h-[300px] lg:mt-0 mt-2">
       <div className="flex justify-between items-center">
@@ -12,7 +14,7 @@ const TopArtist = ({topArtistList}) => {
         {topArtistList && topArtistList.map((item, index) => (
           <div key={index} className="w-full min-h-fit flex items-center justify-between py-2 text-custom-black cursor-pointer">
             <div className="w-full items-center flex border-l-4 border-transparent">
-              <img className="lg:w-[65px] md:w-[70px] shadow-lg rounded-md" src={item.imageSrc} alt="" />
+              <img className="lg:w-[65px] md:w-[70px] shadow-lg rounded-md" src={item.imagesrc} alt="" />
               <div className="capitalize w-[200px] xl:mx-4 lg:mx-2 md:mx-3">
                 <h2 className="font-bold xl:text-xl lg:text-xl md:text-xl line-clamp-1">{item.title}</h2>
                 <span className="text-custom-gray xl:text-sm lg:text-base md:text-lg line-clamp-1 flex items-center">

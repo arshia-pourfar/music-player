@@ -16,6 +16,7 @@ const useFetchData = (
     const [error, setError] = useState(null);
 
     const formattedUrl = limit ? `${url}/${limit}` : url;
+    console.log(method);
 
     const fetchData = useCallback(async () => {
         setLoading(true);
