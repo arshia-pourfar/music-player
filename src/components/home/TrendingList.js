@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import MusicList from '../MusicList';
-import useFetchData from '../../hooks/useFetchData';
-import { useAuth } from '../../hooks/AuthContext';
 
-const TrendingList = ({ onPlay, currentPlaying }) => {
+const TrendingList = ({ trendingList, onPlay, currentPlaying, user }) => {
     const [height, setHeight] = useState(window.innerHeight || 0);
-    const { user } = useAuth();
-
-    const {
-        data: trendingList,
-        loading: trendingLoading,
-        error: trendingError,
-    } = useFetchData('/api/trendinglist', 'GET', null, true);
 
     useEffect(() => {
         function updateHeight() {
@@ -27,23 +18,6 @@ const TrendingList = ({ onPlay, currentPlaying }) => {
             : height >= 800
                 ? 'max-h-[45vh]'
                 : 'max-h-[41vh]';
-
-    if (trendingError) {
-        return <div style={{ color: 'red', padding: 20 }}>Error: {JSON.stringify(trendingError)}</div>;
-    }
-
-    if (trendingLoading) {
-        return (
-            <div className="h-screen w-full flex flex-col justify-center items-center bg-custom-white">
-                <div className="loader"></div>
-                <div className="text-2xl font-bold mt-2">Loading ...</div>
-            </div>
-        );
-    }
-
-    if (trendingError) {
-        return <div>Error: {trendingError.message || 'Failed to load trending music'}</div>;
-    }
 
     // ایمنی: اگر trendingList آرایه نیست، خالی ارسال شود
     const safeTrendingList = Array.isArray(trendingList) ? trendingList : [];
