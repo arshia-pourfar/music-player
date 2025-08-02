@@ -1,78 +1,101 @@
-import React from "react";
+import React, { useMemo } from "react";
 import FavoriteIcon from "../components/FavoriteIcon";
 import MenuIcon from "../components/MenuIcon";
 import clsx from "clsx";
 
 const MusicList = ({ myListArray, isShowAlbumAndTime, userId, onPlay, currentPlaying }) => {
-    return (
-        <div className="flex-1 overflow-y-auto scrollbar-custom">
-            {/* Header Row */}
+  const renderedList = useMemo(
+    () =>
+      myListArray?.map((item, index) => {
+        const isPlaying = currentPlaying?.id === item.id;
+
+        return (
+          <div
+            key={item.id}
+            className={clsx(
+              "grid grid-cols-12 items-center gap-2 p-2 w-full relative",
+              "hover:bg-custom-light transition-colors duration-200",
+            )}
+          >
+            {/* ستون: شماره، کاور، عنوان/خواننده */}
+            <div
+              className={`${isShowAlbumAndTime ? "col-span-4" : "col-span-8"} ${isPlaying ? "border-l-4 border-custom-pink" : "border-l-4 border-transparent"} flex items-center gap-3 cursor-pointer ps-1`}
+              onClick={() => onPlay?.(item, myListArray)}
+            >
+              <span className="w-6 text-center text-base font-semibold opacity-50">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <img
+                src={`/images/${item.imagesrc}`}
+                alt={`${item.musicname} by ${item.artistname}`}
+                className="size-16 rounded-md object-cover shadow-sm"
+              />
+
+              <div className="flex flex-col overflow-hidden">
+                <span className="font-bold text-lg truncate">{item.musicname}</span>
+                <span className="text-custom-gray text-sm truncate">{item.artistname}</span>
+              </div>
+            </div>
+
+            {/* آلبوم */}
             {isShowAlbumAndTime && (
-                <div className="w-full flex items-center justify-between text-lg pb-2 shadow-sm text-opacity-50 capitalize font-semibold text-custom-black bg-custom-white cursor-pointer sticky top-0 z-30">
-                    <div className="w-2/6 flex items-center gap-5 border-l-4 border-transparent">
-                        <span className="w-[10px] ms-2">#</span>
-                        <h2 className="xl:ms-[70px] 2xl:ms-[75px]">Title</h2>
-                    </div>
-                    <div className="w-1/6 text-left">Album</div>
-                    <div className="w-1/6 text-right">Time</div>
-                    <div className="w-2/6 flex items-center justify-end pe-28">Playing</div>
-                </div>
+              <div className="col-span-3 text-sm md:text-sm font-semibold truncate cursor-pointer" onClick={() => onPlay?.(item, myListArray)}>
+                {item.albumname || item.musicname}
+              </div>
             )}
 
-            {/* Music Items */}
-            {myListArray?.map((item, index) => (
-                <div
-                    key={item.id}
-                    data-testid={`music-item-${item.id}`}
-                    className="music-item w-full flex items-center justify-between py-2 text-custom-black cursor-pointer"
-                     // 🎯 اتصال به پلیر
-                >
-                    {/* Left Section: Index + Image + Title */}
-                    <div onClick={() => onPlay?.(item)} className={`w-full flex items-center ${currentPlaying?.id === item.id ? 'border-l-4 border-custom-pink' : 'border-l-4 border-transparent'}`}>
-                        <span className="w-5 text-center xl:text-lg lg:text-base md:text-lg font-semibold opacity-50 md:ms-2">
-                            {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <img
-                            className="lg:w-[65px] md:w-[75px] w-[55px] xl:mx-5 lg:mx-3 md:mx-4 mx-2 shadow-lg rounded-md"
-                            src={`/images/${item.imagesrc}`}
-                            alt={`${item.musicname} by ${item.artistname}`}
-                        />
-                        <div className="capitalize md:w-[200px] w-[150px]">
-                            <h2 className="font-bold xl:text-xl lg:text-xl md:text-xl text-base line-clamp-1">
-                                {item.musicname}
-                            </h2>
-                            <span className="text-custom-gray xl:text-[15px] lg:text-base md:text-lg text-sm line-clamp-1">
-                                {item.artistname}
-                            </span>
-                        </div>
-                    </div>
-
-                    {/* Middle Section: Album + Time */}
-                    {isShowAlbumAndTime && (
-                        <React.Fragment>
-                            <div className="w-1/6 text-left font-semibold text-md">{item.musicname}</div>
-                            <div className="w-1/6 text-right font-semibold text-sm">{item.musictime}</div>
-                        </React.Fragment>
-                    )}
-
-                    {/* Right Section: Views + Icons */}
-                    <div
-                        className={clsx({
-                            "w-2/6": isShowAlbumAndTime,
-                            "xl:w-2/5 lg:w-1/5": !isShowAlbumAndTime,
-                            "relative flex items-center justify-end": true,
-                        })}
-                    >
-                        <span className="text-custom-gray lg:text-sm md:text-base md:inline-block hidden font-semibold">
-                            {item.viewnumber}
-                        </span>
-                        <FavoriteIcon userId={userId} songId={item.id} />
-                        <MenuIcon />
-                    </div>
+            {/* زمان */}
+            {isShowAlbumAndTime && (
+              <>
+                <div className="col-span-1 text-xs md:text-sm font-semibold cursor-pointer" onClick={() => onPlay?.(item, myListArray)}>{item.musictime}</div>
+                <div className="col-span-3 text-center text-custom-gray text-xs md:text-sm font-semibold truncate cursor-pointer" onClick={() => onPlay?.(item, myListArray)}>
+                  {item.viewnumber}
                 </div>
-            ))}
+                <div className="col-span-1 flex justify-end gap-4">
+                  <FavoriteIcon userId={userId} songId={item.id} />
+                  <MenuIcon />
+                </div>
+              </>
+            )}
+            {!isShowAlbumAndTime && (
+              <>
+                <div className="col-span-4 flex justify-end gap-4">
+                  <div className="text-right text-custom-gray text-xs md:text-sm font-semibold truncate">
+                    {item.viewnumber}
+                  </div>
+                  <FavoriteIcon userId={userId} songId={item.id} />
+                  <MenuIcon />
+                </div>
+              </>
+            )}
+          </div>
+        );
+      }),
+    [myListArray, currentPlaying, onPlay, isShowAlbumAndTime, userId]
+  );
+
+  return (
+    <div className="flex-1 overflow-y-auto scrollbar-custom">
+      {/* هدر لیست */}
+      {isShowAlbumAndTime && (
+        <div className="grid grid-cols-12 gap-2 px-4 py-3 sticky top-0 bg-custom-white text-sm font-semibold text-opacity-50 text-custom-black shadow-sm z-30">
+          <div className="col-span-4 flex items-center gap-5">
+            <span className="w-8 text-center">#</span>
+            <span>Cover</span>
+            <span>Title</span>
+          </div>
+          <span className="col-span-3">Album</span>
+          <span className="col-span-1">Time</span>
+          <span className="col-span-3 text-center">Views</span>
+          <span className="col-span-1 text-right">Actions</span>
         </div>
-    );
+      )}
+
+      {/* آیتم‌ها */}
+      {renderedList}
+    </div>
+  );
 };
 
 export default MusicList;

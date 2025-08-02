@@ -3,26 +3,41 @@ import MenuIcon from '../MenuIcon';
 
 const TopArtist = ({ topArtistList }) => {
   return (
-    <div className="relative lg:block hidden justify-center items-center h-[30%] min-h-[300px] lg:mt-0 mt-2">
-      <div className="flex justify-between items-center">
-        <h1 className="font-semibold inline-block xl:text-3xl md:text-2xl">Top Artist</h1>
-        <button className="underline text-custom-blue xl:text-base lg:text-sm">See all</button>
+    <div className="relative lg:block hidden min-h-[300px]">
+      {/* عنوان بخش */}
+      <div className="flex justify-between items-center px-2">
+        <h1 className="font-semibold text-2xl xl:text-3xl">Top Artist</h1>
+        <button className="underline text-custom-blue text-sm xl:text-base">See all</button>
       </div>
-      <div className="w-full h-full top-artist-list lg:px-1 xl:mt-3 md:mt-1 flex flex-col">
-        {topArtistList && topArtistList.map((item, index) => (
-          <div key={index} className="w-full min-h-fit flex items-center justify-between py-2 text-custom-black cursor-pointer">
-            <div className="w-full items-center flex border-l-4 border-transparent">
-              <img className="lg:w-[65px] md:w-[70px] shadow-lg rounded-md" src={`/images/${item.imagesrc}`} alt="" />
-              <div className="capitalize w-[200px] xl:mx-4 lg:mx-2 md:mx-3">
-                <h2 className="font-bold xl:text-xl lg:text-xl md:text-xl line-clamp-1">{item.artistname}</h2>
-                <span className="text-custom-gray xl:text-sm lg:text-base md:text-lg line-clamp-1 flex items-center mt-1">
-                  <i className="fi fi-ss-waveform-path"></i>
-                  <span className="inline-block mx-1">5.1M</span>
-                  Plays
+
+      {/* لیست هنرمندان */}
+      <div className="w-full h-full flex flex-col mt-1 ps-2">
+        {topArtistList?.map((item, index) => (
+          <div
+            key={index}
+            className="relative w-full flex items-center justify-between py-2 hover:bg-custom-light rounded-md transition-colors duration-200 cursor-pointer"
+          >
+            {/* بخش تصویر و اطلاعات */}
+            <div className="flex items-center gap-3 flex-1">
+              <img
+                src={`/images/${item.imagesrc}`}
+                alt={`Top artist: ${item.artistname}`}
+                className="size-[70px] object-cover rounded-md shadow-lg"
+              />
+
+              <div className="flex flex-col overflow-hidden w-[200px]">
+                <h2 className="font-bold text-lg xl:text-xl truncate">
+                  {item.artistname}
+                </h2>
+                <span className="text-custom-gray text-sm flex items-center gap-1 mt-1">
+                  <i className="fi fi-ss-waveform-path text-custom-gray"></i>
+                  <span>5.1M</span> Plays
                 </span>
               </div>
             </div>
-            <div className="xl:w-2/5 lg:w-1/5 relative flex items-center justify-end">
+
+            {/* آیکون منو */}
+            <div className="px-2">
               <MenuIcon />
             </div>
           </div>

@@ -17,17 +17,6 @@ app.use('/api', musicRoutes);
 app.use('/api', favoritesRoutes);
 app.use('/api', userRoutes);
 
-// تست اتصال به دیتابیس
-app.get('/test-db', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT NOW()');
-        res.json(result.rows[0]);
-    } catch (err) {
-        console.error('DB Error:', err);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
-});
-
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

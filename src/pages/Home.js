@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MusicPlayer from '../components/MusicPLayer';
 import Header from '../components/Header';
 import HeaderPostCarousel from '../components/home/HeaderPostCarousel';
@@ -7,28 +7,29 @@ import TopArtist from '../components/home/TopArtist';
 import RecentFavourite from '../components/home/RecentFavourite';
 import AllMusic from '../components/MusicList';
 import useFetchData from '../hooks/useFetchData';
-import { useEffect } from 'react';
 import { useAuth } from '../hooks/AuthContext';
 import useWindowDimensions from '../hooks/useWidthSize';
 
 const Home = () => {
     const [selectedMusic, setSelectedMusic] = useState(null);
     const [isPlayerVisible, setIsPlayerVisible] = useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false);
     const [activeList, setActiveList] = useState([]);
     const { height, width } = useWindowDimensions();
     const [limitTopArtist, setLimitTopArtist] = useState(3);
     const { user } = useAuth();
+
     const {
         data: trendingList,
         loading: trendingLoading,
         error: trendingError,
     } = useFetchData('/api/trendinglist', 'GET', null, true);
+
     const {
         data: topArtistList,
         loading: topArtistLoading,
-        error: topArtistError
+        error: topArtistError,
     } = useFetchData('/api/topartistslist', 'GET', null, true, limitTopArtist);
-
 
     useEffect(() => {
         if (width >= 1024) {
@@ -47,10 +48,12 @@ const Home = () => {
             }
         }
     }, [height, width, user]);
+
     const handlePlayMusic = (musicItem, sourceList) => {
         setSelectedMusic(musicItem);
         setActiveList(sourceList);
         setIsPlayerVisible(true);
+        setHasInteracted(true);
     };
 
     const handleClosePlayer = () => {
@@ -58,6 +61,12 @@ const Home = () => {
         setSelectedMusic(null);
         setActiveList([]);
     };
+
+    const animationClass = hasInteracted
+        ? isPlayerVisible
+            ? 'animate-slide-right'
+            : 'animate-slide-left'
+        : '';
 
     if (trendingLoading || topArtistLoading) {
         return (
@@ -81,10 +90,13 @@ const Home = () => {
                     musicPlayerShow={isPlayerVisible}
                     onClose={handleClosePlayer}
                     onChangeMusic={(item) => handlePlayMusic(item, activeList)}
+                    musicList={activeList}
                 />
             </div>
 
-            <section className={`h-screen w-screen bg-custom-white flex flex-col overflow-hidden rounded-l-xl z-20 relative ${isPlayerVisible ? 'animate-slide-right' : 'animate-slide-left'}`}>
+            <section
+                className={`h-screen w-screen bg-custom-white flex flex-col overflow-hidden rounded-l-xl z-20 relative ${animationClass}`}
+            >
                 <div className="flex-1 overflow-hidden pt-3 lg:px-6 md:px-5 px-2 scrollbar-custom h-screen">
                     <Header />
 
@@ -96,7 +108,12 @@ const Home = () => {
                             <TopArtist topArtistList={topArtistList} />
                         </div>
                         <div className="lg:basis-3/5 w-full mt-4 px-3 max-h-[40vh]">
-                            <TrendingList trendingList={trendingList} onPlay={handlePlayMusic} currentPlaying={selectedMusic} user={user} />
+                            <TrendingList
+                                trendingList={trendingList}
+                                onPlay={handlePlayMusic}
+                                currentPlaying={selectedMusic}
+                                user={user}
+                            />
                         </div>
                         <div className="lg:basis-2/5 w-full mt-4 px-3 max-h-[40vh]">
                             <RecentFavourite />

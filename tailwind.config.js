@@ -50,10 +50,10 @@ module.exports = {
         },
         slideDown: {
           '0%': { bottom: '0px' },
-          '100%': { bottom: '-90px' },
+          '100%': { bottom: '-95px' },
         },
         slideUp: {
-          '0%': { bottom: '-90px' },
+          '0%': { bottom: '-95px' },
           '100%': { bottom: '0px' },
         },
         openNavMenu: {
