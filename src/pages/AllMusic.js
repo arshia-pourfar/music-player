@@ -27,17 +27,15 @@ const AllMusic = () => {
         vertical: false,
     };
 
-    console.log('Selected Music:', selectedMusic);
     const handlePlayMusic = (musicItem, sourceList) => {
         setSelectedMusic(musicItem);
         setActiveList(sourceList);
         setIsPlayerVisible(true);
-        console.log('Selected Music:', selectedMusic);
     };
 
     if (allMusicLoading) {
         return (
-            <div className="h-screen w-full flex flex-col justify-center items-center bg-custom-white">
+            <div className="h-screen w-full flex flex-col justify-center items-center bg-custom-white rounded-l-lg">
                 <div className="loader"></div>
                 <div className="text-2xl font-bold mt-2">Loading ...</div>
             </div>
@@ -90,13 +88,15 @@ const AllMusic = () => {
 
             {/* موزیک پلیر ثابت پایین صفحه */}
             <div className='absolute bottom-0 left-0 w-full z-40'>
-                <MusicPlayer
-                    getStyle={width >= 768 ? 'bottom' : 'full'}
-                    musicDetails={selectedMusic}
-                    musicPlayerShow={true} // همیشه true
-                    onChangeMusic={(item) => handlePlayMusic(item, activeList)}
-                    musicList={activeList}
-                />
+                {isPlayerVisible && (
+                    <MusicPlayer
+                        getStyle={width >= 768 ? 'bottom' : 'full'}
+                        musicDetails={selectedMusic}
+                        musicPlayerShow={true} // همیشه true
+                        onChangeMusic={(item) => handlePlayMusic(item, activeList)}
+                        musicList={activeList}
+                    />
+                )}
             </div>
         </section>
     );

@@ -39,7 +39,7 @@ const Favourite = () => {
 
     if (loading) {
         return (
-            <div className="h-screen w-screen flex flex-col justify-center items-center bg-custom-white">
+            <div className="h-screen w-screen flex flex-col justify-center items-center bg-custom-white rounded-l-lg">
                 <div className="loader" />
                 <div className="text-2xl font-bold mt-2">Loading ...</div>
             </div>
@@ -47,7 +47,7 @@ const Favourite = () => {
     }
 
     return (
-        <section className="relative w-full h-screen bg-custom-white flex flex-col overflow-hidden">
+        <section className="relative w-full h-screen bg-custom-white flex flex-col overflow-hidden rounded-l-lg">
             {/* موزیک پلیر پایین صفحه */}
             {isPlayerVisible && (
                 <MusicPlayer

@@ -70,7 +70,7 @@ const Home = () => {
 
     if (trendingLoading || topArtistLoading) {
         return (
-            <div className="h-screen w-full flex flex-col justify-center items-center bg-custom-white">
+            <div className="h-screen w-full flex flex-col justify-center items-center bg-custom-white rounded-l-lg" >
                 <div className="loader"></div>
                 <div className="text-2xl font-bold mt-2">Loading ...</div>
             </div>
@@ -95,7 +95,7 @@ const Home = () => {
             </div>
 
             <section
-                className={`h-screen w-screen bg-custom-white flex flex-col overflow-hidden rounded-l-xl z-20 relative ${animationClass}`}
+                className={`h-screen w-screen bg-custom-white flex flex-col overflow-hidden rounded-l-lg z-20 relative ${animationClass}`}
             >
                 <div className="flex-1 overflow-hidden pt-3 lg:px-6 md:px-5 px-2 scrollbar-custom h-screen">
                     <Header />
