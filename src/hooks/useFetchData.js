@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
+const BASE_URL = 'https://music-player-backend-pmof.onrender.com';
+
 const useFetchData = (
     initialUrl = '',
     initialMethod = 'GET',
@@ -15,7 +17,7 @@ const useFetchData = (
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const formattedUrl = limit ? `${url}/${limit}` : url;
+    const formattedUrl = `${BASE_URL}${limit ? `${url}/${limit}` : url}`;
 
     const fetchData = useCallback(async () => {
         setLoading(true);

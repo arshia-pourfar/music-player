@@ -10,7 +10,7 @@ const favoritesRoutes = require('./routes/favoritesRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 // ✅ Middlewareهای امنیتی و لاگ
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || '*' }));
