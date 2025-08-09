@@ -22,8 +22,9 @@ export default async function handler(req, res) {
             return res.status(201).json({ message: 'Added to favorites (or already exists)' });
         } catch (err) {
             console.error(err);
-            return res.status(500).json({ message: 'Internal Server Error' });
+            return res.status(500).json({ error: err.message, stack: err.stack });
         }
+
     }
     if (req.method === 'DELETE') {
         const { songId } = req.body;
@@ -39,8 +40,9 @@ export default async function handler(req, res) {
             return res.status(200).json({ message: 'Removed from favorites' });
         } catch (err) {
             console.error(err);
-            return res.status(500).json({ message: 'Internal Server Error' });
+            return res.status(500).json({ error: err.message, stack: err.stack });
         }
+
     }
 
     if (req.method === 'GET') {
@@ -55,8 +57,9 @@ export default async function handler(req, res) {
             return res.json(result.rows.map(row => row.song_id));
         } catch (err) {
             console.error(err);
-            return res.status(500).json({ message: 'Internal Server Error' });
+            return res.status(500).json({ error: err.message, stack: err.stack });
         }
+
     }
 
     return res.status(405).json({ message: 'Method not allowed' });
