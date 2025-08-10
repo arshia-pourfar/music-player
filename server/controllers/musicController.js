@@ -43,11 +43,11 @@ exports.getTopArtists = (req, res) => {
     }
 
     const query = `
-    SELECT DISTINCT ON (id) *
-    FROM allmusiclist
-    ORDER BY viewNumber DESC
-    LIMIT $1
-  `;
+        SELECT *
+        FROM allmusiclist
+        ORDER BY viewNumber DESC
+        LIMIT $1
+    `;
     pool.query(query, [limit], (err, results) => {
         if (err) {
             console.error("🔥 getTopArtists Error:", err);

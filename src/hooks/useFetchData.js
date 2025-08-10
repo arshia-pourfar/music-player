@@ -33,11 +33,13 @@ const useFetchData = (
             });
             setData(response.data || []);
         } catch (err) {
-            setError({
-                message: err.message,
-                status: err.response?.status || 'Network Error',
-                details: err.response?.data || null
-            });
+            if (!err.response || err.response.status >= 500) {
+                setError({
+                    message: err.message,
+                    status: err.response?.status || 'Network Error',
+                    details: err.response?.data || null
+                });
+            }
         } finally {
             setLoading(false);
         }

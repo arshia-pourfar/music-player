@@ -20,18 +20,25 @@ const FavoriteIcon = ({ userId, songId }) => {
     // آپدیت isFavorite بر اساس داده‌ی برگشتی
     useEffect(() => {
         if (Array.isArray(data) && songId) {
-            setIsFavorite(data.includes(songId));
+            setIsFavorite(data.map(String).includes(String(songId)));
         }
     }, [data, songId]);
 
-    const handleAddToFavorites = () => {
+    const handleAddToFavorites = async () => {
         if (!userId || userId === 0) {
             setShowLoginPage(true);
             return;
         }
+
         setUrl(`/api/${userId}/favorites/update`);
         setMethod(isFavorite ? 'DELETE' : 'POST');
         setBody({ songId });
+        await fetchData();
+
+        // گرفتن لیست جدید
+        setUrl(`/api/${userId}/favorites/update`);
+        setMethod('GET');
+        setBody(null);
         fetchData();
     };
 
