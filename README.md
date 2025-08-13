@@ -1,70 +1,167 @@
-# Getting Started with Create React App
+# 🎵 Music Player
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive **music player** built with **React**, connected to a backend API for fetching music data.  
+Designed to provide a seamless and enjoyable listening experience with a clean, user-friendly interface, including user authentication and personalized favorites.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Live Demo
 
-### `npm start`
+🌐 [View Live Site](https://music-player-eight-red.vercel.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🧩 Overview
 
-### `npm test`
+**Music Player** is a full-featured front-end project developed using React. The app interacts with a backend API to retrieve music tracks and provides features for both casual users and logged-in users.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Admins / Users can:
 
-### `npm run build`
+- Browse all music tracks
+- Play, pause, skip, loop, and shuffle tracks
+- Control volume and mute  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Logged-in users can:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Login and Logout securely
+- Access **Favorites** page showing their liked tracks
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Note:** This project does **not** include an admin panel; it only consumes data from the backend.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🛠️ Technologies Used
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Frontend:**
+- **React** – Functional components, JSX, state & props management  
+- **Tailwind CSS** – Utility-first responsive styling  
+- **JavaScript (ES6+)** – Main programming language  
+- **React Icons / FontAwesome** – Scalable vector icons  
+- **Axios / Fetch API** – For fetching data from backend  
+- **React Context API** – Manage user authentication & global state  
+- **Custom Hooks** – For data fetching & responsive behavior  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Backend:**
+- **Node.js** – JavaScript runtime for backend  
+- **Express.js** – Web framework for building RESTful APIs  
+- **PostgreSQL** – Relational database for storing users, tracks, and favorites   
+- **dotenv** – Manage environment variables  
+- **bcrypt** – Password hashing for secure authentication  
+- **jsonwebtoken (JWT)** – User authentication & session management  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## ✨ Key Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- ✅ Fully responsive (mobile, tablet, desktop)  
+- 🎵 Seamless music playback with play, pause, skip  
+- 🔁 Loop and shuffle options for dynamic listening  
+- 🎚️ Volume control with mute option  
+- 🔑 Login and Logout functionality  
+- ⭐ Favorites page for logged-in users  
+- 📡 Fetches music data from backend API  
+- ⚙️ Clean, modular, component-based structure  
+- 🛠️ Ready for further enhancements like Playlist, History, or personalizations  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 📥 Installation & Local Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+git clone https://github.com/arshia-pourfar/music-player.git
+cd music-player
+npm install
+npm start
 
-### Analyzing the Bundle Size
+Backend (optional):
+cd server
+npm install
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Then open your browser and go to:
+http://localhost:3000
+```
+---
 
-### Making a Progressive Web App
+## 📂 Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```plaintext
+Music-Player/
+├── package.json                 # Frontend dependencies and scripts
+├── package-lock.json             # Locked dependency versions
+├── tailwind.config.js            # Tailwind CSS configuration
+├── .env                          # Frontend environment variables
+├── README.md                     # Project documentation
+└── src/                          # Frontend source code
+|   ├── index.js                  # React app entry point
+|   ├── index.css                 # Global styles
+|   ├── App.js                    # Main app component
+|   ├── components/               # Reusable UI components
+|   │   ├── FavoriteIcon.js       # Favorite (like) button
+|   │   ├── Header.js             # Main header bar
+|   │   ├── MenuIcon.js           # Menu icon component
+|   │   ├── MusicList.js          # List of songs component
+|   │   ├── MusicPlayer.js        # Music player controls & playback
+|   │   ├── Navbar.js             # Navigation bar
+|   │   └── home/                 # Home page sections
+|   │       ├── HeaderPostCarousel.js # Carousel for featured tracks
+|   │       ├── RecentFavourite.js    # Recently favorited tracks
+|   │       ├── TopArtist.js          # Top artist section
+|   │       └── TrendingList.js       # Trending songs section
+|   ├── data/
+|   │   └── tracks.js             # Static track data (fallback/demo)
+|   ├── font/
+|   │   ├── Rubik-Italic-VariableFont_wght.ttf
+|   │   └── Rubik-VariableFont_wght.ttf
+|   ├── hooks/
+|   │   ├── AuthContext.js        # User authentication context
+|   │   ├── useFetchData.js       # Custom hook for fetching API data
+|   │   └── useWidthSize.js       # Hook for responsive behavior
+|   └── pages/                    # Application pages (React Router)
+|       ├── AllMusic.js           # All songs page
+|       ├── Download.js           # Download page
+|       ├── Favourite.js          # User's favorite tracks
+|       ├── Home.js               # Homepage
+|       ├── LogIn.js              # Login page
+|       ├── PlayList.js           # Playlist page
+|       └── Setting.js            # Settings page
+|
+└── server/                       # Backend source code (Node.js + Express)
+    ├── controllers/              # API request handlers
+    │   ├── authController.js     # Login, logout, and user auth
+    │   ├── musicController.js    # Fetch and manage music data
+    │   └── favouriteController.js# Manage user's favorite tracks
+    ├── models/                   # Database schemas/models (MongoDB/Prisma/etc.)
+    │   ├── User.js               # User model
+    │   ├── Track.js              # Track (song) model
+    │   └── Favourite.js          # Favorite track relationship model
+    ├── routes/                   # API routes
+    │   ├── authRoutes.js         # Routes for authentication
+    │   ├── musicRoutes.js        # Routes for music data
+    │   └── favouriteRoutes.js    # Routes for favorites
+    ├── utils/                    # Helper utilities
+    │   └── db.js                 # Database connection setup
+    ├── .env                      # Backend environment variables
+    ├── server.js                 # Backend entry point (Express app)
+    └── package.json              # Backend dependencies and scripts
+```
+---
 
-### Advanced Configuration
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Contributions are welcome! Follow these steps:
 
-### Deployment
+1. Fork the repository
+2. Create your feature branch: git checkout -b feature/YourFeature
+3. Commit your changes: git commit -m "Add new feature"
+4. Push to your branch: git push origin feature/YourFeature
+5. Open a pull request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 👤 Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Arshia Pourfar**  
+🔗 [GitHub Profile](https://github.com/arshia-pourfar)  
+💼 [LinkedIn](https://www.linkedin.com/in/arshia-pourfar)  
+📧 [arshiapourfar@gmail.com](mailto:arshiapourfar@gmail.com)   
