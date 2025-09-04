@@ -14,22 +14,6 @@
     --brown: #BF795E;
 }
 
-/* Font */
-@font-face {
-    font-family: 'Rubik';
-    src: url('./font/Rubik-VariableFont_wght.ttf') format('truetype');
-    font-weight: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Rubik Italic';
-    src: url('./font/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
-    font-style: italic;
-    font-weight: normal;
-    font-display: swap;
-}
-
 /* Scrollbar Custom */
 .scrollbar-custom::-webkit-scrollbar {
     width: 6px;
