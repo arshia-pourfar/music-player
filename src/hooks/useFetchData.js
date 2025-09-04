@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const BASE_URL = 'https://music-player-backend-pmof.onrender.com';
+// const BASE_URL = 'https://music-player-backend-pmof.onrender.com';
+const BASE_URL = 'http://localhost:5000';
 
 const useFetchData = (
     initialUrl = '',

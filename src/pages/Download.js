@@ -1,13 +1,10 @@
 const Download = () => {
     return (
-        <section id='download-page' className='relative w-full bg-custom-white h-[100dvh] rounded-l-xl py-5 px-10'>
-            <div className='left-section w-[60%] h-[100dvh]'>
-                <h1 className='font-black block text-5xl'>Download</h1>
-
+        <section id='download-page' className='relative w-full bg-custom-white h-[100dvh] rounded-l-xl pt-3 lg:px-6 md:px-5 px-2'>
+            <h1 className='font-black block text-5xl'>Downloads</h1>
+            <div className='flex w-full h-full items-center justify-center absolute top-0 text-custom-pink'>
+                <h1 className="text-4xl font-extrabold text-center mb-8 text-accent">This page is optional</h1>
             </div>
-            <div className='right-section w-[40%] ps-8 z-[999]'>
-
-            </div >
         </section >
     );
 }

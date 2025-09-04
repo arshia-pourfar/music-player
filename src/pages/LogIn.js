@@ -38,11 +38,11 @@ function LoginOrSingup() {
             setTriggerFetch(false);
         }
         if (data && data.success) {
-            localStorage.setItem('user', JSON.stringify(data.results[0]));
-            setUser(data.results[0]);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            setUser(data.user);
         }
     }, [triggerFetch, fetchData, data, setUser]);
-    
+
     return (
         <section id='user-page' className='relative w-[100vw] custom-h-full flex rounded-l-xl'>
             <img className='object-cover custom-h-full rounded-l-xl' src='/images/login.jpg' alt="" />

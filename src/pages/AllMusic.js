@@ -49,7 +49,7 @@ const AllMusic = () => {
     return (
         <section id='all-music-page' className='relative w-full h-screen bg-custom-white flex flex-col overflow-hidden rounded-l-lg'>
             {/* هدر و اسلایدر بالا */}
-            <div className='lg:px-10 px-2 pt-5'>
+            <div className='pt-3 lg:px-6 md:px-5 px-2'>
                 <Header />
                 <div className='mt-5'>
                     <div className='flex justify-between items-center'>

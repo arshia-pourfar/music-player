@@ -1,5 +1,4 @@
 const pool = require('../models/db');
-const bcrypt = require('bcrypt');
 
 // ورود کاربر
 exports.login = async (req, res) => {
@@ -14,13 +13,12 @@ exports.login = async (req, res) => {
         }
 
         const user = result.rows[0];
-        const isMatch = await bcrypt.compare(password, user.password);
 
-        if (!isMatch) {
+        // مقایسه مستقیم پسورد
+        if (password !== user.password) {
             return res.status(401).json({ success: false, message: 'Invalid username or password' });
         }
 
-        // در اینجا می‌تونی توکن JWT بسازی یا session ایجاد کنی
         res.json({ success: true, user: { id: user.id, username: user.username, email: user.email } });
     } catch (err) {
         console.error(err);
@@ -41,11 +39,9 @@ exports.register = async (req, res) => {
             return res.status(409).json({ message: 'Username or email already exists' });
         }
 
-        // هش کردن رمز عبور
-        const hashedPassword = await bcrypt.hash(password, 10);
-
+        // ذخیره پسورد خام
         const insertQuery = "INSERT INTO users (username, email, password) VALUES ($1, $2, $3)";
-        await pool.query(insertQuery, [username, email, hashedPassword]);
+        await pool.query(insertQuery, [username, email, password]);
 
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {

@@ -61,7 +61,7 @@ const Favourite = () => {
             )}
 
             {/* محتوای صفحه با اسکرول داخلی حرفه‌ای */}
-            <div className="custom-h-full overflow-y-auto scrollbar-custom px-6 pt-5">
+            <div className="custom-h-full overflow-y-auto scrollbar-custom pt-3 lg:px-6 md:px-5 px-2">
                 <Header />
 
                 <div className="mt-5">
