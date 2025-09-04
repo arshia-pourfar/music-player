@@ -8,4 +8,5 @@ const Download = () => {
         </section >
     );
 }
+
 export default Download;
