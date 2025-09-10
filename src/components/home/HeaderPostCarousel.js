@@ -22,7 +22,7 @@ const HeaderPostCarousel = () => {
     return (
         <div
             id="header-carousel"
-            className="relative flex justify-center items-center h-[30%] min-h-[250px] lg:mt-0 mt-2"
+            className="relative flex justify-center items-center h-[30%] lg:min-h-[250px] lg:mt-0 mt-2"
         >
             <Slider
                 {...settings}
@@ -33,7 +33,7 @@ const HeaderPostCarousel = () => {
                         key={item.id}
                         src={item.imageSrc}
                         alt=""
-                        className="rounded-3xl w-auto max-h-[300px] min-h-[250px] my-1 drop-shadow-md"
+                        className="rounded-3xl w-auto lg:max-h-[300px] lg:min-h-[250px] max-h-[180px] my-1 drop-shadow-md"
                     />
                 ))}
             </Slider>

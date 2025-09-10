@@ -47,7 +47,7 @@ function LoginOrSingup() {
         <section id='user-page' className='relative w-[100vw] custom-h-full flex rounded-l-xl'>
             <img className='object-cover custom-h-full rounded-l-xl' src='/images/login.jpg' alt="" />
             {loginPage ? (
-                <div className={'login-content absolute bg-custom-white right-0 transition-all w-[42vw] custom-h-full flex justify-center items-center text-center'}>
+                <div className={'login-content absolute bg-custom-white right-0 transition-all lg:w-[42vw] sm:w-auto w-full lg:px-0 px-10 custom-h-full flex justify-center items-center text-center'}>
                     <form className='w-[360px] relative -top-3' onSubmit={handleSubmitLogin}>
                         <img className='h-[100px] m-auto z-30' src='/images/avatar.svg' />
                         <h2 className="title my-4 text-[#333] font-medium uppercase text-5xl">Welcome</h2>
@@ -98,7 +98,7 @@ function LoginOrSingup() {
                     {data && data.success === false && <p className='absolute top-0 py-3 w-full bg-red-500 text-custom-white'>Login failed. {data.message}</p>}
                 </div>
             ) : (
-                <div className='signup-content absolute bg-custom-white right-0 transition-all w-[40vw] custom-h-full flex justify-center items-center text-center'>
+                <div className='signup-content absolute bg-custom-white right-0 transition-all lg:w-[42vw] sm:w-auto w-full lg:px-0 px-10 custom-h-full flex justify-center items-center text-center'>
                     <form className='w-[360px] relative' onSubmit={handleSubmitRegister}>
                         <h2 className="title my-4 text-[#333] font-semibold uppercase text-3xl">Create your account</h2>
                         <div className='input-div one border-b-2 border-custom-gray transition-all'>

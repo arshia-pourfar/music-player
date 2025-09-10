@@ -52,19 +52,19 @@ const Setting = () => {
 
             {/* User Info */}
             <div className="flex flex-col items-start w-full">
-                <div className="flex justify-between items-center w-full">
-                    <div className="flex items-center gap-6">
+                <div className="flex md:flex-row flex-col md:gap-0 gap-8 sm:justify-between items-center w-full">
+                    <div className="flex flex-wrap sm:justify-normal justify-center items-center gap-6">
                         <img
                             className="w-32 h-32 rounded-full border-2 border-custom-gray"
                             src="/images/avatar.svg"
                             alt="User Avatar"
                         />
-                        <div>
+                        <div className='sm:text-left text-center'>
                             <p className="text-3xl font-bold">{user.username}</p>
                             <p className="text-base text-custom-black">{user.email}</p>
                         </div>
                     </div>
-                    <div>
+                    <div className='sm:gap-0 gap-5 flex flex-wrap justify-center'>
                         <button
                             onClick={() => alert("Invite feature coming soon!")}
                             className="bg-custom-blue hover:bg-custom-blue/70 py-3 px-8 mx-2 rounded-full font-bold text-lg transition shadow-sm text-white"
@@ -99,12 +99,12 @@ const Setting = () => {
                         <>
                             <div className="flex flex-wrap">
                                 {displayedFavorites?.map((song, index) => (
-                                    <div key={index} className="w-1/2 p-2">
+                                    <div key={index} className="lg:w-1/2 md:w-full sm:w-1/2 w-full p-2">
                                         <div className="bg-custom-blue/30 hover:bg-custom-blue/60 flex items-center w-full h-full shadow-md rounded-xl transition-all gap-4 p-2">
                                             <img
                                                 src={`/images/${song.imagesrc}`}
                                                 alt={song.title}
-                                                className="w-24 h-24 rounded-lg object-cover"
+                                                className="lg:size-24 size-20 rounded-lg object-cover"
                                             />
                                             <div>
                                                 <p className="text-lg font-semibold line-clamp-1">{song.musicname}</p>

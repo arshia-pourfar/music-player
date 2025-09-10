@@ -97,17 +97,25 @@ const Home = () => {
             <section
                 className={`h-screen w-screen bg-custom-white flex flex-col overflow-hidden rounded-l-lg z-20 relative ${animationClass}`}
             >
-                <div className="flex-1 overflow-hidden pt-3 lg:px-6 md:px-5 px-2 scrollbar-custom h-screen">
+                <div className="flex-1 overflow-hidden pt-3 lg:px-6 md:px-5 px-0 scrollbar-custom h-screen">
                     <Header />
 
                     <div className="flex flex-wrap pt-4 bg-custom-white">
-                        <div className="lg:basis-3/5 w-full px-3 max-h-[40vh] flex justify-center items-center">
+                        <div className="lg:basis-3/5 w-full px-3 max-h-screen lg:gap-0 gap-6 flex lg:flex-row flex-col justify-center items-center">
                             <HeaderPostCarousel />
+                            <div className='lg:hidden inline-block'>
+                                <TrendingList
+                                    trendingList={trendingList}
+                                    onPlay={handlePlayMusic}
+                                    currentPlaying={selectedMusic}
+                                    user={user}
+                                />
+                            </div>
                         </div>
-                        <div className="lg:basis-2/5 w-full px-3 max-h-[40vh]">
+                        <div className="lg:basis-2/5 w-full px-3 max-h-[40vh] lg:inline-block hidden">
                             <TopArtist topArtistList={topArtistList} />
                         </div>
-                        <div className="lg:basis-3/5 w-full mt-4 px-3 max-h-[40vh]">
+                        <div className="lg:basis-3/5 w-full mt-4 px-3 max-h-[40vh] lg:inline-block hidden">
                             <TrendingList
                                 trendingList={trendingList}
                                 onPlay={handlePlayMusic}
@@ -115,13 +123,9 @@ const Home = () => {
                                 user={user}
                             />
                         </div>
-                        <div className="lg:basis-2/5 w-full mt-4 px-3 max-h-[40vh]">
+                        <div className="lg:basis-2/5 w-full mt-4 px-3 max-h-[40vh] lg:inline-block hidden">
                             <RecentFavourite />
                         </div>
-                    </div>
-
-                    <div className="container md:hidden block mt-6">
-                        <AllMusic onPlay={handlePlayMusic} />
                     </div>
                 </div>
             </section>

@@ -21,7 +21,7 @@ const AllMusic = () => {
         rtl: false,
         infinite: false,
         speed: 1000,
-        slidesToShow: width >= 1536 ? 8 : width >= 1024 ? 8 : width >= 640 ? 4 : 3,
+        slidesToShow: width >= 1536 ? 8 : width >= 1024 ? 8 : width >= 640 ? 6 : width >= 450 ? 4 : 3,
         slidesToScroll: 3,
         arrows: false,
         vertical: false,
@@ -57,11 +57,11 @@ const AllMusic = () => {
                             {width >= 768 ? 'Best Albums Of All Times' : 'Best Albums'}
                         </h3>
                         <div className='control flex items-center'>
-                            <div className='rounded-full flex items-center justify-center size-12 bg-custom-black text-custom-white cursor-pointer mx-2' onClick={() => sliderRef.current.slickPrev()}>
-                                <i className='fi fi-br-angle-left text-2xl flex'></i>
+                            <div className='rounded-full flex items-center justify-center lg:size-12 md:size-10 size-8 bg-custom-black text-custom-white cursor-pointer mx-2' onClick={() => sliderRef.current.slickPrev()}>
+                                <i className='fi fi-br-angle-left lg:text-2xl md:text-xl flex'></i>
                             </div>
-                            <div className='rounded-full flex items-center justify-center size-12 bg-custom-black text-custom-white cursor-pointer' onClick={() => sliderRef.current.slickNext()}>
-                                <i className='fi fi-br-angle-right text-2xl flex'></i>
+                            <div className='rounded-full flex items-center justify-center lg:size-12 md:size-10 size-8 bg-custom-black text-custom-white cursor-pointer' onClick={() => sliderRef.current.slickNext()}>
+                                <i className='fi fi-br-angle-right lg:text-2xl md:text-xl flex'></i>
                             </div>
                         </div>
                     </div>
