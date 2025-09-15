@@ -23,7 +23,9 @@ const MusicPlayer = ({
 
     const handleCloseAnimation = () => {
         setIsClosing(!isClosing);
+        setStyleMode(getStyle);
     };
+
     const handleClick = (action) => {
         if (!musicList || musicList.length === 0 || !onChangeMusic) return;
 
@@ -48,7 +50,7 @@ const MusicPlayer = ({
     const FullscreenButton = () => (
         <button
             onClick={() => setStyleMode('fullscreen')}
-            className="text-custom-white hover:text-green-400 transition-colors mx-3"
+            className="text-custom-white hover:text-green-400 transition-colors"
             title="Fullscreen"
         >
             <FontAwesomeIcon icon={faExpand} className="size-6" />
@@ -80,11 +82,8 @@ const MusicPlayer = ({
                     <div className="h-[35dvh] min-h-[260px] relative overflow-hidden ms-1 shadow-inner">
                         <div className='flex justify-between items-center mt-7'>
                             <h1 className="font-semibold text-custom-white text-3xl mx-5">Next Composition</h1>
-                            <div className='flex'>
-                                <FullscreenButton />
-                                <div className='bg-custom-white rounded-l-full w-[70px] flex justify-center items-center cursor-pointer' onClick={() => onClose?.()} >
-                                    <FontAwesomeIcon className='size-10 p-1 text-custom-black' icon={faXmarkCircle} />
-                                </div>
+                            <div className='bg-custom-white rounded-l-full w-[70px] flex justify-start items-center cursor-pointer' onClick={() => onClose?.()} >
+                                <FontAwesomeIcon className='size-10 p-1 text-custom-black' icon={faXmarkCircle} />
                             </div>
                         </div>
                         <div className="absolute flex flex-nowrap items-center ps-3 mt-3 z-0">
@@ -111,10 +110,15 @@ const MusicPlayer = ({
                         onEnded={onClose}
                         src={getAudioSrc()}
                         header={
-                            <div className="flex flex-col items-center mb-2">
+                            <div className="flex flex-col items-center mb-4 w-full">
                                 <img className="w-[65%] rounded-xl" src={getImageSrc()} alt={`${musicDetails.musicname} cover`} />
-                                <div className="font-semibold text-custom-white text-2xl mt-2 capitalize">{musicDetails.musicname}</div>
-                                <div className="font-medium text-custom-white text-md capitalize">{musicDetails.artistname}</div>
+                                <div className='flex justify-between items-center h-full w-full'>
+                                    <div className='flex flex-col'>
+                                        <div className="font-semibold text-custom-white text-2xl mt-2 capitalize">{musicDetails.musicname}</div>
+                                        <div className="font-medium text-custom-white text-md capitalize">{musicDetails.artistname}</div>
+                                    </div>
+                                    <FullscreenButton />
+                                </div>
                             </div>
                         }
                         style={{
@@ -210,6 +214,7 @@ const MusicPlayer = ({
                         <div className="mx-5" />,
                         RHAP_UI.VOLUME,
                         <div className="mx-4" />,
+                        <FullscreenButton />,
                         <div className="close-bottom-music-player" onClick={handleCloseAnimation}>
                             <div
                                 className="absolute -top-12 right-36 bg-custom-brown h-[65px] w-[50px] flex items-center justify-center rounded-t-3xl cursor-pointer"
@@ -263,14 +268,14 @@ const MusicPlayer = ({
         return (
             <section
                 id="fullscreen-music-player"
-                className="absolute left-[70px] w-[calc(100vw-70px)] z-50 flex flex-col justify-between items-center bg-gradient-to-b from-black/95 to-gray-900/95 p-6 md:p-10 transition-all duration-500"
+                className={`absolute ${getStyle === 'home' ? 'left-[70px] w-[calc(100vw-70px)]' : 'left-0 w-full'}  z-[999] flex flex-col justify-between items-center bg-gradient-to-b from-black/95 to-gray-900/95 p-6 md:p-10 transition-all duration-500`}
             >
                 {/* Header */}
                 <div className="flex justify-between items-center w-full mb-6">
                     <h1 className="text-white text-2xl md:text-3xl font-bold tracking-wide">Now Playing</h1>
                     <button
-                        onClick={onClose}
-                        className="text-white hover:text-red-500 transition-colors"
+                        onClick={handleCloseAnimation}
+                        className="text-white hover:text-custom-pink transition-colors"
                     >
                         <FontAwesomeIcon icon={faXmarkCircle} className="text-3xl md:text-4xl" />
                     </button>
@@ -317,7 +322,7 @@ const MusicPlayer = ({
                     customControlsSection={[
                         <div className="flex items-center space-x-2">
                             <CustomLoopButton isLoop={isLoop} toggleLoop={toggleLoop} />
-                            <FavoriteIcon songId={musicDetails.id} userId={user.id} customStyle={'text-2xl bg-custom-white'} />
+                            <FavoriteIcon songId={musicDetails.id} userId={user.id} customStyle={'lg:text-2xl text-custom-white'} />
                         </div>,
                         RHAP_UI.MAIN_CONTROLS,
                         RHAP_UI.VOLUME,

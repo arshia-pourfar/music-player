@@ -41,12 +41,13 @@ const FavoriteIcon = ({ userId, songId, customStyle }) => {
         setBody(null);
         fetchData();
     };
+    console.log(customStyle);
 
     return showLoginPage ? (
-        <div className={` flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5 text-base mx-3 ${customStyle ? customStyle : ''}`}>
+        <div className={` flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5 text-base mx-3 ${customStyle}`}>
             <i
                 className={`fi ${isFavorite ? 'fi-ss-heart text-custom-pink' : 'fi-rs-heart hover:text-custom-pink text-custom-black'
-                    } flex cursor-pointer icon-favourite drop-shadow-sm ${loading ? 'loading-class' : ''}`}
+                    } flex cursor-pointer icon-favourite drop-shadow-sm ${customStyle} ${loading ? 'loading-class' : ''}`}
                 title="Add to Favorites"
             />
             <a
@@ -57,10 +58,10 @@ const FavoriteIcon = ({ userId, songId, customStyle }) => {
             {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
         </div>
     ) : (
-        <div className={`flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5 text-base mx-3 ${customStyle ? customStyle : ''}`}>
+        <div className={`flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5 text-base mx-3 ${customStyle}`}>
             <i
-                className={`fi ${customStyle ? customStyle : ''} ${isFavorite ? 'fi-ss-heart text-custom-pink' : 'fi-rs-heart hover:text-custom-pink text-custom-black'
-                    } flex cursor-pointer icon-favourite drop-shadow-sm ${loading ? 'loading-class' : ''}`}
+                className={`fi  ${isFavorite ? 'fi-ss-heart text-custom-pink' : 'fi-rs-heart hover:text-custom-pink text-custom-black'
+                    } flex cursor-pointer icon-favourite drop-shadow-sm ${customStyle} ${loading ? 'loading-class' : ''}`}
                 onClick={handleAddToFavorites}
                 title="Add to Favorites"
             />
