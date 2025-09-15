@@ -3,6 +3,9 @@ import 'react-h5-audio-player/lib/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
+import { faExpand, faRedo, faRepeat } from '@fortawesome/free-solid-svg-icons';
+import FavoriteIcon from './FavoriteIcon';
+import { useAuth } from '../hooks/AuthContext';
 
 const MusicPlayer = ({
     getStyle,
@@ -12,7 +15,12 @@ const MusicPlayer = ({
     onChangeMusic,
     musicList
 }) => {
+    const { user } = useAuth();
     const [isClosing, setIsClosing] = useState(false);
+    const [styleMode, setStyleMode] = useState(getStyle);
+    const [isLoop, setIsLoop] = useState(false);
+    const toggleLoop = () => setIsLoop(!isLoop);
+
     const handleCloseAnimation = () => {
         setIsClosing(!isClosing);
     };
@@ -37,8 +45,31 @@ const MusicPlayer = ({
     const getAudioSrc = () => musicDetails ? `/musics/${musicDetails.musiclink}` : '';
     const getImageSrc = () => musicDetails ? `/images/${musicDetails.imagesrc}` : '';
 
+    const FullscreenButton = () => (
+        <button
+            onClick={() => setStyleMode('fullscreen')}
+            className="text-custom-white hover:text-green-400 transition-colors mx-3"
+            title="Fullscreen"
+        >
+            <FontAwesomeIcon icon={faExpand} className="size-6" />
+        </button>
+    );
+
+    const CustomLoopButton = ({ isLoop, toggleLoop }) => (
+        <button
+            onClick={toggleLoop}
+            className={`flex items-center space-x-2 p-2 rounded`}
+        >
+            {isLoop ?
+                <FontAwesomeIcon icon={faRepeat} className="fi fi-rs-refresh text-white text-2xl" /> :
+                <FontAwesomeIcon icon={faRedo} className="fi fi-rs-refresh text-white text-2xl" />
+            }
+            {/* <span className="text-white">Loop</span> */}
+        </button>
+    );
+
     // 🎵 Home Style Player
-    if (getStyle === 'home' && musicPlayerShow && musicDetails) {
+    if (styleMode === 'home' && musicPlayerShow && musicDetails) {
         return (
             <div id="home-music-player" className="absolute left-[75px] h-[100dvh] min-h-[750px] w-[38%] z-0 transition-all duration-500 ease-in-out">
                 <img
@@ -50,8 +81,11 @@ const MusicPlayer = ({
                     <div className="h-[35dvh] min-h-[260px] relative overflow-hidden ms-1 shadow-inner">
                         <div className='flex justify-between items-center mt-7'>
                             <h1 className="font-semibold text-custom-white text-3xl mx-5">Next Composition</h1>
-                            <div className='bg-custom-white rounded-l-full w-[70px] flex justify-start items-center cursor-pointer' onClick={() => onClose?.()} >
-                                <FontAwesomeIcon className='size-10 p-1 text-custom-black' icon={faXmarkCircle} />
+                            <div className='flex'>
+                                <FullscreenButton />
+                                <div className='bg-custom-white rounded-l-full w-[70px] flex justify-center items-center cursor-pointer' onClick={() => onClose?.()} >
+                                    <FontAwesomeIcon className='size-10 p-1 text-custom-black' icon={faXmarkCircle} />
+                                </div>
                             </div>
                         </div>
                         <div className="absolute flex flex-nowrap items-center ps-3 mt-3 z-0">
@@ -134,7 +168,7 @@ const MusicPlayer = ({
     }
     const animationClass = isClosing ? 'animate-slide-down' : 'animate-slide-up';
     // 🎵 Bottom Style Player
-    if (getStyle === 'bottom' && musicPlayerShow && musicDetails) {
+    if (styleMode === 'bottom' && musicPlayerShow && musicDetails) {
         return (
             <section
                 id={musicDetails.id}
@@ -225,6 +259,103 @@ const MusicPlayer = ({
             </section>
         );
     }
+    // 🎵 Fullscreen Style Player
+    if (styleMode === 'fullscreen' && musicPlayerShow && musicDetails) {
+        return (
+            <section
+                id="fullscreen-music-player"
+                className="absolute left-[70px] w-[calc(100vw-70px)] z-50 flex flex-col justify-between items-center bg-gradient-to-b from-black/95 to-gray-900/95 p-6 md:p-10 transition-all duration-500"
+            >
+                {/* Header */}
+                <div className="flex justify-between items-center w-full mb-6">
+                    <h1 className="text-white text-2xl md:text-3xl font-bold tracking-wide">Now Playing</h1>
+                    <button
+                        onClick={onClose}
+                        className="text-white hover:text-red-500 transition-colors"
+                    >
+                        <FontAwesomeIcon icon={faXmarkCircle} className="text-3xl md:text-4xl" />
+                    </button>
+                </div>
+
+                {/* Album Cover */}
+                <div className="flex flex-col items-center justify-center flex-grow">
+                    <div className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-800">
+                        <img
+                            src={getImageSrc()}
+                            alt={`${musicDetails.musicname} cover`}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div className="mt-5 text-center">
+                        <h2 className="text-white text-2xl md:text-3xl font-extrabold capitalize truncate">
+                            {musicDetails.musicname}
+                        </h2>
+                        <p className="text-gray-300 text-lg md:text-xl capitalize truncate mt-1">
+                            {musicDetails.artistname}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Audio Player */}
+                <AudioPlayer
+                    className="w-full md:w-[70%] rounded-3xl shadow-lg"
+                    preload="metadata"
+                    autoPlay
+                    src={getAudioSrc()}
+                    style={{
+                        backgroundColor: '#1F1A1F',
+                        padding: '18px',
+                        opacity: 0.95,
+                    }}
+                    showSkipControls
+                    showLoopControl={false}
+                    showJumpControls={false}
+                    customProgressBarSection={[
+                        RHAP_UI.CURRENT_TIME,
+                        RHAP_UI.PROGRESS_BAR,
+                        RHAP_UI.DURATION,
+                    ]}
+                    customControlsSection={[
+                        <div className="flex items-center space-x-2">
+                            <CustomLoopButton isLoop={isLoop} toggleLoop={toggleLoop} />
+                            <FavoriteIcon songId={musicDetails.id} userId={user.id} />
+                        </div>,
+                        RHAP_UI.MAIN_CONTROLS,
+                        RHAP_UI.VOLUME,
+                    ]}
+                    customIcons={{
+                        play: (
+                            <div className="bg-custom-white flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer">
+                                <i className="fi fi-sr-play text-2xl text-custom-black flex" />
+                            </div>
+                        ),
+                        pause: (
+                            <div className="bg-custom-white flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer">
+                                <i className="fi fi-sr-pause text-2xl text-custom-black flex" />
+                            </div>
+                        ),
+                        previous: (
+                            <button
+                                onClick={() => handleClick('prev')}
+                                className="w-full flex justify-center items-center text-custom-white"
+                            >
+                                <i className="fi fi-sr-step-backward text-2xl flex" />
+                            </button>
+                        ),
+                        next: (
+                            <button
+                                onClick={() => handleClick('next')}
+                                className="w-full flex justify-center items-center text-custom-white"
+                            >
+                                <i className="fi fi-sr-step-forward text-2xl flex" />
+                            </button>
+                        ),
+                    }}
+                />
+            </section>
+        );
+    }
+
 
     return null;
 };
