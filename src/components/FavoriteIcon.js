@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import useFetchData from '../hooks/useFetchData';
 
-const FavoriteIcon = ({ userId, songId }) => {
+const FavoriteIcon = ({ userId, songId, customStyle }) => {
     const { data, loading, error, setUrl, setMethod, setBody, fetchData } = useFetchData('', 'GET', null, false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [showLoginPage, setShowLoginPage] = useState(false);
@@ -43,7 +43,7 @@ const FavoriteIcon = ({ userId, songId }) => {
     };
 
     return showLoginPage ? (
-        <div className="flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5 text-base mx-3">
+        <div className={` flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5 text-base mx-3 ${customStyle ? customStyle : ''}`}>
             <i
                 className={`fi ${isFavorite ? 'fi-ss-heart text-custom-pink' : 'fi-rs-heart hover:text-custom-pink text-custom-black'
                     } flex cursor-pointer icon-favourite drop-shadow-sm ${loading ? 'loading-class' : ''}`}
@@ -57,9 +57,9 @@ const FavoriteIcon = ({ userId, songId }) => {
             {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
         </div>
     ) : (
-        <div className="flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5 text-base mx-3">
+        <div className={`flex justify-center items-center relative xl:text-xl xl:mx-5 lg:text-xl lg:mx-4 md:text-2xl md:mx-5 text-base mx-3 ${customStyle ? customStyle : ''}`}>
             <i
-                className={`fi ${isFavorite ? 'fi-ss-heart text-custom-pink' : 'fi-rs-heart hover:text-custom-pink text-custom-black'
+                className={`fi ${customStyle ? customStyle : ''} ${isFavorite ? 'fi-ss-heart text-custom-pink' : 'fi-rs-heart hover:text-custom-pink text-custom-black'
                     } flex cursor-pointer icon-favourite drop-shadow-sm ${loading ? 'loading-class' : ''}`}
                 onClick={handleAddToFavorites}
                 title="Add to Favorites"

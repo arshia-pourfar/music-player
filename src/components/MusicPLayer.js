@@ -64,7 +64,6 @@ const MusicPlayer = ({
                 <FontAwesomeIcon icon={faRepeat} className="fi fi-rs-refresh text-white text-2xl" /> :
                 <FontAwesomeIcon icon={faRedo} className="fi fi-rs-refresh text-white text-2xl" />
             }
-            {/* <span className="text-white">Loop</span> */}
         </button>
     );
 
@@ -318,7 +317,7 @@ const MusicPlayer = ({
                     customControlsSection={[
                         <div className="flex items-center space-x-2">
                             <CustomLoopButton isLoop={isLoop} toggleLoop={toggleLoop} />
-                            <FavoriteIcon songId={musicDetails.id} userId={user.id} />
+                            <FavoriteIcon songId={musicDetails.id} userId={user.id} customStyle={'text-2xl bg-custom-white'} />
                         </div>,
                         RHAP_UI.MAIN_CONTROLS,
                         RHAP_UI.VOLUME,

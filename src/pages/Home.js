@@ -5,7 +5,6 @@ import HeaderPostCarousel from '../components/home/HeaderPostCarousel';
 import TrendingList from '../components/home/TrendingList';
 import TopArtist from '../components/home/TopArtist';
 import RecentFavourite from '../components/home/RecentFavourite';
-import AllMusic from '../components/MusicList';
 import useFetchData from '../hooks/useFetchData';
 import { useAuth } from '../hooks/AuthContext';
 import useWindowDimensions from '../hooks/useWidthSize';
