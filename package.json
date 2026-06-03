@@ -54,7 +54,7 @@
     "web-vitals": "^2.1.4"
   },
   "homepage": "./",
-  "proxy": "https://music-player-eight-red.vercel.app",
+  "proxy": "https://music-player-arshia-pourfar.vercel.app",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
