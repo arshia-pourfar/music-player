@@ -7,7 +7,7 @@ Designed to provide a seamless and enjoyable listening experience with a clean, 
 
 ## 🚀 Live Demo
 
-🌐 [View Live Site](https://music-player-eight-red.vercel.app/)
+🌐 [View Live Site](https://music-player-arshia-pourfar.vercel.app/)
 
 ---
 
