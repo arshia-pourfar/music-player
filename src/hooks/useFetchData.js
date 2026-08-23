@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const BASE_URL = 'https://music-player-aatn.vercel.app/';
+const BASE_URL = 'https://music-player-aatn.vercel.app';
 // const BASE_URL = 'http://192.168.1.228:5000';
 // const BASE_URL = 'http://localhost:5000';
 
